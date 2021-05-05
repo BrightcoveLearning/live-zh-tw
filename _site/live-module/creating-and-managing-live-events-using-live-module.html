@@ -1,0 +1,1020 @@
+﻿<!doctype html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="在本主題中，您將學習如何使用即時模組建立和管理即時事件。">
+  
+  <title>使用即時模組建立和管理即時事件</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">  
+  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&amp;display=swap">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/prism.css">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/styles.css">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/landing-page.css">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/tabs.css">
+  <link rel="stylesheet" href="/assets/css/local.css">
+  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&display=swap">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/381443caa8.js" crossorigin="anonymous"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/google-analytics.js"></script>
+  <script src="/assets/js/sajari-head.js"></script>
+</head>
+
+<body class="body">
+
+<header>
+  <div class="div-header">
+    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/Live_Logo.svg" alt="產品標誌" style="max-height: 100px;max-width: 232px;"/></a>
+<!-- GTranslate: https://gtranslate.io/ -->
+<select onchange="doGTranslate(this);"><option value="">選擇語言</option><option value="en|en" translate="No">English</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">Français</option><option value="en|de" translate="No">Deutsche</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">한국어</option><option value="en|es" translate="No">Español</option></select>
+
+<script>
+/* <![CDATA[ */
+function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
+/* ]]> */
+</script>
+
+Brightcove 
+
+    <span class="secondary-nav"><a href="https://supportportal.brightcove.com/s/login/?"><img src="https://support.brightcove.com/site-assets/images/site/support.png" alt="支持"/>聯繫支持</a><span style="vertical-align: top;margin-left:1em;margin-right:1em;">|</span><a href="https://status.brightcove.com/"><img src="https://support.brightcove.com/site-assets/images/site/status.png" alt="系統狀態"/>系統狀況</a></span><br/>
+    
+  </div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb arr-right">
+      
+      <li class="breadcrumb-item"><a href="/">首頁</a></li>
+      
+      
+      
+      <li class="breadcrumb-item"><a href="/live-module/">即時模組</a></li>
+      
+      <li class="breadcrumb-item active" aria-current="page">使用即時模組建立和管理即時事件</li>
+    </ol>
+  </nav>
+</header>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-3 left-side-bar">
+        				<select id="site_select" class="bcls-select" style="margin-right: 1rem;">
+					<option value="">其他布萊特灣文件</option>
+					
+						
+							<option value="https://support.brightcove.com">文件首頁</option>
+						
+					
+						
+							<option value="https://audience.support.brightcove.com">布萊特灣觀眾</option>
+						
+					
+						
+							<option value="https://beacon.support.brightcove.com">布萊特灣燈塔</option>
+						
+					
+						
+							<option value="https://campaign.support.brightcove.com">布萊特灣戰役</option>
+						
+					
+						
+							<option value="https://engage.support.brightcove.com">布萊特灣參與</option>
+						
+					
+						
+							<option value="https://live.support.brightcove.com">Brightcove Live</option>
+						
+					
+						
+							<option value="https://gallery.support.brightcove.com">Brightcove 圖庫</option>
+						
+					
+						
+							<option value="https://ssai.support.brightcove.com">布萊特灣</option>
+						
+					
+						
+							<option value="https://social.support.brightcove.com">布萊特灣社會</option>
+						
+					
+						
+							<option value="https://studio.support.brightcove.com">視訊雲端工作室</option>
+						
+					
+						
+							<option value="https://player.support.brightcove.com">布萊特灣球員開發</option>
+						
+					
+						
+							<option value="https://apis.support.brightcove.com">視訊雲端平台 API</option>
+						
+					
+						
+							<option value="https://sdks.support.brightcove.com">視訊雲端裝置開發套件</option>
+						
+					
+						
+							<option value="https://integrations.support.brightcove.com">整合與 CMS 連接器</option>
+						
+					
+						
+							<option value="https://general.support.brightcove.com">視訊雲端一般資訊</option>
+						
+					
+						
+							<option value="https://zencoder.support.brightcove.com">Zencoder</option>
+						
+					
+				</select>
+						<nav class="sidenav" id="side_nav">
+
+          
+            
+            <h5><a href="/index.html">首頁</a></h5>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/get-started/index.html">開始使用 <strong>+</strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/get-started/brightcove-live-training-videos.html">布萊特灣現場訓練影片</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/delivering-live-streams.html">提供即時串流</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/live-module-guidelines-and-best-practices.html">即時模組指南與最佳實務</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">逐步：與 OBS 搭配使用即時模組</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/step-step-using-live-module-telestream-wirecast.html">逐步：使用直播模組與線控</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/general/index.html">一般資訊 <strong>+</strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/general/live-drm.html">即時 DRM </a></li>
+                  
+                
+                  
+                    <li><a href="/general/live-platforms-comparison-matrix.html">即時平台比較表</a></li>
+                  
+                
+                  
+                    <li><a href="/general/live-video-glossary.html">即時視訊詞彙</a></li>
+                  
+                
+                  
+                    <li><a href="/general/reducing-latency-live-streams.html">減少即時串流的延遲</a></li>
+                  
+                
+                  
+                    <li><a href="/general/supported-encoders-live-events.html">直播活動支援編碼器</a></li>
+                  
+                
+                  
+                    <li><a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html">使用阿卡邁流包裝和控制</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/live-module/index.html">使用即時模組<strong> + </strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">使用即時 SSAI 的客戶端預售廣告</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">建立與管理即時事件</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/creating-video-clip-using-live-module.html">建立視訊片段</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">主持阿瓦雅會議在布萊特灣直播</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">主持思科韋貝斯到布萊特灣直播</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">主體縮放至布萊特灣現場</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">在布萊特灣直播上舉辦 INXPO 活動</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">實作伺服器端廣告</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/live-redundancy.html">即時備援</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/publishing-live-event-facebook.html">發佈直播活動至臉書</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/publishing-live-event-youtube.html">將現場活動發佈至 YouTube </a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/reviewing-live-analytics.html">檢閱即時分析</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html">使用即時 RTMP 輸出</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/live-api/index.html">使用即時 API <strong> + </strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li class="submenu-header">
+                      <a href="/live-api/getting-started/index.html">即時 API：開始使用 <strong>+</strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/getting-started/overview-brightcove-live-api.html">概述：即時 API </a></li>
+                        
+                        <li><a href="/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">使用 API 建立即時串流</a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      <a href="/live-api/code-samples/index.html">即時 API：程式碼範例 <strong>+</strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/code-samples/live-api-sample-create-live-job.html">建立即時工作</a></li>
+                        
+                        <li><a href="/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">為 MPEG2-TS 輸入建立即時工作</a></li>
+                        
+                        <li><a href="/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html">使用即時事件的 RTMP 輸出</a></li>
+                        
+                        <li><a href="/live-api/code-samples/simulated-live.html">模擬現場活動</a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      <a href="/live-api/references/index.html">即時 API：參考資料 <strong>+</strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/references/live-api-error-messages.html">錯誤訊息</a></li>
+                        
+                        <li><a href="/live-api/references/live-api-release-notes.html">版本資訊</a></li>
+                        
+                        <li><a href="/live-api/references/reference.html">即時 API 參考</a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      <a href="/live-api/ssai/index.html">即時 API：三世 <strong>+</strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">提示點和廣告信標與 SSAI </a></li>
+                        
+                        <li><a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">伺服器端廣告插入 (SSAI) </a></li>
+                        
+                        <li><a href="/live-api/ssai/overview-player-enhancements-live-ssai.html">概述：即時 SSAI 的玩家增強功能</a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      <a href="/live-api/guides/index.html">即時 API：指南 <strong>+</strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/guides/brightcove-live-best-practices.html">布萊特灣現場最佳實踐</a></li>
+                        
+                        <li><a href="/live-api/guides/brightcove-live-program-ad-metadata-api.html">布萊特灣直播計畫廣告中繼資料 API </a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-creating-frame-accurate-clip.html">建立精確影格的剪輯</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-creating-vod-clips.html">建立點播剪輯</a></li>
+                        
+                        <li><a href="/live-api/guides/getting-list-live-or-vod-jobs.html">取得即時或 VOD 工作清單</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-insert-id3-timed-metadata.html">插入 ID3 計時的詮釋資料</a></li>
+                        
+                        <li><a href="/live-api/guides/live-drm-live-api.html">透過即時 API 即時 DRM </a></li>
+                        
+                        <li><a href="/live-api/guides/managing-credentials-live-api.html">管理即時 API 的認證</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-notifications.html">通知</a></li>
+                        
+                        <li><a href="/general/reducing-latency-live-streams.html">減少即時串流的延遲</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-rtmp-outputs.html">RTMP 輸出</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-static-entry-points.html">靜態進入點</a></li>
+                        
+                        <li><a href="/live-api/guides/signed-urls-and-token-auth-live-stream.html">具有即時串流的已簽署 URL 和權杖驗證</a></li>
+                        
+                        <li><a href="/live-api/guides/using-live-redundancy.html">使用即時備援</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-vod-live-event.html">直播活動的 VOD </a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/admin/index.html">管理帳號<strong> + </strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">建立自訂即時內嵌設定檔</a></li>
+                  
+                
+                  
+                    <li><a href="/admin/fields-custom-live-ingest-profiles.html">自訂即時擷取設定檔的欄位</a></li>
+                  
+                
+                  
+                    <li><a href="/admin/managing-live-settings.html">管理即時設定</a></li>
+                  
+                
+                  
+                    <li><a href="/admin/managing-api-authentication-credentials.html">管理 API 身份驗證憑證</a></li>
+                  
+                
+                  
+                    <li><a href="/admin/standard-live-ingest-profiles.html">標準即時擷取設定檔</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/release-notes/index.html">版本說明<strong> + </strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/release-notes/live-api-release-notes.html">即時發行紀錄</a></li>
+                  
+                
+                  
+                    <li><a href="/release-notes/known-issues.html">已知問題</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/support/index.html">支援<strong> + </strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    
+                  
+                
+                  
+                    <li><a href="/support/viewing-brightcove-system-status-page.html">檢視布萊特灣系統狀態頁面</a></li>
+                  
+                
+                  
+                    <li><a href="/support/contact-sales.html">聯絡銷售人員</a></li>
+                  
+                
+                  
+                    <li><a href="/support/opening-case-with-brightcove-support.html">開啟支援案例</a></li>
+                  
+                
+              </ul>
+            
+          
+      </nav>
+    </div>
+    <div class="col-lg-7" style="background-color: white;color: #333333;margin-top: -1em;margin-bottom: -1em;padding-bottom:1em;">
+  <!-- bootstrap layout -->
+
+<p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="導覽功能表"/></p>
+
+<!-- search bar -->
+<div id="nav-search-box" style="margin-top: 1rem;"></div>
+<!-- in-page navigation for narrow screens -->
+<details class="centered-inpage-nav" id="centered_inpage_nav">
+  <summary><h6 class="toc">頁面內容</h6></summary>
+  <nav id="centered_toc"></nav>
+  <ul id="centered_in_page_toc" class="list-none"></ul>
+</details>
+<!-- open in new tab/window -->
+<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="在新分頁中開啟" style="margin-top:4em;width: 1.5em;"/></a>
+
+
+
+  
+    
+
+
+<h1>使用即時模組建立和管理即時事件</h1>
+<article class="bcls-article">
+  <summary>在本主題中，您將學習如何使用即時模組建立和管理即時事件。</summary>
+  <section class="bcls-section">
+    <div class="training-video-player-ipx" data-experience="5a73630f7afd7a00101bc1b5" data-video-ids="2403492012001">&nbsp;</div>
+    <script src="https://players.brightcove.net/20318290001/experience_5a73630f7afd7a00101bc1b5/live.js"></script>
+  </section>
+  <section class="bcls-section">
+    <h2 id="introduction">簡介</h2>
+    <p>實時模塊可用於幫助您將實時事件廣播到台式機和移動設備。在直播模組中輸入您的活動資訊後，系統會提供一組編碼器設定，讓您插入現場編碼器。所有轉碼都在雲端完成，因此您不需要基於硬件的轉碼器。</p>
+    <p>視您的 Live 訂閱而定，您可能有能力建立活動、頻道或兩者。通常，會建立事件來串流較短的長度、一次性或週期性事件。頻道通常用於提供全年無休的現場活動。</p>
+    <aside class="bcls-aside bcls-aside--information">注意：即時串流支援僅適用於視訊雲端專業版和企業發佈商。</aside>
+  </section>
+  <section class="bcls-section">
+    <h2 id="prerequisites">先決條件</h2>
+    <p>在廣播即時活動之前，必須先提供下列項目：</p>
+    <ul>
+      <li>可存取直播模組的視訊雲端專業版或企業帳戶</li>
+      <li>播放活動的攝影機</li>
+      <li>您必須擁有自己的編碼軟體，例如<a href="https://www.telestream.net/wirecast/overview.htm">電信的 Wirecast </a>或<a href="https://obsproject.com">開放式廣播軟體</a></li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="limitations">限制</h2>
+    <ul>
+      <li>若要在「媒體」模組上建立含有 DVR 的即時串流，您必須先從該處建立新的遠端資產，然後在 URL 串流結尾加上「playlist_dvr.m38」副檔名填入即時模組播放清單。</li>
+      <li>使用 SSAI 的即時串流必須透過即時模組發佈，而非媒體模組。</li>
+      <li>直播將經歷 20-30 秒的延遲.</li>
+      <li>串流必須在事件開始後的 30 分鐘內開始 (預設層級帳戶設定)。</li>
+      <li>對於使用網際網路總管的使用者，需要版本 10 或更新版本。</li>
+      <li>使用 Brightcove 播放程式 SDK 時，不支援含 DVR 的即時串流。在此情況下，您應該將 DVR 播放 URL 新增至遠端資產，然後將遠端資產 URL 與 SDK 搭配使用。</li>
+      <li>輸出設定<strong>不能</strong>創建事件後進行修改。</li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="manage">管理即時事件</h2>
+    <p>要訪問實時模塊，請登錄Video Cloud Studio並單擊<strong>生活</strong>在導航標題中。登入後，您的 Video Cloud 帳戶名稱會出現在頁面的右上角。如果您有多個帳戶，請使用帳戶切換器下拉式清單來選取您要使用的帳戶。如果您選取的帳戶尚未啟用直播，則會出現「Brightcove Live」介紹影片頁面。「管理事件」頁面會顯示三個主要標籤：</p>
+    <ul>
+      <li><strong>Live </strong> -列出進行中的即時事件</li>
+      <li><strong>支持</strong> -清單<a href="#intro_recurring">重複發生的事件</a>處於待機模式</li>
+      <li><strong>已完成</strong> -列出已完成的事件</li>
+    </ul>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/node18470-homepage.png"/></figure>
+    <aside class="bcls-aside bcls-aside--information">注意：建立直播頻道的功能取決於您的直播訂閱項目。</aside>
+    <p>[ <strong>顯示</strong> ] 下拉式清單可用來篩選出現在 [ <strong>已完成</strong> ] 索引標籤上的事件。</p>
+    <p>頁面的主體將顯示具有相關資訊的即時事件清單：</p>
+    <ul>
+      <li>工作狀態-即時串流的狀態
+        <ul>
+          <li><strong>處理</strong> -串流即時</li>
+          <li><strong>處理錯誤</strong> -即時串流發生錯誤</li>
+          <li><strong>待命</strong> -即將啟動的串流 (僅限靜態進入點)</li>
+          <li><strong>停止</strong> -即時流正在停止並創建任何相關的 VOD 輸出</li>
+          <li>已<strong>完成</strong> -即時串流已完成</li>
+          <li><strong>取消</strong> -即時串流正在停止，不會處理任何待定的 VOD 輸出</li>
+          <li>已<strong>取消</strong> -直播已取消</li>
+          <li><strong>中斷連線</strong> -編碼器已中斷連線</li>
+          <li><strong>已停用</strong> -重複發生的事件處於停用狀態</li>
+          <li><strong>未激活</strong> -重複活動已激活，但尚未開始流播</li>
+          <li><strong>等待</strong> -等待 RTMP 串流 (編碼器啟動)</li>
+          <li><strong>失敗</strong> -工作因系統錯誤而停止</li>
+          <li>已<strong>放棄</strong> -事件在沒有連接編碼器的情況下完成</li>
+        </ul>
+      </li>
+      <li>完成的日期和時間</li>
+      <li>事件名稱和識別碼</li>
+      <li>總檢視</li>
+      <li>持續時間</li>
+      <li>建立的日期和時間 (僅適用於週期性事件)</li>
+    </ul>
+    <p>若要檢視即時事件視訊屬性，請按一下事件名稱以開啟<a href="#controlroom">控制室</a>。</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="create">建立新事件</h2>
+    <p>有關使用實時模塊創建和流式傳輸實時事件的完整分步指南，請參閱<a href="/get-started/step-step-using-live-module-telestream-wirecast.html">一步步：將實時模塊與Telestream Wirecast一起使用</a>要么<a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">一步步：使用開放式廣播軟體 (OBS) 的直播模組</a>。</p>
+    <p>若要建立新的事件，請依照下列步驟執行。</p>
+    <ol class="bcls-tasklist-restart">
+      <li>從「管理事件」頁面按一下「<strong>建立事件</strong>」。「建立即時事件」或「建立即時頻道」頁面隨即開啟。建立事件和通道時的屬性是相同的。本文件中的螢幕擷取畫面涵蓋建立事件。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/node18470-new-event.png"/></figure>
+      </li>
+      <li>輸入活動詳細資料：
+        <ul>
+          <li><strong>事件名稱</strong> -事件的名稱；如果視訊儲存為視訊資產，則此名稱也會出現在「媒體」模組中 (最多 255 個字元)</li>
+          <li><strong>簡短說明</strong> -事件的摘要 (最多 250 個字元)</li>
+          <li><strong>標籤</strong> -要與事件關聯的標籤；如果視訊儲存為視訊資產 (最多 128 個字元和 1200 個標籤)，則會將標籤指派給視訊</li>
+          <li><strong>參考 ID </strong> -事件的參考 ID；必須是唯一的 (最多 150 個字元)</li>
+        </ul>
+      </li>
+      <li>將顯示帳戶的任何必要自訂欄位。將值指派給自訂欄位。</li>
+      <li>將「<strong>串流至社交媒體</strong>」設定為「<strong>允許</strong>」，活動可以串流至社交媒體平台。可以做到<a href="#social">一旦事件開始流式傳輸</a>或使用<a href="/live-module/publishing-live-event-facebook.html">社會模塊</a>。</li>
+      <li>選取「<strong>即時內嵌設定檔</strong>」。下拉式清單會列出所有即時內嵌設定檔。內嵌描述檔將控制所建立的即時轉譯的品質和數目。按一下「<strong>管理設定檔</strong>」連結將會在其他瀏覽器標籤中開啟內嵌設定檔編輯器。請注意，您必須是帳戶管理員才能存取內嵌設定檔編輯器。按一下<strong>轉譯</strong>連結，檢視將使用選取的內嵌輪廓建立的轉譯。
+        <aside class="bcls-aside bcls-aside--information language-editable">三個層級的位元率和帳單詳細資料如下：
+          <ul>
+            <li>第 1 級允許高達 5,500 Kbps，並以 1.0 小時計費</li>
+            <li>第 2 層允許高達 10,000 Kbps，並以 1.5 小時計費</li>
+            <li>第 3 級允許高達 20,000 Kbps，並以 2.0 小時的方式進行充電</li>
+          </ul>
+        </aside>
+        <aside class="bcls-aside bcls-aside--information"> 有關創建實時攝取配置文件的信息，請參閱<a href="/admin/creating-custom-live-ingest-profiles.html">創建自定義實時提取配置文件</a>。</aside>
+
+      </li>
+      <li>選取 [ <strong>完成時將事件轉換為視訊資產</strong> ]，即可將直播影片的 VOD 版本儲存到您的 Video Cloud 帳戶。選取此選項後，會使用所選「<strong>即時內嵌設定檔」中的最</strong>高品質轉譯作為 VOD 視訊的來源。建立轉譯時，會使用帳戶的預設內嵌設定檔。<strong>請注意，即時活動結束後就無法使用 VOD 版本，視訊會在擷取程序完成後才能使用。</strong>
+        <aside class="bcls-aside bcls-aside--information">使用週期性事件時，不支援此選項。</aside>
+      </li>
+      <li>按一下「<strong>進階選項</strong>」並<a href="#advanced">設定進階選項</a>。</li>
+      <li>按一下「<strong>建立事件</strong>」以啟動即時事件。[ <a href="#controlroom">控制室] 頁面</a>將會開啟，其中包含即時事件的詳細資料，包括編碼器將使用的<strong>串流端點 (RTMP URL) </strong><strong>和串流名稱</strong>。
+        <aside class="bcls-aside bcls-aside--information"> 處理串流需要大約一分鐘的時間。</aside>
+        <p>根據預設，編碼器必須在建立新事件後的 30 分鐘內啟動。</p>
+      </li>
+    </ol>
+    <p>按一下「<strong>停止串流</strong>」按鈕以結束事件。</p>
+    <aside class="bcls-aside bcls-aside--information">注意：確保編碼器在即時串流完成時關閉/停止。在任何編碼器和 Brightcove 之間保持連線開啟，即使沒有傳送任何資料，也可能會導致未預期的連線費用。</aside>
+  </section>
+  <section class="bcls-section">
+    <h2 id="advanced">設定進階選項</h2>
+    <p>建立新事件時，可以設定進階選項。若要設定進階選項，請在建立事件時按一下 [ <strong>進階選項</strong> ] 連結。</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/node18470-advanced-options.png"/></figure>
+    <p>您可以設定下列選項：</p>
+    <aside class="bcls-aside bcls-aside--information"> 對於 VOD 剪輯片段，不會發送任何通知。</aside>
+    <aside class="bcls-aside bcls-aside--information">如果您對自訂邊緣 CDN 主機名感興趣，請聯絡 Brightcove 支援部門。</aside>
+    <ul>
+      <li><strong>重新連接時間</strong> -如果編碼器已斷開連接，則這是實時流保持可用的時間。此設定不會影響編碼器在建立新事件時必須啟動的時間。</li>
+      <li><strong>啟用服務器端廣告插入（SSAI）</strong> -啟用服務器端廣告插入。廣告被配置為<a href="https://studio.support.brightcove.com/admin/configuring-server-side-ad-settings.html">服務器端廣告設置</a>。有關在“實時”模塊中使用服務器端廣告的信息，請參見<a href="/live-module/implementing-server-side-ads-live-module.html">在實時模塊中實施服務器端廣告。</a>
+<ul>
+          <li><strong>填充石板</strong> -選擇填充板。當直播廣告片段中有空白無法填滿動態播放的廣告時，即會顯示填色板。創建填充板岩作為<a href="/admin/managing-live-settings.html">實時設置</a>。</li>
+          <li><strong>廣告音頻</strong> -選中後，將根據設置的調整對廣告的音頻電平進行標準化。這可以用來協助確保廣告不會比內容大幅度大。</li>
+        </ul>
+      </li>
+      <li><strong>創建Cloud DVR</strong> -啟用DVR功能。如果事件是使用 6.33.0 之前的布萊特灣播放程式版本發佈，則需要使用<a href="https://player.support.brightcove.com/plugins/live-dvrux-plugin.html">即時 DVRUX 外掛程式</a>。活動結束後 7 天內提供內容。
+        <ul>
+          <li><strong>DVR視窗</strong> -保留在實時DVR清單中的時間（以秒為單位）。</li>
+        </ul>
+      </li>
+      <li><strong>輸入格式</strong> -來自編碼器的輸入格式，將被發送到實時模塊。此功能可在現在直播中提供額外的中繼資料，例如現在-下一步，在字幕和字幕、音軌方面更具彈性，並透過標準的廣播層級資料提供簡化的數位體驗。支援下列輸入格式：
+        <ul>
+          <li><strong>RTMP (預設值) </strong></li>
+          <li><strong>即時傳輸通訊協定 (RTP) </strong></li>
+          <li><strong>安全可靠的傳輸 (SRT) </strong></li>
+        </ul>
+      </li>
+      <li><strong>要使用的RTMP憑證</strong> -選擇用於保護流式傳輸端點的RTMP憑據。請注意，只有在“輸入格式”為RTMP且至少一個RTMP憑證已作為以下內容的一部分被創建時，此選項才會出現<a href="/admin/managing-live-settings.html">實時設置</a>。</li>
+      <li><strong>RTMP IP 白名單</strong> -輸入一組允許連線至 RTMP 端點的 IP 位址。這會控制誰可以連線到 RTMP 端點。注意只有在輸入格式為 RTMP 時，才會出現此選項。</li>
+      <li>
+        <strong>CIDR白名單</strong> -輸入一組允許連接到RTP或SRT端點的IP地址。這會控制誰可以連線到 RTP 或 SRT 端點。注意只有在輸入格式為 RTP 或 SRT 時，才會出現此選項。<strong>您可以指定<code translate="No">0.0.0.0/0</code>允許所有網絡。</strong>
+      </li>
+      <li><strong>地區</strong> -要使用的Amazon Web Services（AWS）區域。若要減少延遲，您應該選擇最接近編碼器所在位置的區域。<strong>默認情況下，該地區設置為俄勒岡州（美國西部），如果您是從其他大洲來的話，這會產生不好的結果。</strong>支援下列區域：
+        <ul>
+          <li>俄勒岡州 (美國西部) (預設值)</li>
+          <li>維吉尼亞 (美國東部)</li>
+          <li>東京 (亞太地區)</li>
+          <li>新加坡 (亞太區)</li>
+          <li>雪梨 (亞太地區)</li>
+          <li>孟買 (亞太地區)</li>
+          <li>法蘭克福 (歐洲)</li>
+          <li>愛爾蘭 (歐洲)</li>
+        </ul>
+      </li>
+      <li><strong>內容加密</strong> -選取要套用至即時串流的加密類型：
+        <ul>
+          <li><strong>無</strong> -未套用加密</li>
+          <li><strong>AES-128 </strong> -使用 AES-128 加密來保護資料流的安全。如果選取此選項，您必須輸入<strong>加密金鑰</strong>。金鑰必須是 32 個十六進位字串。為獲得最佳結果，請使用<a href="https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx">金鑰產生器</a>，選擇<code translate="No">128-bit</code>和<code translate="No">Hex</code>選項。
+            <aside class="bcls-aside bcls-aside--information">剪輯片段無法從加密的即時串流建立。</aside>
+          </li>
+          <li><strong>數字版權管理（DRM）</strong> -使用數字版權管理技術保護高級內容流。有關詳細信息，請參見<a href="/general/live-drm.html">實時DRM</a>文件。
+            <ul>
+              <li>HLS + <a href="https://developer.apple.com/streaming/fps/">公平競爭</a></li>
+              <li>HLS (FMP4) + 威德文模組化</li>
+            </ul>
+            <aside class="bcls-aside bcls-aside--information"> 您的真實帳戶必須先由布萊特灣支援啟用，才能使用 DRM。若要發佈已啟用 DRM 的事件，必須建立並使用啟用 DRM 的播放程式 v6.37.1 或更新版本。</aside>
+          </li>
+        </ul>
+      </li>
+      <li><strong>啟用流狀態通知</strong> -選中後，輸入<strong>通知網址</strong>。我們會向<strong>通知網址</strong>工作狀態發生變化時。這可用來更新伺服器，以回應作業狀態的變更。有關使用API通知的更多信息，請參見<a href="/live-api/guides/live-api-notifications.html">實時API通知</a>話題。</li>
+      <li><strong>+ 新增多個 CDN 設定</strong> -輸入其他 CDN 的<strong>標籤</strong>和<strong> URL </strong>。這是允許詢問我們的主要 CDN 視頻段的 CDN 的白名單。您必須負責正確設定次要 CDN。</li>
+      <li><strong>使用靜態入口點（SEP）將其創建為重複事件</strong> -允許創建單個直播流，然後在需要時將其激活/停用。有關信息，請參閱<a href="#intro_recurring">週期性事件簡介</a>本文檔的第二部分。</li>
+    </ul>
+    <p>請點擊<strong>編輯配置</strong>查看/編輯將創建實時流的API請求。直接編輯 API 呼叫時，應謹慎使用。</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="intro_recurring">週期性事件簡介</h2>
+    <p>選擇<strong>使用靜態入口點（SEP）將其創建為重複事件</strong>選項允許長時間運行的實時流，可以在保持相同的入口點URL和播放URL的情況下激活和停用該流。使用週期性事件時，串流端點 URL 和視訊 ID 將不會變更。</p>
+    <aside class="bcls-aside bcls-aside--information">請注意，當您建立週期性事件時，會在「媒體」模組中自動為其建立視訊。請<strong>勿</strong>刪除此視訊，因為每次事件重複發生時都需要這個影片。</aside>
+    <h3>限制</h3>
+    <p>使用週期性事件時，會套用下列限制：</p>
+    <ul>
+      <li>的<strong>完成後將事件轉換為視頻資產</strong>選項不可用。另一種方法是使用剪輯將完整的現場事件存檔為 VOD。您可以在下次啟用串流之前建立短片，或是 7 天 (以較短者為準)。重新啟動串流時，先前的錄製工作階段會從伺服器中移除，且無法再剪輯。</li>
+      <li>無法修改工作設定，它們目前與最初建立週期性事件的設定繫結。</li>
+      <li>啟用串流可能需要 60 秒才能使用事件。一些編碼器具有內置的重試（Wirecast，元素等），因此編碼器將在入口點可用時立即重新連接。</li>
+      <li><strong>重新連接時間</strong>仍然適用於編碼器斷開時的重複事件。如果<strong>重新連接時間</strong>達到後，重複發生的事件將被設置為停用狀態。Brightcove建議在作業完成後停用流，並設置<strong>重新連接時間</strong>斷開連接後等待的可接受時間範圍內（在此等待期間內累積了輸入小時成本）。</li>
+      <li>在停用週期性事件之前，您應該始終停止編碼器。帳戶會分配有限數量的週期性事件。如果達到限制，您必須先停止其中一個週期性事件，才能建立新事件。如果您已達到週期性事件的最大數目，並嘗試建立另一個事件，則會傳回錯誤。</li>
+      <li>當您停用週期性事件時，串流的最後幾秒仍可播放一段時間。</li>
+      <li>帳戶僅限於共有 34 個 9 月份活動（每個區域 3 次，除了我們-西 2，其中 10 個允許）。如果您達到限制，您必須在想要建立新的區域結束一個 SEP 事件，然後才能繼續進行。</li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="work_recurring">使用週期性事件</h2>
+    <p>若要建立週期性事件，請在<strong>建立即時事件時選取 [使用靜態進入點 (SEP) 建立這個為週</strong>期性事件] 選項，然後按一下 [ <strong>建立事件</strong> ]。</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/node18470-recurring-event-selected.png"/></figure>
+    <p>創建重複事件後，它將出現在<strong>支持</strong>標籤上的“管理事件”頁面。</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/node18470-standby-tab.png"/></figure>
+    <p>週期性事件狀態可以是下列其中一個：</p>
+    <ul>
+      <li><strong>未激活</strong> -重複活動已創建，流媒體從未開始</li>
+      <li><strong>等候</strong> -重複活動已激活並正在等待流</li>
+      <li><strong>流媒體</strong> -正在進行的重複活動</li>
+      <li><strong>斷線</strong> -重複發生的事件正在被停止</li>
+      <li><strong>已停用</strong> -重複活動已停用</li>
+      <li><strong>已封存</strong> -重複活動已存檔</li>
+    </ul>
+    <h3>啟動週期性事件</h3>
+    <p>啟動週期性事件可讓工作可供串流使用。在編碼器啟動之前，應該啟動週期性事件。若要啟動週期性事件：</p>
+    <ol class="bcls-tasklist-restart">
+      <li>按一下 [ <strong>待</strong>命] 索引標籤。</li>
+      <li>按一下事件名稱以在控制室中開啟事件。</li>
+      <li>請點擊<strong>啟用</strong>。</li>
+      <li>啟動編碼器</li>
+    </ol>
+    <p>重複活動被激活後，它將從<strong>支持</strong>標籤到<strong>生活</strong>標籤。</p>
+    <h3>停用週期性事件</h3>
+    <p>停用週期性事件會停用串流的工作。當事件結束時，週期性事件應該被停用。若要停用週期性事件：</p>
+    <ol class="bcls-tasklist-restart">
+      <li>點擊<strong>生活</strong>標籤。</li>
+      <li>按一下事件名稱以在控制室中開啟事件。</li>
+      <li>請點擊<strong>停用</strong>。</li>
+      <li>停止你的編碼器</li>
+    </ol>
+    <h3>封存週期性事件</h3>
+    <p>封存週期性事件會永久停用工作，因此無法啟用串流。最終該事件將被刪除。只有已啟動串流的事件才能封存。如果創建了重複事件並且從未開始流式傳輸，則<strong>取消</strong>按鈕將顯示與<strong>封存</strong>按鈕。</p>
+    <p>若要封存週期性事件：</p>
+    <ol class="bcls-tasklist-restart">
+      <li>按一下 [ <strong>待</strong>命] 索引標籤。</li>
+      <li>按一下事件的列以選取該事件。</li>
+      <li>請點擊<strong>封存</strong>。</li>
+    </ol>
+  </section>
+  <section class="bcls-section">
+    <h2 id="controlroom">使用控制室檢視即時活動資訊</h2>
+    <p>「控制室」頁面可用來檢視即時事件的相關資訊。當您建立新的直播活動並開始串流時，「控制室」頁面會開啟，顯示事件資訊。預覽播放器中將顯示賽事的預覽。當您按一下 [管理即時事件] 頁面上的事件時，也會顯示 [控制室] 頁面。按一下預覽播放器下方的<strong>監</strong>控索引標籤，即可在串流進行時<a href="#monitor">檢視監控資訊</a>。</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/node18470-control-room.png"/></figure>
+    <p>「控制室」頁面「<strong>事件資訊</strong>」頁籤分成下列段落：</p>
+    <ul>
+      <li><a href="#eventstatus">活動狀態</a></li>
+      <li><a href="#eventinfo">活動資訊</a></li>
+      <li><a href="#clips">剪輯</a></li>
+      <li><a href="#renditions">演繹</a></li>
+      <li>RTMP<a href="#rtmp"></a></li>
+      <li><a href="#social_event">社會活動</a></li>
+    </ul>
+    <p>按一下預覽播放器下方的<strong>監</strong>控索引標籤，即可在串流進行時<a href="#monitor">檢視監控資訊</a>。</p>
+    <div>
+      <h3 id="eventstatus">事件狀態</h3>
+      <p>只有在事件進行中時才會顯示「事件狀態」區段。會顯示下列資訊：</p>
+      <ul>
+        <li><strong>工作狀態</strong> -當前工作狀態
+          <ul>
+            <li><strong>流媒體</strong> -直播</li>
+            <li><strong>處理錯誤</strong> -即時串流發生錯誤</li>
+            <li><strong>待命</strong> -即將啟動的串流 (僅限靜態進入點)</li>
+            <li><strong>停止</strong> -即時流正在停止並創建任何相關的 VOD 輸出</li>
+            <li>已<strong>完成</strong> -即時串流已完成</li>
+            <li><strong>取消</strong> -即時串流正在停止，不會處理任何待定的 VOD 輸出</li>
+            <li>已<strong>取消</strong> -直播已取消</li>
+            <li><strong>中斷連線</strong> -編碼器已中斷連線</li>
+            <li><strong>等待</strong> -等待 RTMP 串流 (編碼器啟動)</li>
+            <li><strong>失敗</strong> -工作因系統錯誤而停止</li>
+          </ul>
+        </li>
+        <li><strong>當前觀看者</strong> -當前觀眾人數。請注意，這只是一個估計，這個數字可能不準確，對於觀眾數量低或觀眾數量高峰的事件而言，這個數字可能不準確。</li>
+        <li><strong>經過時間-</strong>自從<strong>開始了</strong>（不是創建時）</li>
+        <li><strong>當前時間 -</strong>當前UTC時間</li>
+      </ul>
+    </div>
+    <div>
+      <h3 id="eventinfo">活動資訊</h3>
+      <p>「事件資訊」段落會顯示下列資訊：</p>
+      <ul>
+        <li><strong>名稱</strong> -活動名稱</li>
+        <li><strong>工作識別碼</strong> -內部工作 ID</li>
+        <li><strong>影片編號</strong></li>
+        <li><strong>簡短的介紹</strong></li>
+        <li><strong>標籤</strong></li>
+        <li><strong>參考編號</strong></li>
+        <li><strong>串流至社交媒體</strong> -如果<strong>允許</strong>，即可將直播活動指派至已排程的社交活動</li>
+        <li><strong>流端點（RTMP URL</strong>）-編碼器使用的流終結點</li>
+        <li><strong>流名稱</strong> -編碼器使用的流名稱</li>
+        <li><strong>區域</strong> -串流區域</li>
+        <li><strong>播放 URL </strong> -可用於在非 BrightCove 播放器中查看即時直播的 URL</li>
+      </ul>
+    </div>
+    <div>
+      <h3 id="clips">短片</h3>
+      <p>「剪輯」區段會顯示從即時串流建立的所有剪輯片段。按一下剪輯片段名稱會在「媒體」模組中開啟剪輯片段。如需有關建立剪輯的資訊，請參閱<a href="/live-module/creating-video-clip-using-live-module.html">使用即時模組建立視訊片段</a>。</p>
+    </div>
+    <div>
+      <h3 id="renditions">轉譯</h3>
+      <p>「轉譯」區段會顯示已建立轉譯的相關詳細資訊。按一下轉譯連結會顯示轉譯的編碼設定。</p>
+    </div>
+    <div>
+      <h3 id="rtmp">RTMP</h3>
+      <p>RTMP 區段可用於新增 RTMP 輸出。這可讓即時串流傳送至其他 RTMP 進入點。例如，這可以用來將直播發送到 Facebook 或 YouTube。</p>
+      <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18470/node18470-rtmp.png"/></figure>
+      <p>輸入<strong>RTMP輸出網址</strong>和<strong>渲染</strong>發送。請注意，輸出 URL 的格式可能會根據使用 RTMP 資料流的位置而變更。有關更多信息，請參見<a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html">使用實時RTMP輸出流式傳輸到Facebook和YouTube</a>。</p>
+    </div>
+    <div>
+      <h3 id="social_event">社交活動</h3>
+      <p>社交活動部分將顯示有關<a href="#social">預定的社交活動</a>實時流分配給該流（如果有）。</p>
+      <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/node18470-social-event.png"/></figure>
+    </div>
+  </section>
+  <section class="bcls-section">
+    <h2 id="monitor">監視事件</h2>
+    <p>點擊<strong>監控方式</strong>預覽播放器下方的“標籤”以查看監視信息。在事件進行期間，事件結束後最多 1 小時內都可以使用監控資訊。</p>
+    <aside class="bcls-aside bcls-aside--information">預設情況下，「監視器」模組只會顯示「輸出」和「輸入漂移」圖表。如果您想要延伸顯示器版本，請聯絡您的 Brightcove 客戶代表。</aside>
+    <p>請點擊<strong>報告中</strong>在左側導航中查看<a href="/live-module/reviewing-live-analytics.html">實時分析</a>。</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/node18470-monitoring.png"/></figure>
+    <p>請點擊<strong>選擇圖</strong>選擇要顯示的圖並描述每個圖包含的內容。</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="duplicate">複製事件</h2>
+    <p>複製事件可讓您輕鬆建立另一個事件，並使用相同的設定來建立先前的現場活動。若要複製事件，請依照下列步驟執行：</p>
+    <ol class="bcls-tasklist-restart">
+      <li>按一下事件以開啟 [控制室] 頁面。</li>
+      <li>按一下頁面頂端的「<strong>複製事件</strong>」。將使用先前即時活動的設定來建立新的直播活動。視需要變更事件屬性。</li>
+      <li>按一下「<strong>建立事件</strong>」。</li>
+    </ol>
+  </section>
+  <section class="bcls-section">
+    <h2 id="publish">產生即時事件的內嵌程式碼</h2>
+    <p>要生成事件的嵌入代碼，請單擊<strong>發布和嵌入&gt;播放器配置</strong>在左側導航欄中。有兩種類型的內嵌程式碼可供選擇：</p>
+    <ul>
+      <li><strong>標準</strong> -iframe 嵌入代碼。建議在大多數情況下使用。這種類型將播放器放在 &lt; iframe &gt; 標籤內。</li>
+      <li><strong>進階</strong> -頁內嵌程式碼。允許播放器直接存在於 HTML 頁面中，而不是在 iframe 中。這可讓開發人員輕鬆存取播放程式以及相關屬性和活動的優點。</li>
+    </ul>
+    <p>您也可以取得已發佈播放程式的 URL。這對於在瀏覽器中檢視事件非常有用。</p>
+    <p>如果要產生即時事件的內嵌程式碼，請依照下列步驟執行：</p>
+    <ol class="bcls-tasklist-restart">
+      <li>按一下事件以開啟 [控制室] 頁面。</li>
+      <li>請點擊<strong>發布和嵌入&gt;播放器配置</strong>在左側導航欄中。</li>
+      <li>選擇一個<strong>播放器</strong>。
+        <aside class="bcls-aside bcls-aside--information">注意：如果事件設定為啟用伺服器端廣告 (SSAI)、DVR 或多 CDN，則必須使用布萊特灣播放程式 6.18.3 及以上版本。只有 6.18.3 版及以上的玩家才會出現在下拉列表中。</aside>
+      </li>
+      <li>什麼時候<strong>允許DVR</strong>選中後，播放器將請求DVR清單而不是實時清單。僅當事件是使用<strong>創建Cloud DVR</strong>選擇的選項。如果事件是使用 6.33.0 之前的布萊特灣播放程式版本發佈，則需要使用<a href="https://player.support.brightcove.com/plugins/live-dvrux-plugin.html">即時 DVRUX 外掛程式</a>。
+        <aside class="bcls-aside bcls-aside--information">注意：
+          <ul>
+            <li>「允許 DVR」功能目前與「圖庫」模組不相容。</li>
+            <li>通過選擇“允許DVR”選項，其值將更改為<strong>adConfigId =實時</strong>。</li>
+          </ul>
+        </aside>
+      </li>
+      <li>按一下<strong>播放程式 URL </strong>可在瀏覽器中預覽事件，或複製要使用的適當內嵌程式碼。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/node18470-publish-event.png"/></figure>
+        <p>預覽即時串流的另一個選項是透過 API 進行。</p>
+        <p>複製<strong>播放網址</strong>使用Live API創建Live作業後返回的值，並將其粘貼到Safari瀏覽器中。由於此瀏覽器支援原生 HLS 播放，因此您應該會看到您的直播。</p>
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="800" height="500" src="/assets/images/general/18470/0.png"/></figure>
+        <p>此外，您可以複製您的網址並將其粘貼到 Bright湾玩家參考應用程序中：</p>
+        <p><a href="https://players.brightcove.net/3303963094001/player-reference-app/index.html
+">https://players.brightcove.net/3303963094001/player-reference-app/index.html</a></p>
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="800" height="500" src="/assets/images/general/18470/0.png"/></figure>
+      </li>
+    </ol>
+  </section>
+  <section class="bcls-section">
+    <h2 id="social">連線到社交媒體</h2>
+    <p>您可以將現場活動連結至 Social 模組中排程的社交活動。在將現場活動與社交活動聯繫起來之前，您應該<a href="/live-module/publishing-live-event-facebook.html">在社交模塊中創建現場活動</a>。僅使用<strong>流媒體到社交媒體</strong>設置為<strong>允許的</strong>可以分配給預定的事件。</p>
+    <p>若要將即時活動連線到社交活動，請依照下列步驟操作：</p>
+    <ol class="bcls-tasklist-restart">
+      <li><a href="/live-module/publishing-live-event-facebook.html">在社交模塊中創建現場活動</a>。</li>
+      <li>按一下事件以開啟 [控制室] 頁面。</li>
+      <li>請點擊<strong>發布和嵌入&gt;連接到社交媒體</strong>在左側導航欄中。會顯示已排程的社交活動清單。如果未顯示任何事件，則不存在排程事件。</li>
+      <li>單擊預定的事件，然後單擊<strong>連接</strong>。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/node18470-select-social-event.png"/></figure>
+      </li>
+    </ol>
+    <p>使用即時模組指派事件後，返回 Social 模組以預覽事件，並開始串流至社交平台。</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="clip">建立剪輯片段</h2>
+    <p>您可以在活動進行時或活動結束後建立剪輯片段。如果無法建立剪輯片段，將滑鼠游標懸停在左側導覽中的 [ <strong>建立剪</strong>輯片段] 上時，就會出現訊息。如需有關建立剪輯的資訊，請參閱<a href="/live-module/creating-video-clip-using-live-module.html">使用即時模組建立視訊片段</a>。</p>
+    <aside class="bcls-aside bcls-aside--information">注意：
+      <ul>
+        <li>
+          <p>直播活動結束後，可在 7 天內進行剪輯。</p>
+        </li>
+        <li>
+          <p>對於靜態入口點（循環）流：如果在串流後的 7 天內，串流會以第二個串流重新啟動，則只有第二個串流的內容才能使用剪輯。第一個串流會在此時清除，而且即使串流停用後 7 天內，也無法再從該串流建立剪輯片段。</p>
+        </li>
+      </ul>
+    </aside>
+  </section>
+  <section class="bcls-section">
+    <h2 id="ad">要求廣告</h2>
+    <p>如果<strong>啟用服務器端廣告插入（SSAI）</strong>在創建事件時選擇了“選項”，“控制室”頁面將顯示一個<strong>轉到廣告</strong>按鈕。按一下後，即可選取廣告片段的長度。</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/node18470-goto-ad.png"/></figure>
+    <p>按一下 [ <strong>插</strong>入]，即可在直播中插入廣告分享。如果廣告沒有填滿整個廣告突發時間，就會顯示填色板。有關在“實時”模塊中使用服務器端廣告的信息，請參見<a href="/live-module/implementing-server-side-ads-live-module.html">在實時模塊中實施服務器端廣告</a>。</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="captions">字幕</h2>
+    <p>布萊特灣直播目前支持帶內 608 個字幕（在 h.264 標題內）。如果標題位於 h.264 輸入信號內（在 user_data 數據包中正確信號），則會通過傳遞給 h.264 輸出。</p>
+    <p>如果您使用的是廣播元素現場編碼器，您可以從 SDI（EIA-608/CEA-608）或其他來源（SCTE-20，SCC，大利文，DVB-副，輔助，ARIB，TML，SCTE-27，STL，SRT，SMI）中獲取字幕，並將它們放入您發送給我們的 .264 流。其他廣播級編碼器可能可以做同樣的事情，但我們沒有正式測試它們。</p>
+    <p>即時串流<strong>不</strong>支援 WebVTT 字幕。</p>
+    <p>布萊特灣播放器支援頻內字幕。</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="trouble">即時串流問題疑難排解</h2>
+    <p>如果您需要進一步協助讓您的直播活動正常運作，<a href="https://supportportal.brightcove.com/create">請與我們聯絡</a>。為了確保您得到最快的回應，以下是解決問題所需的支援清單。</p>
+    <ul>
+      <li>流的具體症狀。例如，它是根本不播放還是口吃或凍結？</li>
+      <li>這個流是否在過去正常工作</li>
+      <li>您在編碼器中使用的入口點 URL</li>
+      <li>您使用的編碼軟件和硬件</li>
+      <li>您發佈直播活動的玩家 URL</li>
+      <li>影片雲端工作室中即時資產的視訊 ID</li>
+      <li>從編碼器到發佈點主機的追蹤路由結果</li>
+    </ul>
+  </section>
+</article>
+
+<!-- complete bootstrap layout -->
+    </div>
+    <div class="col-sm-2 right-side-bar">
+      
+      <nav class="right-side-nav" id="right_side_nav">
+        <h6 class="toc">頁面內容</h6>
+        <ul id="in_page_nav" class="list-none"></ul>
+      </nav>
+      
+    </div>
+  </div>
+</div>
+
+<hr>
+<footer class="bcls-footer" role="contentinfo">  <div class="row">
+    <div class="region region-footer-top-center col-md-12">
+      <nav role="navigation" aria-labelledby="block-brightcovesupport-menu" id="block-brightcovesupport" class="footer-menu">
+
+        <h2>布萊特灣支援</h2>
+
+        <ul class="menu">
+          <li>
+            <a href="https://status.brightcove.com">系統狀態</a>
+          </li>
+          <li>
+            <a href="https://supportportal.brightcove.com/s/login/?">聯絡支援</a>
+          </li>
+          <li>
+            <a href="https://support.brightcove.com/">文獻資料</a>
+          </li>
+        </ul>
+
+      </nav>
+      <nav role="navigation" aria-labelledby="block-training-menu" id="block-training" class="footer-menu">
+
+        <h2>訓練</h2>
+
+        <ul class="menu">
+          <li>
+            <a href="https://studio.support.brightcove.com/training/online-training-courses.html">線上課程</a>
+          </li>
+          <li>
+            <a href="https://studio.support.brightcove.com/training/register-training.html">註冊課程</a>
+          </li>
+          <li>
+            <a href="https://university.brightcove.com/">布萊特灣大學</a>
+          </li>
+        </ul>
+
+      </nav>
+      <nav role="navigation" aria-labelledby="block-brightcove-menu" class="footer-menu">
+
+        <h2>Brightcove</h2>
+
+        <ul class="menu">
+          <li>
+            <a href="https://www.brightcove.com">亮麗</a>
+          </li>
+          <li>
+            <a href="https://supportportal.brightcove.com/s/login/?">聯絡我們</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="region region-footer-bottom-center col-md-12">
+      <div class="bcls-copyright footer-menu">
+        <table>
+          <tr>
+            <td>
+              <div id="bc_copyright" class="field field--name-field-copyright-year field--type-string field--label-hidden field--item" style="float: left;"> 布萊特灣公司版權所有</div>
+            </td>
+            <td><a href="https://www.brightcove.com/en/legal/privacy">私隱</a> | 條<a href="https://www.brightcove.com/en/terms-and-conditions">款及細則</a></td>
+            <td>
+              <div class="gf-links-cols footer-menu">
+                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin"><i class="fab fa-linkedin-in" style="font-size: 1.5rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter"><i class="fab fa-twitter" style="font-size: 1.5rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i class="fab fa-facebook-f" style="font-size: 1.5rem;"></i></a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+      
+  var searchBox = sajari.init({
+    mode: "search-box",
+    project: "1588255093746585379", // Set this to your project.
+    collection: "brightcove-documenation", // Set this to your collection.
+    instantPipeline: "autocomplete", // Pipeline used as you type
+    inputPlaceholder: "Search", // Input element placeholder
+    maxSuggestions: 5, // Maximum number of suggestions to show
+    attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
+  });
+  
+    searchBox("sub", "pipeline.search-sent", function (_, query) {
+      window.location = "/search.html?q=" + encodeURIComponent(query.q);
+    });
+  
+
+</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/https-fix.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/setDate.js"></script>
+  
+  <script src="https://support.brightcove.com/site-assets/js/site/prism.js"></script>
+  
+  <script src="https://support.brightcove.com/site-assets/js/site/site.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/tabs.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/toc.js"></script>
+  <script src="/assets/js/sites_nav.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/bcls-utils.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/local-link-fix.js"></script>
+  <script src="/assets/js/feedback.js"></script>
+  
+  <script src="/assets/js/sajari-search-foot.js"></script>
+  
+  <!-- <script src="/assets/js/sajari-index.js"></script> -->
+  <style>
+    a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 {
+      background-color: lightblue;
+    }
+    div.sj-tabs__tab {
+      margin-top: 3rem;
+      margin-left: .3rem;
+      border-top-left-radius: .4rem;
+      border-top-right-radius: .4rem;
+      background-color:#e8e8e8;
+    }
+
+    div.sj-tabs__tab.sj-tabs__tab--selected {
+      border-bottom-color: crimson;
+      background-color: #f8f8f8;
+    }
+
+    p.sj-results__result__description.css-p9jvyt {
+      font-size: 1rem;
+    }
+
+    .sj-result__text.css-31l7gp h3 {
+      color: navy;
+      font-size: 1.4rem;
+    }
+    </style>
+
+</body>
+
+</html>
