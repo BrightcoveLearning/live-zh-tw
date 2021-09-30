@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="In this topic, you will learn how to schedule live events.">
+  
+  <title>Scheduling Live Events</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">  
+<link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/prism.css">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/styles.css">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/learning-paths/learning-paths.css">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/landing-page.css">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/tabs.css">
+  <link rel="stylesheet" href="/assets/css/local.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2728311-17"></script>
+<script translate="no">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2728311-17');
+</script>
+  <script src="/assets/js/sajari-head.js"></script>
+	<script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body class="body">
+
+<header>
+  <div class="div-header">
+    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/SVG/COVE004_Brightcove_Live_Logo_RGB_K.svg" alt="Brightcove" style="max-width: 170px;"></a>
+<!-- GTranslate: https://gtranslate.io/ -->
+<select onchange="doGTranslate(this);"><option value="">Select Language</option><option value="en|en" translate="No">English</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">Français</option><option value="en|de" translate="No">Deutsche</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">한국어</option><option value="en|es" translate="No">Español</option></select>
+
+<script translate="no">
+/* <![CDATA[ */
+function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
+/* ]]> */
+</script>
+
+
+
+    <span class="secondary-nav"><a href="https://supportportal.brightcove.com"><i data-feather="help-circle"></i> Contact Support</a> <span style="vertical-align: middle;margin-left:1em;margin-right:1em;">|</span> <a href="https://status.brightcove.com/"><i data-feather="cloud"></i> System Status</a></span>
+    <br>
+    
+  </div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb arr-right">
+      
+      <li class="breadcrumb-item first-item"><a href="/">Home</a></li>
+      
+      
+      
+      <li class="breadcrumb-item"><a href="/live-module/">Live Module</a></li>
+      
+      <li class="breadcrumb-item active" aria-current="page">Scheduling Live Events</li>
+    </ol>
+  </nav>
+</header>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-3 left-side-bar">
+				<select id="site_select" class="bcls-select" style="margin-left: 1rem;">
+					<option value="">Other Brightcove Docs</option>
+					
+						
+							<option value="https://support.brightcove.com">Documentation Home</option>
+						
+					
+						
+							<option value="">-- VIDEO CLOUD --</option>
+						
+					
+						
+							<option value="https://studio.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud Studio</option>
+						
+					
+						
+							<option value="https://player.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Player Development</option>
+						
+					
+						
+							<option value="https://apis.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud Platform APIs</option>
+						
+					
+						
+							<option value="https://sdks.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud Device SDKs</option>
+						
+					
+						
+							<option value="https://integrations.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;Integrations and CMS Connectors</option>
+						
+					
+						
+							<option value="https://general.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud General Information</option>
+						
+					
+						
+							<option value="">-- VIDEO ESSENTIALS --</option>
+						
+					
+						
+							<option value="https://beacon.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Beacon</option>
+						
+					
+						
+							<option value="https://live.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Live</option>
+						
+					
+						
+							<option value="https://zencoder.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;Zencoder</option>
+						
+					
+						
+							<option value="">-- VIDEO CLOUD ADD-ONS --</option>
+						
+					
+						
+							<option value="https://campaign.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Campaign</option>
+						
+					
+						
+							<option value="https://engage.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Engage</option>
+						
+					
+						
+							<option value="https://gallery.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Gallery</option>
+						
+					
+						
+							<option value="https://studio.support.brightcove.com/social/index.html">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Social</option>
+						
+					
+						
+							<option value="https://ssai.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove SSAI</option>
+						
+					
+				</select>
+        <nav class="sidenav" id="side_nav">
+          
+            
+            <h5><a href="/index.html">Home</a></h5>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/get-started/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;Getting Started</a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/get-started/brightcove-live-training-videos.html">Brightcove Live Training Videos</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/delivering-live-streams.html">Delivering Live Streams</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/live-module-guidelines-and-best-practices.html">Brightcove Live: Best Practices</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">Step-by-Step: Using the Live Module with OBS</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/step-step-using-live-module-telestream-wirecast.html">Step-by-Step: Using the Live Module with Wirecast</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/step-step-live-srt.html">Step-by-Step: Streaming an SRT Live Event</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/general/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;General Information</a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/general/live-drm.html">Live DRM</a></li>
+                  
+                
+                  
+                    <li><a href="/general/live-platforms-comparison-matrix.html">Live Platforms Comparison Matrix</a></li>
+                  
+                
+                  
+                    <li><a href="/general/live-video-glossary.html">Live Video Glossary</a></li>
+                  
+                
+                  
+                    <li><a href="/general/reducing-latency-live-streams.html">Reducing Latency for Live Streams</a></li>
+                  
+                
+                  
+                    <li><a href="/general/supported-encoders-live-events.html">Supported Encoders for Live Events</a></li>
+                  
+                
+                  
+                    <li><a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html">Using Akamai Stream Packaging and Wirecast</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/live-module/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;Using the Live Module</a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">Client-Side Preroll Ads with Live SSAI</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">Creating and Managing Live Events</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/creating-video-clip-using-live-module.html">Creating a Video Clip</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">Host Avaya Conference on Brightcove Live</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">Host Cisco Webex to Brightcove Live</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">Host Zoom to Brightcove Live</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">Host an INXPO Event on Brightcove Live</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">Implementing Server-Side Ads (SSAI)</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/zoom-live-integration.html">Integrating a Zoom Meeting</a></li>
+                  
+                
+                  
+                    <li><a href="https://studio.support.brightcove.com/social/publishing-live-event-facebook.html">Publishing a Live Event to Facebook</a></li>
+                  
+                
+                  
+                    <li><a href="https://studio.support.brightcove.com/social/publishing-live-event-youtube.html">Publishing a Live Event to YouTube</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/reviewing-live-analytics.html">Reviewing Live Analytics</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/scheduling-live-event.html">Scheduling Live Events</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/live-redundancy.html">Using Live Redundancy</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html">Using Live RTMP Outputs</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="https://apis.support.brightcove.com/live-api/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;Working with the Live API</a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li class="submenu-header">
+                      <a href="https://apis.support.brightcove.com/live-api/getting-started/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;Live API: Getting Started</a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/getting-started/overview-brightcove-live-api.html">Overview: Live API</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">Creating a Live Stream using the API</a></li>
+                          
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      <a href="https://apis.support.brightcove.com/live-api/code-samples/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;Live API: Code Samples</a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/code-samples/live-api-sample-create-live-job.html">Create a Live Job</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">Create a Live Job for MPEG2-TS Input</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html">Using RTMP Outputs for Live Events</a></li>
+                          
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      <a href="https://apis.support.brightcove.com/live-api/references/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;Live API: References</a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/references/live-api-error-messages.html">Error Messages</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/references/live-api-release-notes.html">Release Notes</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/references/reference.html">Live API Reference</a></li>
+                          
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      <a href="https://apis.support.brightcove.com/live-api/ssai/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;Live API: SSAI</a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">Cue Points and Ad Beacons with SSAI</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">Server-Side Ad Insertion (SSAI)</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/ssai/overview-player-enhancements-live-ssai.html">Overview: Player Enhancements for Live SSAI</a></li>
+                          
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      <a href="https://apis.support.brightcove.com/live-api/guides/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;Live API: Guides</a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/brightcove-live-best-practices.html">Brightcove Live Best Practices</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/brightcove-live-program-ad-metadata-api.html">Brightcove Live Program Ad Metadata API</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-frame-accurate-clip.html">Creating a Frame-Accurate Clip</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-vod-clips.html">Creating VOD Clips</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/getting-list-live-or-vod-jobs.html">Getting a List of Live or VOD Jobs</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-insert-id3-timed-metadata.html">Insert ID3 timed metadata</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-drm-live-api.html">Live DRM via the Live API</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/managing-credentials-live-api.html">Managing Credentials for the Live API</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-notifications.html">Notifications</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-playback-restrictions.html">Playback Restrictions with Live Streams</a></li>
+                          
+                        
+                          
+                            <li><a href="/general/reducing-latency-live-streams.html">Reducing Latency for Live Streams</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-rtmp-outputs.html">RTMP Outputs</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-static-entry-points.html">Static Entry Points</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/signed-urls-and-token-auth-live-stream.html">Signed URLs and Token Auth with a Live Stream</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/using-live-redundancy.html">Using Live Redundancy</a></li>
+                          
+                        
+                          
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-vod-live-event.html">VOD from Live Event</a></li>
+                          
+                        
+                      </ul>
+                    </li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/admin/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;Administering Accounts</a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">Creating Custom Live Ingest Profiles</a></li>
+                  
+                
+                  
+                    <li><a href="/admin/fields-custom-live-ingest-profiles.html">Fields for Custom Live Ingest Profiles</a></li>
+                  
+                
+                  
+                    <li><a href="/admin/managing-live-settings.html">Managing Live Settings</a></li>
+                  
+                
+                  
+                    <li><a href="/admin/managing-api-authentication-credentials.html">Managing API Authentication Credentials</a></li>
+                  
+                
+                  
+                    <li><a href="/admin/standard-live-ingest-profiles.html">Standard Live Ingest Profiles</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/release-notes/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;Release Notes</a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/release-notes/live-api-release-notes.html">Live Release Notes</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/support/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;Support</a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/support/viewing-brightcove-system-status-page.html">Viewing the Brightcove System Status Page</a></li>
+                  
+                
+                  
+                    <li><a href="/support/contact-sales.html">Contact Sales</a></li>
+                  
+                
+                  
+                    <li><a href="/support/opening-case-with-brightcove-support.html">Opening a Support Case</a></li>
+                  
+                
+                  
+                    <li><a href="/support/reset-support-portal-password.html">Reset Your Support Portal Password</a></li>
+                  
+                
+              </ul>
+            
+          
+      </nav>
+    </div>
+    <div class="col-lg-7" style="background-color: white;color: #333333;margin-top: -1em;margin-bottom: -1em;padding-bottom:1em;">
+  <!-- bootstrap layout -->
+
+<p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="Navigation Menu"></p>
+
+<!-- search bar -->
+<div id="nav-search-box" style="margin-top: 1rem;"></div>
+<!-- in-page navigation for narrow screens -->
+<details class="centered-inpage-nav" id="centered_inpage_nav">
+  <summary><h6 class="toc">Page Contents</h6></summary>
+  <nav id="centered_toc"></nav>
+  <ul id="centered_in_page_toc" class="list-none"></ul>
+</details>
+<!-- open in new tab/window -->
+<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="open in new tab" style="margin-top:4em;width: 1.5em;"></a>
+
+
+
+  
+    
+
+
+<article class="bcls-article">
+  <h1>Scheduling Live Events</h1>
+  <summary>In this topic, you will learn how to schedule live events.</summary>
+  <section class="bcls-section">
+    <p>The Live module provides the ability to schedule when recurring  events start and end. When the scheduled start time is reached, the recurring event will become activated. Note that only events that were created as recurring events can be scheduled.</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/live-module/scheduling/recurring-event.png" /></figure>
+    <aside class="bcls-aside bcls-aside--information">Note: Currently, the scheduling of redundant groups is not supported.</aside>
+    <h3 id="notes">Notes on scheduled events</h3>
+    <ul>
+      <li>Six pending activations can be scheduled at a time; if more are needed, please contact Brightcove Support</li>
+      <li>Once the event is activated, the default <strong>Reconnect Time</strong> is still valid (see <a href="https://live.support.brightcove.com/live-api/guides/live-api-static-entry-points.html#max_waiting_time" target="_blank">Live API: Static Entry Points for more information</a>)</li>
+      <li>All of the limitations associated with <a href="creating-and-managing-live-events-using-live-module.html#recurring_limitations">static entry points</a> are still valid</li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="schedule">Adding a schedule to an event</h2>
+    <p>If your account is enabled for Auto Start/Stop, a <strong>Scheduling</strong> section will be available when you edit the event (on the Control Room page).</p>
+    <p>To use Auto Start/Stop, follow the instructions below:</p>
+    <ol class="bcls-tasklist-restart">
+      <li>In the Live module, create a new recurring live event or click the <strong>Standby</strong> tab and click on an existing event.</li>
+      <li>On the <strong>Control Room</strong> page, locate the <strong>Scheduling</strong> section.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/live-module/scheduling/schedule-section.png" /></figure>
+      </li>
+      <li>Click <strong>+ Add Schedule</strong> and enter the event <strong>Start Date</strong> and <strong>End Date</strong>.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/scheduling/start-end-dates.png" /></figure>
+        <aside class="bcls-aside bcls-aside--information">Note: While we do not prevent multiple schedules from running at the same time, the conflicting rows will be shown with a warning. Conflicting schedules are likely to fail if not addressed prior to the activation time. To avoid the warning, simply delete one of the rows or adjust the times.</aside>
+      </li>
+      <li> To create another schedule, click <strong>+ Add Schedule</strong>. The <strong>+ Add Schedule</strong> button will become disabled when the maximum number of  pending activations is reached.</li>
+    </ol>
+    <p>To delete a schedule, click the delete (<img class="bcls-image--no-border" alt="" src="/assets/images/live-module/scheduling/trash-icon.png" />) icon next to the schedule.</p>
+    </ol>
+    <aside class="bcls-aside bcls-aside--information">Notes:
+      <ul>
+        <li>Scheduled events will turn yellow as a warning when there are conflicting schedules</li>
+        <li>Scheduled events will turn red when streaming fails for any reason</li>
+        <li>Failed schedules will remain visible for 7 days</li>
+      </ul>
+    </aside>
+  </section>
+  <section class="bcls-section">
+    <h2 id="upcoming">Viewing upcoming activations</h2>
+    <p>To view all scheduled events, click the <strong>Standby</strong> tab. The next upcoming <strong>Start</strong> and <strong>Stop</strong> dates are shown under the <strong>Upcoming</strong> title.</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/scheduling/upcoming-events.png" /></figure>
+    <p>The <strong>Show</strong> dropdown at the top of the page can be used to  display only scheduled events.</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/scheduling/show-events.png" /></figure>
+    <p>Once an event starts, it will be displayed on the <strong>Live</strong> tab, and the start time will be disabled.</p>
+  </section>
+</article>
+
+<!-- complete bootstrap layout -->
+    </div>
+    <div class="col-sm-2 right-side-bar">
+      
+      <nav class="right-side-nav" id="right_side_nav">
+        <h6 class="toc">Page Contents</h6>
+        <ul id="in_page_nav" class="list-none"></ul>
+      </nav>
+      
+    </div>
+  </div>
+</div>
+
+<hr>
+<div class="last-updated">
+  Page last updated on 16 Sep 2021
+</div>
+
+
+
+<footer class="bcls-footer" role="contentinfo">
+  <div class="row">
+    <div class="region region-footer-top-center col-md-12">
+      <nav role="navigation" aria-labelledby="block-brightcovesupport-menu" id="block-brightcovesupport" class="footer-menu">
+        <img src="https://support.brightcove.com/site-assets/images/site/SVG/COVE004_Brightcove_Logo_093020_RGB_KO.svg" class="bc-footer-logo" alt="Brightcove">
+
+        <h2>Brightcove Support</h2>
+
+        <ul class="menu">
+          <li>
+            <a href="https://status.brightcove.com">System Status</a>
+          </li>
+          <li>
+            <a href="https://supportportal.brightcove.com">Contact Support</a>
+          </li>
+          <li>
+            <a href="https://support.brightcove.com/">Documentation</a>
+          </li>
+        </ul>
+
+      </nav>
+      <nav role="navigation" aria-labelledby="block-training-menu" id="block-training" class="footer-menu">
+
+        <h2>Training</h2>
+
+        <ul class="menu">
+          <li>
+            <a href="https://studio.support.brightcove.com/training/online-training-courses.html">Online Courses</a>
+          </li>
+          <li>
+            <a href="https://studio.support.brightcove.com/training/register-training.html">Register for a course</a>
+          </li>
+          <li>
+            <a href="https://university.brightcove.com/">Brightcove University</a>
+          </li>
+        </ul>
+
+      </nav>
+      <nav role="navigation" aria-labelledby="block-brightcove-menu" class="footer-menu">
+
+        <h2>Brightcove</h2>
+
+        <ul class="menu">
+          <li>
+            <a href="https://www.brightcove.com">Brightcove.com</a>
+          </li>
+          <li>
+            <a href="https://supportportal.brightcove.com">Contact Us</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="region region-footer-bottom-center col-md-12">
+      <div class="bcls-copyright footer-menu">
+        <table>
+          <tr>
+            <td>
+              <div id="bc_copyright" class="field field--name-field-copyright-year field--type-string field--label-hidden field--item" style="float: left;"> Brightcove Inc. All rights reserved.</div>
+            </td>
+            <td><a href="https://www.brightcove.com/en/legal/privacy">Privacy</a> | <a href="https://www.brightcove.com/en/terms-and-conditions">Terms &amp; Conditions</a></td>
+            <td>
+              <div class="gf-links-cols footer-menu">
+                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin" style="margin-right: 1rem;"><i data-feather="linkedin" style="color:#8E9093;height: 1.25rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter" style="margin-right: 1rem;"><i data-feather="twitter" style="color:#8E9093;height: 1.25rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i data-feather="facebook" style="color:#8E9093;height: 1.25rem;"></i></a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script translate="no">
+      
+  var searchBox = sajari.init({
+    mode: "search-box",
+    project: "1588255093746585379", // Set this to your project.
+    collection: "brightcove-documenation", // Set this to your collection.
+    instantPipeline: "autocomplete", // Pipeline used as you type
+    inputPlaceholder: "Search", // Input element placeholder
+    maxSuggestions: 5, // Maximum number of suggestions to show
+    attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
+  });
+  
+    searchBox("sub", "pipeline.search-sent", function (_, query) {
+      window.location = "/search.html?q=" + encodeURIComponent(query.q);
+    });
+  
+
+</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/https-fix.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/setDate.js"></script>
+  
+  <script src="https://support.brightcove.com/site-assets/js/site/prism.js"></script>
+  
+  <script src="https://support.brightcove.com/site-assets/js/site/site.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/learning-paths/learning-paths.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/tabs.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/toc.js"></script>
+  <script src="/assets/js/sites_nav.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/bcls-utils.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/local-link-fix.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/sajari-reindex.js"></script>
+  <script src="/assets/js/feedback.js"></script>
+  
+  <script src="/assets/js/sajari-search-foot.js"></script>
+  
+	<script translate="no">
+  feather.replace()
+</script>
+  <!-- <script src="/assets/js/sajari-index.js"></script> -->
+  <style translate="no">
+    a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 {
+      background-color: lightblue;
+    }
+    div.sj-tabs__tab {
+      margin-top: 3rem;
+      margin-left: .3rem;
+      border-top-left-radius: .4rem;
+      border-top-right-radius: .4rem;
+      background-color:#e8e8e8;
+    }
+
+    div.sj-tabs__tab.sj-tabs__tab--selected {
+      border-bottom-color: crimson;
+      background-color: #f8f8f8;
+    }
+
+    p.sj-results__result__description.css-p9jvyt {
+      font-size: 1rem;
+    }
+
+    .sj-result__text.css-31l7gp h3 {
+      color: navy;
+      font-size: 1.4rem;
+    }
+    </style>
+
+</body>
+
+</html>
