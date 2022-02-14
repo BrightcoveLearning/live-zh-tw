@@ -1,0 +1,81 @@
+---
+title:多語言音頻
+parent: General Information
+layout: staging 
+---
+
+<article class="bcls-article">
+  <h1>多語言音頻</h1>
+  <summary>此功能允許攝取多種音頻語言，描述性或環境音頻體驗音軌，以供實時播放。</summary>
+  <section class="bcls-section">
+
+    <h2 id="Prerequisites">先決條件：</h2>
+    <ul>
+        <li>定義<strong>PID（數據包標識符）</strong>編碼器中的每個音軌。</li>
+        <li>目前，僅支持RTP輸入格式。要在<strong>建立現場活動</strong>頁面，轉到<strong>高級選項</strong>部分並選擇<strong>實時傳輸協議（RTP）</strong>在下面<strong>輸入格式</strong>選擇器。 </li>
+        <li>在裡面<strong>CIDR白名單</strong>部分，輸入IP：<strong>0.0.0.0/0</strong>連接到RTP端點。如果“輸入格式"未設置為“RTP"，則“多語言"按鈕將被禁用。 </li>
+
+
+        <aside class="bcls-aside bcls-aside--information">筆記： 
+            <ul>
+            
+            <li>有關如何定義<strong>PID（數據包標識符）</strong>，有關音軌，請參閱您的編碼器文檔。 </li>
+            <li>在不久的將來將增加對SRT的支持。</li>
+            <li>有關如何設置RTP輸入的更多信息，請訪問<a href="https://live.support.brightcove.com/live-module/creating-and-managing-live-events-using-live-module.html#advanced" target="_blank">配置高級選項文檔</a>。
+            </li>
+        </ul>
+        
+        </aside>
+    </ul>
+
+
+    </section>
+    <section class="bcls-section">
+
+        <h2 id="add-audio">將音軌添加到現場活動 </h2>
+
+        <p>創建新的直播活動時：</p>
+
+    <ol class="bcls-tasklist-restart">
+
+        <li>打開<strong>音軌</strong>部分。</li>
+        <li>點擊<strong>添加音軌</strong>按鈕。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/multi-language-audio/audio-track-section.png" /></figure>
+
+        </li>
+        <li>填寫字段以添加新的音軌。帶星號（*）的字段為必填項。
+         <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/multi-language-audio/audio-track-fields.png" /></figure>
+            <ul>
+                <li><strong>默認</strong>：選擇默認的音軌。</li>
+                <li><strong>語*</strong>：鍵入新音頻軌道的語言代碼。示例：en，es，cy-GB等</li>
+                <li><strong>PID *</strong>：輸入先前在編碼器中定義的PID代碼，以將傳入流中的音軌同步到正確的語言和變體。注意：每個音軌都需要唯一的PID。 </li>
+                <li><strong>變體</strong>：表示音軌的變體。這些可以是：<strong>主要，評論，替代，標題，字幕，補充，配音</strong>。 </li>
+                <li><strong>標籤</strong>：鍵入軌道的名稱。範例：英文，西班牙文等請注意，如果標籤字段保留為空，則語言代碼將用作標籤。</li>
+            </ul>
+        </li>
+        <li>通過點擊<strong>+</strong>和<strong>--</strong>按鈕，您可以添加或刪除音軌。<aside class="bcls-aside bcls-aside--information">筆記：您最多可以添加六個音軌。如果需要添加更多曲目，請聯繫支持。</aside>
+        
+        </li>
+    
+    </ol>
+
+    </section>
+
+    <section class="bcls-section">
+
+        <h2 id="change-audio">更改音軌</h2>
+
+        <ol class="bcls-tasklist-restart">
+            <li>如果正確設置了多音頻軌道，則播放器將帶有一個耳機圖標，可用於在各軌道之間切換。
+
+                <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/multi-language-audio/player-multi-language.png" /></figure>
+
+            </li>
+
+        </ol>
+
+        </section>
+
+
+
+</article>

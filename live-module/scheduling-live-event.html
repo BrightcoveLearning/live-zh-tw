@@ -1,0 +1,98 @@
+---
+title:安排實時 SEP 事件
+parent: Live Module 
+---
+
+
+<article class="bcls-article">
+    <h1>使用靜態入口點自動開始/停止實時事件</h1>
+    <summary>此功能使用戶可以計劃和管理一個或多個實時作業事件的開始和停止時間。 
+        </summary>
+   
+
+        <section class="bcls-section">
+            <h2 id="schedule">先決條件</h2>
+
+            <p>為了安排事件，必須創建SEP（靜態入口點）類型的實時事件。</p>
+
+            <aside class="bcls-aside bcls-aside--information">目前不支持冗餘組的調度。</aside>
+
+            <h2 id="schedule">建議和最佳做法</h2>
+
+            <p>為了獲得最佳效果，請按照以下說明進行操作。</p>
+                <ol class="bcls-tasklist-restart">
+                <li>一次可以安排六個未決的激活。如果需要更多，請聯繫客戶支持。</li>
+                <li>激活SEP後，默認的“最長等待時間"仍然有效（請參見<a href="https://live.support.brightcove.com/live-api/guides/live-api-static-entry-points.html#max_waiting_time" target="_blank">實時API：靜態入口點以獲取更多信息</a>）。</li>
+                <li>請注意，<a href="https://live.support.brightcove.com/live-api/guides/live-api-static-entry-points.html#Limitations" target="_blank">靜態入口點</a>仍然有效。</li>
+                </ol>
+        </section>
+
+        <section class="bcls-section">
+
+            <h2 id="schedule">控制室中的調度面板</h2>
+
+            <p>如果啟用了“自動啟動/停止"的實時帳戶，則在預覽播放器下方控制室的右上角將提供“調度"面板。</p>
+            <p>要使用自動啟動/停止，請按照以下說明進行操作：</p>
+
+            <ol class="bcls-tasklist-restart">
+                <li>在實時模塊中，使用靜態入口點創建一個新的實時事件，或訪問以前創建的事件。</li>
+                <li>在裡面<strong>控制室</strong>，一個名為Scheduling的新面板將可用。點擊<strong>+添加時間表</strong>創建新的自動激活和停用功能。
+                <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/live-module/scheduling/add-schedule.png" /></figure>
+
+                </li>
+                <li>將開始日期和結束日期分別修改為所需的激活和停用狀態。
+                <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/live-module/scheduling/start-end-dates.png" /></figure>
+                <aside class="bcls-aside bcls-aside--information">雖然我們不會阻止多個計劃同時運行，但衝突行將顯示警告。如果在激活時間之前未解決衝突的計劃，則可能會失敗。為避免出現警告，只需刪除其中一行或調整時間即可。</aside>
+                </li>
+                <li>
+                    要創建第二個時間表，請再次單擊<strong>+添加時間表</strong>按鈕。這<strong>+添加時間表</strong>當達到未決激活的限制時，該按鈕將被自動禁用。
+                    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/live-module/scheduling/more-schedules.png" /></figure>
+
+                </li>
+                <li>要刪除計劃，請單擊 <img class="bcls-image--no-border" alt="" width="30" height="30" src="/assets/images/live-module/scheduling/trash-icon.png" /> 圖標。</li>
+                
+            </ol>
+
+            <aside class="bcls-aside bcls-aside--information">
+
+                <ul>
+
+                    <li>時間表發生衝突時，時間表事件將變為黃色，作為警告。</li>
+                    <li>當流由於任何原因失敗時，計劃的事件將變為紅色。</li>
+                    <li>失敗的日程表將保持可見7天。 </li>
+
+                </ul>
+
+
+
+            </aside>
+
+
+        </section>
+
+        <section class="bcls-section">
+
+            <h2 id="schedule">查看即將進行的激活</h2>
+
+            <ol class="bcls-tasklist-restart">
+                
+                <li>創建計劃的激活後，您可以在<strong>管理活動&gt;待機</strong>標籤。下一個即將到來<strong>開始</strong>和<strong>停止</strong>日期顯示在<strong>即將來臨</strong>標題。
+                    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/live-module/scheduling/upcoming-events.png" /></figure>
+                </li>
+                <li>這<strong>表演</strong>選擇框允許您僅顯示計劃的事件。
+                <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="300" height="200" src="/assets/images/live-module/scheduling/show-events.png" /></figure>
+                </li>
+                <li>活動開始後，會在<strong>居住</strong>標籤，然後<strong>開始</strong>時間將被禁用。
+                <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="" height="" src="/assets/images/live-module/scheduling/streaming-event.png" /></figure>
+
+                </li>
+            </ol>
+
+
+
+            </section>
+
+
+
+
+</article>

@@ -1,0 +1,169 @@
+---
+title: '一步步：串流安全可靠的傳輸 (SRT) 即時事件'
+parent: Getting Started —
+<article class="bcls-article">
+  <h1>一步步：串流安全可靠的傳輸 (SRT) 即時事件</h1> 
+  <summary>本快速入門的目的是向您展示如何使用Video Cloud Live模塊和Open Broadcaster Software（OBS）廣播SRT實時事件。</summary>
+  <section class="bcls-section">
+    <p>要了解實時模塊中可用的所有功能，請參閱<a href="/live-module/creating-and-managing-live-events-using-live-module.html">使用實時模塊創建和管理實時事件</a>。有關有助於確保高質量，穩定的實時流媒體體驗的一系列最佳做法和建議，請參閱<a href="/get-started/live-module-guidelines-and-best-practices.html">實時模塊準則和最佳實踐</a>。有關Brightcove提供的用於傳輸實時流視頻的所有選項的列表，請參見<a href="/get-started/delivering-live-streams.html">傳送直播</a>。</p>
+    <aside class="bcls-aside bcls-aside--information">筆記：實時流媒體支持僅適用於 Video Cloud Enterprise 發布商。</aside>
+    <p>完成此「快速入門」後，您應該能夠：</p>
+    <ul>
+      <li>使用視頻雲直播模塊創建SRT直播活動</li>
+      <li>為SRT現場活動配置編碼器</li>
+      <li>修剪您的活動，並將其儲存為視訊雲端帳戶中的 VOD 資產</li>
+    </ul>
+    <p>這個快速入門將幫助您廣播現場活動使用開放廣播軟件（OBS）Studio 不同的設備。OBS是用於視頻錄製和實時流傳輸的開源軟件，可以將<a href="https://obsproject.com">在這裡下載</a>。其他編碼器也可以與 Live 模組搭配使用。</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="audience">受眾</h2>
+    <p>任何需要使用影片雲端直播模組播放即時串流活動的 Video Cloud 發行者。</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="prereq">先決條件</h2>
+    <ul>
+      <li>可訪問實時模塊的Video Cloud Enterprise帳戶</li>
+      <li>播放活動的攝影機</li>
+      <li>您必須擁有自己的編碼軟件。本快速入門使用<a href="https://obsproject.com">OBS工作室</a>可以免費下載（請參閱<a href="/general/supported-encoders-live-events.html">支持的編碼器</a>）</li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="limitations">限制</h2>
+    <ul>
+      <li>您的編碼器必須輸出 RTMP 或 SRT 串流</li>
+      <li>直播將經歷 20-30 秒的延遲</li>
+      <li>串流必須在活動開始後 30 分鐘內開始 (預設層級帳戶設定)</li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="steps">直播活動的步驟</h2>
+    <p>若要使用直播模組串流您的即時活動，您將完成下列工作：</p>
+    <ul>
+      <li><a href="#newevent">使用Video Cloud Live模塊創建新事件</a></li>
+      <li><a href="#encoder">配置編碼器</a></li>
+      <li><a href="#publish">發布實時流</a></li>
+      <li><a href="#clip">從現場直播中創建片段</a></li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="newevent">建立新的直播活動</h2>
+    <ol class="bcls-tasklist-restart">
+      <li>在瀏覽器窗口中，導航到<a href="https://studio.brightcove.com">Video Cloud Studio</a>。</li>
+      <li>輸入您的Video Cloud登錄憑據，然後單擊<strong>登入。</strong></li>
+      <li>目前的 Video Cloud 帳戶名稱會出現在頁面的右上角。如果您有多個帳戶，請按一下帳戶選擇器下拉式清單，然後選取您要儲存實況資產的帳戶。如果您選取的帳戶尚未啟用 Live，即時模組將會以試用模式開啟。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="400" height="600"  src="/assets/images/get-started/10821/node10820-account-selector.png" /></figure>
+      </li>
+      <li>點擊<strong>居住</strong>在導航標題中。</li>
+      <li>點擊<strong>建立活動</strong>按鈕創建一個新事件。</li>
+      <li>輸入一個<strong>活動名稱</strong>。</li>
+      <li>輸入一些<strong>標籤</strong>為事件。</li>
+      <li>如果您的帳戶已設定必要的自訂欄位，請確定已指派自訂欄位值。</li>
+      <li>選擇一個<strong>實時攝取資料</strong>從下拉列表中。即時內嵌描述檔可控制所建立的即時轉譯的數量和品質。</li>
+      <li>選擇<strong>完成後將事件轉換為視頻資產</strong>。這會將事件儲存為媒體模組中的視訊。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10821/node10820-create-live-event.png" /></figure>
+      </li>
+      
+      <li>選擇<strong>地區</strong>最接近您的位置。</li>
+      <li>點擊<strong>高級選項</strong>鏈接以展開高級選項。</li>
+      <li>設置<strong>重新連接時間</strong>到10分鐘（默認）。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10821/node10820-srt-options.png" /></figure>
+      </li>
+      <li>選擇<strong>安全可靠的傳輸（SRT）</strong>來自<strong>輸入格式</strong>下拉式菜單。</li>
+      <li>在裡面<strong>CIDR白名單</strong>部分中，輸入一組允許連接到SRT端點的IP地址。這控制了誰可以連接到SRT端點。請注意，只有在<strong>輸入格式</strong>是RTP或SRT。您可以指定<code translate="No">0.0.0.0/0</code>允許所有網絡。</li>
+      <li>點擊<strong>開始流式傳輸</strong>。Live模塊將返回一個<strong>流端點（SRT URL）</strong>。通過選擇以下選項，將在OBS中可用的編碼器設置中使用SRT URL：<strong>風俗</strong>在下面<strong>流設置服務</strong>，然後輸入<code translate="No">srt://</code>服務器框中的路徑。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10821/control-room-srt.png" /></figure>
+      </li>
+    </ol>
+  </section>
+  <section class="bcls-section">
+    <h2 id="encoder">設定您的編碼器</h2>
+    <p>在本節中，我們將配置和使用 OBS Studio 編碼器來支持即時串流事件。OBS Studio 軟件是一個桌面應用程序，它從你的攝像機捕獲輸入，並產生一個可以由 CDN 交付的流。請注意，有些硬體和其他軟體的編碼解決方案可能更適合用來傳遞您的直播活動。您可以下載OBS Studio軟件<a href="https://obsproject.com">這裡</a>。</p>
+    <aside class="bcls-aside bcls-aside--information">筆記：在繼續之前，您應該安裝 OBS 軟件並將相機連接到您的計算機</aside><aside class="bcls-aside bcls-aside--information">筆記：本示例使用了一台使用 Blackmagic Design UltraStudio Mini Recorder 連接到筆記本電腦的 DSLR。</aside><aside class="bcls-aside bcls-aside--information">筆記：OBS 提供了記錄流的本地副本的能力。如果選擇這樣做，您將擁有串流的本機複本，您可以建立剪輯片段，以防事件廣播期間發生任何網路問題。有關如何錄製本地文件的信息，請參閱<a href="https://obsproject.com/docs/index.html">OBS 文檔</a>.</aside>
+    <ol class="bcls-tasklist-restart">
+      <li>開啟「OBS 工作室」。</li>
+      <li>在裡面<strong>資料來源</strong>部分，單擊<strong>+</strong>添加新的來源。選擇一個<strong>來源</strong>從列表中。此快速入門使用通過Blackmagic Design UltraStudio Mini Recorder連接到筆記本電腦的DSLR，因此<strong>黑魔法裝置</strong>被選中。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10821/node18621-add-source.png" /></figure>
+      </li>
+      <li>輸入新來源的名稱，然後單擊<strong>好的</strong>。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10821/node18621-blackmagic.png" /></figure>
+      </li>
+      <li>從中選擇您的相機<strong>設備</strong>列表。預覽應該會出現在屬性對話方塊中。點擊<strong>好的</strong>。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10821/node18621-source-preview.png" /></figure>
+      </li>
+      <li>在控件部分中，單擊<strong>設定值</strong>。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10821/node18621-controls.png" /></figure>
+      </li>
+      <li>點擊<strong>溪流</strong>在“設置"對話框的左側。</li>
+      <li>在裡面<strong>服務</strong>下拉菜單，選擇<strong>風俗</strong>。</li>
+      <li>為了<strong>服務器</strong>， 使用<strong>SRT網址</strong>由實時模塊提供。</li>
+      <li>為了<strong>流鍵</strong>，將其留空。</li>
+      <li>點擊<strong>好的</strong>保存設置。</li>
+      <li>在控件部分中，單擊<strong>開始流式傳輸</strong>。現場直播應該開始。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10821/node18621-live-stream-OBS.png" /></figure>
+      </li>
+    </ol>
+    <aside class="bcls-aside bcls-aside--information">筆記：處理您的流大約需要一分鐘。</aside>
+  </section>
+  <section class="bcls-section">
+    <h2 id="publish">發佈現場活動</h2>
+    <p>如果要產生即時事件的內嵌程式碼，請依照下列步驟執行：</p>
+    <ol class="bcls-tasklist-restart">
+      <li>返回直播模組。</li>
+      <li>如果未顯示事件的“控制室"頁面，請單擊<strong>居住</strong>標籤以顯示實時事件列表。按一下事件名稱以開啟 [  控制室]   頁面。</li>
+      <li>確認您可以看到即時直播。請注意，啟動編碼器後，可能需要一分鐘才會顯示即時串流。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10821/node10820-control-room.png" /></figure>
+      </li>
+      <li>點擊<strong>發布和嵌入</strong>。</li>
+      <li>選擇一個<strong>播放器</strong>然後點擊<strong>播放器網址</strong>觀看直播。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10821/node10820-embed-code.png" /></figure>
+      </li>
+      <li>直播結束後，請點擊<strong>停止流</strong>實時模塊中的按鈕。此外，返回 OBS Studio 並單擊流按鈕，停止編碼器從流媒體。<aside class="bcls-aside bcls-aside--information">筆記：當直播完成時，請務必關閉/停止編碼器。使任何編碼器和 Brightcove 之間的連接保持打開狀態，即使沒有發送數據，也可能導致意外的連接費用。</aside>
+      </li>
+    </ol>
+  </section>
+  <section class="bcls-section">
+    <h2 id="clip">建立剪輯片段</h2>
+    <p>Live 模組提供從已完成的事件建立視訊剪輯的功能。您也可以在現場活動進行時建立剪輯片段。建立剪輯片段的原因有幾種：</p>
+    <ul>
+      <li>建立可張貼至社交媒體的簡短、傳情剪輯</li>
+      <li>限制您要張貼的影片長度 (大多數平台會限制視訊的長度)</li>
+      <li>您發現較短的視頻在社交媒體上表現更好</li>
+    </ul>
+    <p>剪輯片段只能在活動結束後 7 天內建立。之後，<strong>創建剪輯</strong>按鈕將被禁用。如果事件超過 24 小時，只有過去 24 小時可以剪輯。</p>
+    <aside class="bcls-aside bcls-aside--information">筆記：有關使用剪輯界面的完整詳細信息，請參見<a href="/live-module/creating-video-clip-using-live-module.html">使用直播模塊創建視頻剪輯</a>.</aside>
+    <p>若要建立剪輯片段，請依照下列步驟執行：</p>
+    <ol class="bcls-tasklist-restart">
+      <li>返回直播模組。</li>
+      <li>點擊<strong>完全的</strong>標籤。</li>
+      <li>找到事件並按一下事件名稱以開啟控制室。</li>
+      <li>點擊<strong>創建剪輯</strong>。剪裁編輯器將打開。</li>
+      <li>單擊並拖動剪輯手柄 (<img alt="" width="5" height="20" src="/assets/images/get-started/10821/node10820-clip-handle.png" />) 在焦點時間線上設置剪輯的起點和終點。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="400" height="300" src="/assets/images/get-started/10821/node10820-clip-start-end.png" /></figure>
+      </li>
+      <li>點擊<strong>預覽剪輯</strong>預覽剪輯。可以根據需要調整起點和終點。</li>
+      <li>點擊<strong>保存剪輯</strong>。</li>
+      <li>進入一個<strong>剪輯名稱</strong>和其他元數據值。帳戶的所有必要欄位也會出現，且應該被指派值。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10821/node10820-clip-metadata.png" /></figure>
+      </li>
+      <li>點擊<strong>創建剪輯</strong>。擷取程序將會開始，剪輯片段會儲存至您的 Video Cloud 帳戶。</li>
+      <li>剪輯片段會出現在剪輯片段編輯器下方。點擊<strong>發佈到社交</strong>使用Brightcove Social將剪輯發佈到您的社交目的地之一。有關使用“社交"模塊發布視頻的信息，請參閱<a href="https://social.support.brightcove.com/general/publishing-videos-social-media-platforms.html">將視頻發佈到社交媒體平台</a>。</li>
+      <li>點擊<strong>返回控制室：完全的</strong>麵包屑。所有剪輯片段也會出現在活動的「控制室」中。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10821/node10820-clips-section.png" /></figure>
+        <aside class="bcls-aside bcls-aside--information">筆記：您可以多次按一下「建立剪輯片段」按鈕，建立多個廣播片段。這允許您根據需要為每個廣播修剪和保存任意次數，將剪輯保存為媒體庫中的單獨 VOD 資產。</aside>
+      </li>
+    </ol>
+  </section>
+  <section class="bcls-section">
+    <h2 id="troubleshoot">即時串流問題疑難排解</h2>
+    <p>如果您需要進一步的幫助以使現場活動開始進行，可以<a href="https://supportportal.brightcove.com/create">聯繫我們</a>。為了確保您得到最快的回應，以下是解決問題所需的支援清單。</p>
+    <ul>
+      <li>流的具體症狀。例如，它是根本不播放還是口吃或凍結？</li>
+      <li>這個流是否在過去正常工作</li>
+      <li>您在編碼器中使用的入口點 URL</li>
+      <li>您使用的編碼軟件和硬件</li>
+      <li>您發佈直播活動的玩家 URL</li>
+      <li>影片雲端工作室中即時資產的視訊 ID</li>
+      <li>從編碼器到發佈點主機的追蹤路由結果</li>
+    </ul>
+  </section>
+</article>
