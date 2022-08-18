@@ -1,434 +1,315 @@
-﻿<!doctype html>
-<html lang="zh-TW">
+<!doctype html>
+<html lang="en-us">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="在本主題中，您將學習如何在使用 Brightcove 的伺服器端廣告插入 (SSAI) 進行即時串流工作時，如何管理提示點和廣告信標。">
+  <meta name="description" content="在本主題中，您將了解如何在將 Brightcove 的服務器端廣告插入 (SSAI) 用於直播作業時管理提示點和廣告信標.">
   
-  <title>即時 API：提示點和廣告信標與 SSAI</title>
+  <title>實時 API 提示點與 SSAI 說明的廣告信標</title>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">  
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&amp;display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/prism.css">
   <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/styles.css">
   <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/landing-page.css">
   <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/tabs.css">
   <link rel="stylesheet" href="/assets/css/local.css">
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&display=swap">
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/381443caa8.js" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/google-analytics.js"></script>
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2728311-17"></script>
+<script translate="no">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-2728311-17');
+</script>
   <script src="/assets/js/sajari-head.js"></script>
+	<script src="https://unpkg.com/feather-icons"></script>
 </head>
 
 <body class="body">
-
-<header>
+ <header>
   <div class="div-header">
-    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/Live_Logo.svg" alt="產品標誌" style="max-height: 100px;max-width: 232px;"/></a>
+    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/SVG/COVE004_Brightcove_Live_Logo_RGB_K.svg" alt="Brightcove" style="max-width: 170px;"></a>
 <!-- GTranslate: https://gtranslate.io/ -->
-<select onchange="doGTranslate(this);"><option value="">選擇語言</option><option value="en|en" translate="No">English</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">Français</option><option value="en|de" translate="No">Deutsche</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">한국어</option><option value="en|es" translate="No">Español</option></select>
+<select onchange="doGTranslate(this);"><option value="">選擇語言</option><option value="en|en" translate="No">英語</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">法國</option><option value="en|de" translate="No">德意志</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">국</option><option value="en|es" translate="No">西班牙文</option></select>
 
 <script>
-/* <![CDATA[ */
-function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
-/* ]]> */
+/*<![CDATA[ */ 函數 doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;} /*]]> */
 </script>
 
-Brightcove 
 
-    <span class="secondary-nav"><a href="https://supportportal.brightcove.com/s/login/?"><img src="https://support.brightcove.com/site-assets/images/site/support.png" alt="支持"/>聯繫支持</a><span style="vertical-align: top;margin-left:1em;margin-right:1em;">|</span><a href="https://status.brightcove.com/"><img src="https://support.brightcove.com/site-assets/images/site/status.png" alt="系統狀態"/>系統狀況</a></span><br/>
+
+    <span class="secondary-nav"><a href="https://supportportal.brightcove.com/s/login/?"><i data-feather="help-circle"></i> 聯繫支持</a><span style="vertical-align: middle;margin-left:1em;margin-right:1em;">|</span><a href="https://status.brightcove.com/"><i data-feather="cloud"></i> 系統狀況</a></span>
+    <br>
     
   </div>
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb arr-right">
       
-      <li class="breadcrumb-item"><a href="/">首頁</a></li>
+      <li class="breadcrumb-item first-item"><a href="/">家</a></li>
+        
+      <li class="breadcrumb-item"><a href="/live-api/ssai/">SSAI</a></li>
       
-      
-      
-      <li class="breadcrumb-item"><a href="/live-api/ssai/"></a></li>
-      
-      <li class="breadcrumb-item active" aria-current="page">即時 API：提示點和廣告信標與 SSAI</li>
+      <li class="breadcrumb-item active" aria-current="page">實時 API 提示點與 SSAI 說明的廣告信標</li>
     </ol>
   </nav>
-</header>
-<div class="container">
+</header> <div class="container">
     <div class="row">
       <div class="col-sm-3 left-side-bar">
-        				<select id="site_select" class="bcls-select" style="margin-right: 1rem;">
+				<select id="site_select" class="bcls-select" style="margin-left: 1rem;">
 					<option value="">其他布萊特灣文件</option>
-					
-						
-							<option value="https://support.brightcove.com">文件首頁</option>
-						
-					
-						
-							<option value="https://audience.support.brightcove.com">布萊特灣觀眾</option>
-						
-					
-						
-							<option value="https://beacon.support.brightcove.com">布萊特灣燈塔</option>
-						
-					
-						
-							<option value="https://campaign.support.brightcove.com">布萊特灣戰役</option>
-						
-					
-						
-							<option value="https://engage.support.brightcove.com">布萊特灣參與</option>
-						
-					
-						
-							<option value="https://live.support.brightcove.com">Brightcove Live</option>
-						
-					
-						
-							<option value="https://gallery.support.brightcove.com">Brightcove 圖庫</option>
-						
-					
-						
-							<option value="https://ssai.support.brightcove.com">布萊特灣</option>
-						
-					
-						
-							<option value="https://social.support.brightcove.com">布萊特灣社會</option>
-						
-					
-						
-							<option value="https://studio.support.brightcove.com">視訊雲端工作室</option>
-						
-					
-						
-							<option value="https://player.support.brightcove.com">布萊特灣球員開發</option>
-						
-					
-						
-							<option value="https://apis.support.brightcove.com">視訊雲端平台 API</option>
-						
-					
-						
-							<option value="https://sdks.support.brightcove.com">視訊雲端裝置開發套件</option>
-						
-					
-						
-							<option value="https://integrations.support.brightcove.com">整合與 CMS 連接器</option>
-						
-					
-						
-							<option value="https://general.support.brightcove.com">視訊雲端一般資訊</option>
-						
-					
-						
-							<option value="https://zencoder.support.brightcove.com">Zencoder</option>
-						
-					
+					 
+							<option value="https://support.brightcove.com">文檔主頁</option>
+						  
+							<option value="">-- 視頻雲 --</option>
+						  
+							<option value="https://studio.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;影雲工作室</option>
+						  
+							<option value="https://player.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp; Brightcove 播放器開發</option>
+						  
+							<option value="https://apis.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;視頻雲平台API</option>
+						  
+							<option value="https://sdks.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;視頻雲設備 SDK</option>
+						  
+							<option value="https://integrations.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;集成和 CMS 連接器</option>
+						  
+							<option value="https://general.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;視頻雲一般信息</option>
+						  
+							<option value="">-- 視頻要點 --</option>
+						  
+							<option value="https://beacon.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;明灣燈塔</option>
+						  
+							<option value="https://live.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp; Brightcove 現場直播</option>
+						  
+							<option value="https://zencoder.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;編碼器</option>
+						  
+							<option value="">-- 視頻雲插件 --</option>
+						  
+							<option value="https://campaign.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp; Brightcove 運動</option>
+						  
+							<option value="https://engage.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp; Brightcove 參與</option>
+						  
+							<option value="https://gallery.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;布賴特科夫畫廊</option>
+						  
+							<option value="https://studio.support.brightcove.com/social/index.html">&nbsp;&nbsp;&nbsp;&nbsp; Brightcove 社交</option>
+						  
+							<option value="https://ssai.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp; Brightcove SSAI</option>
+						 
 				</select>
-						<nav class="sidenav" id="side_nav">
-
-          
-            
-            <h5><a href="/index.html">首頁</a></h5>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/get-started/index.html">開始使用 <strong>+</strong></a></h5>
+        <nav class="sidenav" id="side_nav">
+           
+            <h5><a href="/index.html">家</a></h5>
+              
+              <h5 class="submenu-header"><a href="/get-started/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;入門</a></h5>
               <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/get-started/brightcove-live-training-videos.html">布萊特灣現場訓練影片</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/delivering-live-streams.html">提供即時串流</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/live-module-guidelines-and-best-practices.html">即時模組指南與最佳實務</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">逐步：與 OBS 搭配使用即時模組</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/step-step-using-live-module-telestream-wirecast.html">逐步：使用直播模組與線控</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/general/index.html">一般資訊 <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/general/live-drm.html">即時 DRM </a></li>
-                  
-                
-                  
-                    <li><a href="/general/live-platforms-comparison-matrix.html">即時平台比較表</a></li>
-                  
-                
-                  
-                    <li><a href="/general/live-video-glossary.html">即時視訊詞彙</a></li>
-                  
-                
-                  
-                    <li><a href="/general/reducing-latency-live-streams.html">減少即時串流的延遲</a></li>
-                  
-                
-                  
-                    <li><a href="/general/supported-encoders-live-events.html">直播活動支援編碼器</a></li>
-                  
-                
-                  
-                    <li><a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html">使用阿卡邁流包裝和控制</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/live-module/index.html">使用即時模組<strong> + </strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">使用即時 SSAI 的客戶端預售廣告</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">建立與管理即時事件</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-video-clip-using-live-module.html">建立視訊片段</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">主持阿瓦雅會議在布萊特灣直播</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">主持思科韋貝斯到布萊特灣直播</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">主體縮放至布萊特灣現場</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">在布萊特灣直播上舉辦 INXPO 活動</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">實作伺服器端廣告</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/live-redundancy.html">即時備援</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/publishing-live-event-facebook.html">發佈直播活動至臉書</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/publishing-live-event-youtube.html">將現場活動發佈至 YouTube </a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/reviewing-live-analytics.html">檢閱即時分析</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html">使用即時 RTMP 輸出</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/live-api/index.html">使用即時 API <strong> + </strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/getting-started/index.html">即時 API：開始使用 <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/getting-started/overview-brightcove-live-api.html">概述：即時 API </a></li>
-                        
-                        <li><a href="/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">使用 API 建立即時串流</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/code-samples/index.html">即時 API：程式碼範例 <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/code-samples/live-api-sample-create-live-job.html">建立即時工作</a></li>
-                        
-                        <li><a href="/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">為 MPEG2-TS 輸入建立即時工作</a></li>
-                        
-                        <li><a href="/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html">使用即時事件的 RTMP 輸出</a></li>
-                        
-                        <li><a href="/live-api/code-samples/simulated-live.html">模擬現場活動</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/references/index.html">即時 API：參考資料 <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/references/live-api-error-messages.html">錯誤訊息</a></li>
-                        
-                        <li><a href="/live-api/references/live-api-release-notes.html">版本資訊</a></li>
-                        
-                        <li><a href="/live-api/references/reference.html">即時 API 參考</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/ssai/index.html">即時 API：三世 <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">提示點和廣告信標與 SSAI </a></li>
-                        
-                        <li><a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">伺服器端廣告插入 (SSAI) </a></li>
-                        
-                        <li><a href="/live-api/ssai/overview-player-enhancements-live-ssai.html">概述：即時 SSAI 的玩家增強功能</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      <a href="/live-api/guides/index.html">即時 API：指南 <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/guides/brightcove-live-best-practices.html">布萊特灣現場最佳實踐</a></li>
-                        
-                        <li><a href="/live-api/guides/brightcove-live-program-ad-metadata-api.html">布萊特灣直播計畫廣告中繼資料 API </a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-frame-accurate-clip.html">建立精確影格的剪輯</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-vod-clips.html">建立點播剪輯</a></li>
-                        
-                        <li><a href="/live-api/guides/getting-list-live-or-vod-jobs.html">取得即時或 VOD 工作清單</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-insert-id3-timed-metadata.html">插入 ID3 計時的詮釋資料</a></li>
-                        
-                        <li><a href="/live-api/guides/live-drm-live-api.html">透過即時 API 即時 DRM </a></li>
-                        
-                        <li><a href="/live-api/guides/managing-credentials-live-api.html">管理即時 API 的認證</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-notifications.html">通知</a></li>
-                        
-                        <li><a href="/general/reducing-latency-live-streams.html">減少即時串流的延遲</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-rtmp-outputs.html">RTMP 輸出</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-static-entry-points.html">靜態進入點</a></li>
-                        
-                        <li><a href="/live-api/guides/signed-urls-and-token-auth-live-stream.html">具有即時串流的已簽署 URL 和權杖驗證</a></li>
-                        
-                        <li><a href="/live-api/guides/using-live-redundancy.html">使用即時備援</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-vod-live-event.html">直播活動的 VOD </a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/admin/index.html">管理帳號<strong> + </strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">建立自訂即時內嵌設定檔</a></li>
-                  
-                
-                  
-                    <li><a href="/admin/fields-custom-live-ingest-profiles.html">自訂即時擷取設定檔的欄位</a></li>
-                  
-                
-                  
-                    <li><a href="/admin/managing-live-settings.html">管理即時設定</a></li>
-                  
-                
-                  
-                    <li><a href="/admin/managing-api-authentication-credentials.html">管理 API 身份驗證憑證</a></li>
-                  
-                
-                  
-                    <li><a href="/admin/standard-live-ingest-profiles.html">標準即時擷取設定檔</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/release-notes/index.html">版本說明<strong> + </strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/release-notes/live-api-release-notes.html">即時發行紀錄</a></li>
-                  
-                
-                  
-                    <li><a href="/release-notes/known-issues.html">已知問題</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/support/index.html">支援<strong> + </strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
+                 
+                    <li><a href="/get-started/brightcove-live-training-videos.html">Brightcove 現場培訓視頻</a></li>
                     
-                  
-                
-                  
-                    <li><a href="/support/viewing-brightcove-system-status-page.html">檢視布萊特灣系統狀態頁面</a></li>
-                  
-                
-                  
-                    <li><a href="/support/contact-sales.html">聯絡銷售人員</a></li>
-                  
-                
-                  
-                    <li><a href="/support/opening-case-with-brightcove-support.html">開啟支援案例</a></li>
-                  
-                
+                    <li><a href="/get-started/delivering-live-streams.html">提供實時流</a></li>
+                    
+                    <li><a href="/get-started/live-module-guidelines-and-best-practices.html">Brightcove 現場直播：最佳實踐</a></li>
+                    
+                    <li><a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">一步步：將實時模塊與 OBS 結合使用</a></li>
+                    
+                    <li><a href="/get-started/step-step-using-live-module-telestream-wirecast.html">一步步：使用直播模組與線控</a></li>
+                    
+                    <li><a href="/get-started/step-step-live-srt.html">一步步：串流 SRT 即時事件</a></li>
+                   
               </ul>
-            
-          
+              
+              <h5 class="submenu-header"><a href="/general/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;一般信息</a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                 
+                    <li><a href="/general/live-drm.html">實時數字版權管理</a></li>
+                    
+                    <li><a href="/general/live-platforms-comparison-matrix.html">直播平台比較矩陣</a></li>
+                    
+                    <li><a href="/general/live-video-glossary.html">實時視頻詞彙表</a></li>
+                    
+                    <li><a href="/general/reducing-latency-live-streams.html">減少直播的延遲</a></li>
+                    
+                    <li><a href="/general/supported-encoders-live-events.html">現場活動支持的編碼器</a></li>
+                    
+                    <li><a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html">使用 Akamai Stream Packaging 和 Wirecast</a></li>
+                   
+              </ul>
+              
+              <h5 class="submenu-header"><a href="/live-module/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;使用實時模塊</a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                 
+                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">帶有實時 SSAI 的客戶端預貼廣告</a></li>
+                    
+                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">創建和管理現場活動</a></li>
+                    
+                    <li><a href="/live-module/creating-video-clip-using-live-module.html">創建視頻剪輯</a></li>
+                    
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">在 Brightcove Live 上主持 Avaya 會議</a></li>
+                    
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">將 Cisco Webex 託管到 Brightcove Live</a></li>
+                    
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">主機 Zoom 到 Brightcove Live</a></li>
+                    
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">在 Brightcove Live 上舉辦 INXPO 活動</a></li>
+                    
+                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">實施服務器端廣告 (SSAI)</a></li>
+                    
+                    <li><a href="/live-module/live-redundancy.html">實時冗餘</a></li>
+                    
+                    <li><a href="/live-module/publishing-live-event-facebook.html">將直播活動發佈到 Facebook</a></li>
+                    
+                    <li><a href="/live-module/publishing-live-event-youtube.html">將直播活動發佈到 YouTube</a></li>
+                    
+                    <li><a href="/live-module/reviewing-live-analytics.html">查看實時分析</a></li>
+                    
+                    <li><a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html">使用實時 RTMP 輸出</a></li>
+                    
+                    <li><a href="/live-module/zoom-live-integration.html">集成 Zoom 會議</a></li>
+                   
+              </ul>
+              
+              <h5 class="submenu-header"><a href="https://apis.support.brightcove.com/live-api/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;使用實時 API</a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                 
+                    <li class="submenu-header">
+                      <a href="https://apis.support.brightcove.com/live-api/getting-started/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;實時 API：入門</a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                         
+                            <li><a href="https://apis.support.brightcove.com/live-api/getting-started/overview-brightcove-live-api.html">概述：實時API</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">使用 API 創建實時流</a></li>
+                           
+                      </ul>
+                    </li>
+                    
+                    <li class="submenu-header">
+                      <a href="https://apis.support.brightcove.com/live-api/code-samples/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;實時 API：代碼樣例</a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                         
+                            <li><a href="https://apis.support.brightcove.com/live-api/code-samples/live-api-sample-create-live-job.html">創建現場工作</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">為 MPEG2-TS 輸入創建實時作業</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html">將 RTMP 輸出用於實時事件</a></li>
+                           
+                      </ul>
+                    </li>
+                    
+                    <li class="submenu-header">
+                      <a href="https://apis.support.brightcove.com/live-api/references/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;實時 API：參考</a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                         
+                            <li><a href="https://apis.support.brightcove.com/live-api/references/live-api-error-messages.html">錯誤訊息</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/references/live-api-release-notes.html">發行說明</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/references/reference.html">實時API參考</a></li>
+                           
+                      </ul>
+                    </li>
+                    
+                    <li class="submenu-header">
+                      <a href="https://apis.support.brightcove.com/live-api/ssai/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;實時 API：智囊團</a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                         
+                            <li><a href="https://apis.support.brightcove.com/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">使用 SSAI 的提示點和廣告信標</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">服務器端廣告插入（SSAI）</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/ssai/overview-player-enhancements-live-ssai.html">概述：實時SSAI的播放器增強</a></li>
+                           
+                      </ul>
+                    </li>
+                    
+                    <li class="submenu-header">
+                      <a href="https://apis.support.brightcove.com/live-api/guides/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;實時 API：指南</a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                         
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/brightcove-live-best-practices.html">Brightcove Live 最佳實踐</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/brightcove-live-program-ad-metadata-api.html">Brightcove 直播節目廣告元數據 API</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-frame-accurate-clip.html">創建幀精確剪輯</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-vod-clips.html">創建 VOD 剪輯</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/getting-list-live-or-vod-jobs.html">獲取直播或 VOD 作業列表</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-insert-id3-timed-metadata.html">插入 ID3 定時元數據</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-drm-live-api.html">通過 Live API 進行實時 DRM</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/managing-credentials-live-api.html">管理 Live API 的憑證</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-notifications.html">通知</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-playback-restrictions.html">實時流的播放限制</a></li>
+                            
+                            <li><a href="/general/reducing-latency-live-streams.html">減少直播的延遲</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-rtmp-outputs.html">RTMP 輸出</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-static-entry-points.html">靜態入口點</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/signed-urls-and-token-auth-live-stream.html">帶有實時流的簽名URL和令牌身份驗證</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/using-live-redundancy.html">使用實時冗餘</a></li>
+                            
+                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-vod-live-event.html">來自現場活動的 VOD</a></li>
+                           
+                      </ul>
+                    </li>
+                   
+              </ul>
+              
+              <h5 class="submenu-header"><a href="/admin/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;管理帳戶</a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                 
+                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">創建自定義實時攝取配置文件</a></li>
+                    
+                    <li><a href="/admin/fields-custom-live-ingest-profiles.html">自定義實時攝取配置文件的字段</a></li>
+                    
+                    <li><a href="/admin/managing-live-settings.html">管理實時設置</a></li>
+                    
+                    <li><a href="/admin/managing-api-authentication-credentials.html">管理API身份驗證憑據</a></li>
+                    
+                    <li><a href="/admin/standard-live-ingest-profiles.html">標準實時攝取配置文件</a></li>
+                   
+              </ul>
+              
+              <h5 class="submenu-header"><a href="/release-notes/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;發行說明</a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                 
+                    <li><a href="/release-notes/live-api-release-notes.html">實時發布說明</a></li>
+                   
+              </ul>
+              
+              <h5 class="submenu-header"><a href="/support/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;支持</a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                 
+                    <li><a href="/support/viewing-brightcove-system-status-page.html">查看Brightcove系統狀態頁面</a></li>
+                    
+                    <li><a href="/support/contact-sales.html">與銷售人員聯繫</a></li>
+                    
+                    <li><a href="/support/opening-case-with-brightcove-support.html">打開支持案例</a></li>
+                    
+                    <li><a href="/support/reset-support-portal-password.html">重置您的支持門戶密碼</a></li>
+                   
+              </ul>
+             
       </nav>
     </div>
     <div class="col-lg-7" style="background-color: white;color: #333333;margin-top: -1em;margin-bottom: -1em;padding-bottom:1em;">
   <!-- bootstrap layout -->
-
-<p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="導覽功能表"/></p>
+ <p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="Navigation Menu"></p>
 
 <!-- search bar -->
 <div id="nav-search-box" style="margin-top: 1rem;"></div>
@@ -439,24 +320,26 @@ Brightcove
   <ul id="centered_in_page_toc" class="list-none"></ul>
 </details>
 <!-- open in new tab/window -->
-<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="在新分頁中開啟" style="margin-top:4em;width: 1.5em;"/></a>
-
-
-
-  
-    
-
-
+<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="open in new tab" style="margin-top:4em;width: 1.5em;"></a>   <h1>此頁面已移動 - 您將被定向到<a href="https://apis.support.brightcove.com/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">新地點</a>在 3 秒內。請更新您的書籤！</h1>
+<script type="text/javascript">
+var t = setTimeout(function() { window.location.href = 'https://apis.support.brightcove.com/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html'; } , 3000);
+</script>
 <article class="bcls-article">
- <h1>即時 API：提示點和廣告信標與 SSAI</h1>
- <summary>在本主題中，您將學習如何在使用 Brightcove 的伺服器端廣告插入 (SSAI) 進行即時串流工作時，如何管理提示點和廣告信標。</summary>
+ <h1>實時 API 提示點與 SSAI 說明的廣告信標</h1>
+ <summary>在本主題中，您將了解如何在將 Brightcove 的服務器端廣告插入 (SSAI) 用於直播作業時管理提示點和廣告信標.</summary>
 
  <section class="bcls-section">
-  <h2 id="Overview">概覽</h2>
+  <h2 id="Overview">概述</h2>
   
-  <p>服務器端廣告插入<span translate="No">(SSAI)</span>允許您在直播事件期間的指定時間展示廣告。有關一般信息，請參見<a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">實時API：服務器端廣告插入<span translate="No">(SSAI)</span></a>文件。</p>
+  <p>服務器端廣告插入<span translate="No">(SSAI)</span>允許您在直播活動期間的指定時間展示廣告。有關一般信息，請參見<a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">實時API：服務器端廣告插入<span translate="No">(SSAI)</span></a>文檔。</p>
   
-  <aside class="bcls-aside bcls-aside--information">您必須先為您的帳戶啟用<span translate="No">SSAI</span>它才能使用。如需詳細資訊，請聯絡客戶經理。</aside>
+  <aside class="bcls-aside bcls-aside--information">
+    
+    <ul>
+      <li>在您可以使用之前<span translate="No">SSAI</span>，必須為您的帳戶啟用它。如需詳細資訊，請聯絡您的客戶經理</li>
+   </ul>
+  
+  </aside>
   </section>
   
   <section class="bcls-section">
@@ -466,12 +349,12 @@ Brightcove
   
   <ul>
     <li>編碼器發送給Brightcove</li>
-    <li>通過創建即時提示點<span translate="No">Live API</span></li>
+    <li>通過創建的即時提示點<span translate="No">實時 API</span></li>
   </ul>
   
   <h3>從編碼器</h3>
   
-  <p>Brightcove實時投放系統可以解釋編碼器以AMF格式提交的提示點：</p>
+  <p>Brightcove實時交付系統可以解釋編碼器以AMF格式提交的提示點：</p>
   
   <pre class="line-numbers">
   <code class="language-bash" translate="No">AMFDataList
@@ -490,17 +373,17 @@ Brightcove
   <h4>注意事項：</h4>
   
   <ul>
-    <li>只要<code translate="No">avail_in</code>當前支持類型提示點。</li>
-    <li>RTMP和SCTE-35提示點均受支持<a href="/live-api/getting-started/overview-brightcove-live-api.html#input_protocol">TS</a>輸入。</li>
+    <li>僅有的<code translate="No">avail_in</code> RTMP輸入當前支持類型提示點。</li>
+    <li>RTP和SRT輸入支持SCTE-35提示點。</li>
   </ul>
   
-  <aside class="bcls-aside bcls-aside--information">見<a href="#Appendix">下面的附錄</a>有關元素編碼器的示例提示點設置的屏幕截圖。</aside>
+  <aside class="bcls-aside bcls-aside--information">見<a href="#Appendix">下面的附錄</a>有關 Elemental 編碼器的示例提示點設置的屏幕截圖。</aside>
   </section>
   
   <section class="bcls-section">
   <h2 id="Manual_cue_point_insertion">手動插入提示點</h2>
   
-  <p>您可以使用創建即時提示點<span translate="No">Live API</span>通過發送一個<code translate="No">POST</code>請求：</p>
+  <p>您可以使用<span translate="No">實時 API</span>通過發送一個<code translate="No">POST</code>要求：</p>
   
   <table class="bcls-table">
     <tbody class="bcls-table__body">
@@ -509,7 +392,7 @@ Brightcove
         <td style="width:80em;"><code class="language-http" translate="No">POST</code></td>
       </tr>
       <tr>
-        <th>URL</th>
+        <th>網址</th>
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/jobs/<span class="bcls-input">Job_ID</span>/cuepoint</code></td>
       </tr>
       <tr>
@@ -519,7 +402,7 @@ Brightcove
     </tbody>
   </table>
   
-  <p>包括指定以下內容的請求正文：</p>
+  <p>包括一個指定以下內容的請求主體：</p>
   
   <table class="bcls-table">
     <thead class="bcls-table__head">
@@ -533,17 +416,23 @@ Brightcove
       <tr>
         <td><code translate="No">duration</code></td>
         <td>整數</td>
-        <td>休息時間（以秒為單位）。<br/><br/>插入提示點的持續時間需要為<strong>至少是段長度的兩倍</strong>就職（於）;著手（於。見<a href="#Duration_example">持續時間的例子</a>。</td>
+        <td>休息時間（以秒為單位）。<br />
+        <br />
+        插入提示點的持續時間需要為<strong>至少是段長度的兩倍</strong>就職（於）;著手（於。見<a href="#Duration_example">持續時間的例子</a>。</td>
       </tr>
       <tr>
         <td><code translate="No">timecode</code></td>
         <td>SMPTE格式</td>
-        <td><strong>選用性：</strong>SMPTE格式的時間碼，<strong> HH：MM：SS：FF</strong>（FF =幀），以指定何時應將一組任何變量（鍵/值對）傳遞給adServer。<br/><br/>如果省略，提示點將立即插入。<br/><br/>如果您使用timecode屬性，則編碼器必鬚髮送SMPTE格式的（<code translate="No">HH:MM:SS:FF</code>）存儲在<code translate="No">tc</code>通過屬性<code translate="No">OnFI</code>。時間碼是從直播開始的。</td>
+        <td><strong>可選的：</strong>SMPTE格式的時間碼，<strong> HH：MM：SS：FF</strong>（FF =幀），以指定何時應將一組任何變量（鍵/值對）傳遞給adServer。<br />
+        <br />
+        如果省略，將立即插入提示點。<br />
+        <br />
+        如果您使用時間碼屬性，則編碼器必鬚髮送 SMPTE 格式的 ( <code translate="No">HH:MM:SS:FF</code> ) 時間碼存儲在<code translate="No">tc</code>財產通過<code translate="No">OnFI</code> .時間碼是從直播開始的。</td>
       </tr>
       <tr>
         <td><code translate="No">ad_server_data</code></td>
         <td>物件</td>
-        <td><strong>選用性：</strong>您傳遞的鍵/值對將取決於您使用的廣告服務器。有關更多詳細信息，請參見廣告服務器文檔和<a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html#Targeting_ads_using_ad_macros">使用廣告宏定位廣告</a>部分。</td>
+        <td><strong>可選的：</strong>您傳遞的鍵/值對將取決於您使用的廣告服務器。有關更多詳細信息，請參見您的廣告服務器文檔和<a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html#Targeting_ads_using_ad_macros">使用廣告宏定位廣告</a>部分。</td>
       </tr>
     </tbody>
   </table>
@@ -552,7 +441,7 @@ Brightcove
   
   <p>插入提示點的持續時間需要為<strong>至少是段長度的兩倍</strong>就職（於）;著手（於。</p>
   
-  <p>例如，插入一個<strong>10秒提示點</strong>在工作中<code translate="No">"segment_seconds"=4</code>，可以正常工作。但是，在作業中插入相同的提示點<code translate="No">"segment_seconds"=6</code>將導致以下錯誤：</p>
+  <p>例如，插入一個<strong>10秒提示點</strong>在工作中<code translate="No">"segment_seconds"=4</code>，可以正常工作。但是，在具有以下內容的作業中插入相同的提示點<code translate="No">"segment_seconds"=6</code>將導致以下錯誤：</p>
   
   <pre>
   <code class="language-json" translate="No">"error": "The parameter duration should be greater than
@@ -560,7 +449,7 @@ Brightcove
   </code></pre>
   &nbsp;
   
-  <h3>請求主體範例</h3>
+  <h3>樣品索取主體</h3>
   
   <pre class="line-numbers">
   <code class="language-json" translate="No">{
@@ -579,7 +468,7 @@ Brightcove
     <li>基本硬件編碼器確實支持通過以下方式發送時間代碼<code translate="No">OnFI</code> RTMP流中的數據包</li>
   </ol>
   
-  <h3>範例回應</h3>
+  <h3>樣品回复</h3>
   
   <pre class="line-numbers">
   <code class="language-json" translate="No">{
@@ -596,7 +485,7 @@ Brightcove
   <section class="bcls-section">
   <h2 id="Beacons">信標</h2>
   
-  <p>信標是發送到第三方分析的回放數據點，以跟踪是否播放了廣告以及播放了多少廣告。在本節中，我們將討論可以使用以下命令設置的信標類型<span translate="No">Live API</span>以及可用於提供數據的變量。下一部分將詳細介紹用於創建和管理信標集的API請求。</p>
+  <p>信標是發送到第三方分析的播放數據點，以跟踪是否播放了廣告以及播放了多少廣告。在本節中，我們將查看可以使用<span translate="No">實時 API</span>，以及可用於提供數據的變量。下一部分將詳細介紹用於創建和管理信標集的API請求。</p>
   
   <h3>信標類型</h3>
   
@@ -631,7 +520,7 @@ Brightcove
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">AdMidpoint </code></td>
-        <td style="text-align:left;width:60%;word-wrap:break-word">廣告四分位數（50％）</td>
+        <td style="text-align:left;width:60%;word-wrap:break-word">第二個廣告四分位（50％）</td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">AdThirdQuartile </code></td>
@@ -654,13 +543,13 @@ Brightcove
   
   <h3>信標/廣告變量</h3>
   
-  <p>下表顯示了可用於為信標URL提供數據的變量。要包含變量，請用雙大括號括起來，如下所示：<code translate="No"><span class="bcls-highlight">{{</span>job.job_id<span class="bcls-highlight">}}</span> </code>。有關完整的示例，請參見下一部分有關管理信標集的部分。</p>
+  <p>下表顯示了可用於為信標URL提供數據的變量。要包含一個變量，請用雙大括號括起來，如下所示：<code translate="No"><span class="bcls-highlight">{{</span>job.job_id<span class="bcls-highlight">}}</span> </code>。有關完整的示例，請參見下一部分有關管理信標集的部分。</p>
   
   <table class="bcls-table">
     <caption class="bcls-caption--table">廣告配置變量</caption>
     <thead class="bcls-table__head">
       <tr>
-        <th style="width:20%;">變數</th>
+        <th style="width:20%;">多變的</th>
         <th style="width:60%;">
         <div style="word-wrap:break-word;">描述</div>
         </th>
@@ -784,13 +673,13 @@ Brightcove
       <tr>
         <td style="width:20%"><code translate="No">live.adbreak.timestamputc.wallclock </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">調用廣告服務器的時間間隔（以毫秒為單位）</div>
+        <div style="word-wrap:break-word;">調用廣告服務器後的紀元時間（以毫秒為單位）</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">live.adbreak.timestamputc.origin </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">從原始塊列表開始的時間（以毫秒為單位）。該值指示在原始塊列表中創建提示塊的時間。</div>
+        <div style="word-wrap:break-word;">從原始塊列表開始的時間（以毫秒為單位）。此值指示在原始塊列表中創建提示塊的時間。</div>
         </td>
       </tr>
       <tr>
@@ -804,17 +693,17 @@ Brightcove
   
   <h3>SCTE-35廣告變量</h3>
   
-  <p>的<a href="https://www.scte.org/">電纜電信工程師協會（SCTE）</a>定義了用於實時流的動態廣告插入的標準。下表總結了SCTE-35廣告配置變量。</p>
+  <p>這<a href="https://www.scte.org/">電纜電信工程師協會（SCTE）</a>定義了用於實時流的動態廣告插入的標準。下表總結了SCTE-35廣告配置變量。</p>
   
   <aside class="bcls-aside bcls-aside--information">
-  <p>使用實時傳輸協議（RTP）的RTMP和傳輸流（TS）輸入源當前都支持SCTE-35 ad參數，並帶有或不帶有前向糾錯（FEC）。請注意，強烈建議將FEC用於RTP。</p>
-  這些廣告參數不適用於使用實時消息協議（RTMP）的輸入流。</aside>
+  <p>帶有或不帶有前向糾錯（FEC）和基於傳輸流（TS）的安全可靠傳輸（SRT）輸入源的實時傳輸協議（RTP）當前都支持SCTE-35 ad參數。請注意，強烈建議將FEC用於RTP。</p>
+  這些廣告參數不適用於使用實時消息傳遞協議 (RTMP) 的輸入流。</aside>
   
   <table class="bcls-table">
     <caption class="bcls-caption--table">SCTE-35廣告配置變量</caption>
     <thead class="bcls-table__head">
       <tr>
-        <th style="width:20%;">變數</th>
+        <th style="width:20%;">多變的</th>
         <th style="width:60%;">
         <div style="word-wrap:break-word;">描述</div>
         </th>
@@ -860,7 +749,7 @@ Brightcove
   
   <p>本節提供有關管理信標集的API請求的詳細信息。有關信標類型和變量，請參見上一節。</p>
   
-  <p>要將信標集添加到實時作業中，請先創建信標集，然後在創建作業時添加標識，如下所示：</p>
+  <p>要將信標集添加到實時作業，請首先創建信標集，然後在創建作業時包括id，如下所示：</p>
   
   <pre class="line-numbers">
   <code class="language-json" translate="No">{
@@ -872,7 +761,7 @@ Brightcove
   
   <h3>創建信標集</h3>
   
-  <p>要創建信標集，請發送一個<code translate="No">POST</code>請求：</p>
+  <p>要創建信標集，請發送一個<code translate="No">POST</code>要求：</p>
   
   <table class="bcls-table">
     <tbody class="bcls-table__body">
@@ -881,7 +770,7 @@ Brightcove
         <td style="width:80em;"><code class="language-http" translate="No">POST</code></td>
       </tr>
       <tr>
-        <th>URL</th>
+        <th>網址</th>
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/ssai/beaconsets</code></td>
       </tr>
       <tr>
@@ -891,7 +780,7 @@ Brightcove
     </tbody>
   </table>
   
-  <h4>請求主體範例</h4>
+  <h4>樣品索取主體</h4>
   
   <pre class="line-numbers">
   <code class="language-json" translate="No">{
@@ -908,9 +797,9 @@ Brightcove
     ]
   }</code></pre>
   
-  <aside class="bcls-aside bcls-aside--information">該<code translate="No">account_id </code>字段是真實帳戶 ID。省略時，會使用請求使用者的帳戶 ID。</aside>
+  <aside class="bcls-aside bcls-aside--information">這<code translate="No">account_id </code>字段是真實賬戶 ID。如果省略，則使用請求用戶的帳戶 ID。</aside>
   
-  <h4>範例回應</h4>
+  <h4>樣品回复</h4>
   
   <pre class="line-numbers">
   <code class="language-json" translate="No">{
@@ -931,7 +820,7 @@ Brightcove
   
   <h3>更新信標集</h3>
   
-  <p>更新信標集與創建信標集相似。提交一個<code translate="No">PUT</code>請求：</p>
+  <p>更新信標集與創建信標集相似。提交一個<code translate="No">PUT</code>要求：</p>
   
   <table class="bcls-table">
     <tbody class="bcls-table__body">
@@ -940,7 +829,7 @@ Brightcove
         <td style="width:80em;"><code class="language-http" translate="No">PUT</code></td>
       </tr>
       <tr>
-        <th>URL</th>
+        <th>網址</th>
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/ssai/beaconsets/beaconset/<span class="bcls-input">beacon_set_id</span> </code></td>
       </tr>
       <tr>
@@ -950,7 +839,7 @@ Brightcove
     </tbody>
   </table>
   
-  <h4>請求主體範例</h4>
+  <h4>樣品索取主體</h4>
   
   <pre class="line-numbers">
   <code class="language-json" translate="No">{
@@ -967,9 +856,9 @@ Brightcove
     ]
   }</code></pre>
   
-  <aside class="bcls-aside bcls-aside--information">該<code translate="No">account_id </code>字段是真實帳戶 ID。省略時，會使用請求使用者的帳戶 ID。</aside>
+  <aside class="bcls-aside bcls-aside--information">這<code translate="No">account_id </code>字段是真實賬戶 ID。如果省略，則使用請求用戶的帳戶 ID。</aside>
   
-  <h4>範例回應</h4>
+  <h4>樣品回复</h4>
   
   <pre class="line-numbers">
   <code class="language-json" translate="No">{
@@ -1001,7 +890,7 @@ Brightcove
   
   <h3>獲取信標集</h3>
   
-  <p>要檢索帳戶的信標集，請提交一個<code translate="No">GET</code>請求：</p>
+  <p>要檢索帳戶的信標集，請提交一個<code translate="No">GET</code>要求：</p>
   
   <table class="bcls-table">
     <tbody class="bcls-table__body">
@@ -1010,7 +899,7 @@ Brightcove
         <td style="width:80em;"><code class="language-http" translate="No">GET</code></td>
       </tr>
       <tr>
-        <th>URL</th>
+        <th>網址</th>
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/ssai/beaconsets/account/<span class="bcls-input">Account ID</span></code></td>
       </tr>
       <tr>
@@ -1020,9 +909,9 @@ Brightcove
     </tbody>
   </table>
   
-  <aside class="bcls-aside bcls-aside--information">請注意，此處的帳戶ID是真實帳戶ID。</aside>
+  <aside class="bcls-aside bcls-aside--information">請注意，此處的帳戶 ID 是真實帳戶 ID。</aside>
   
-  <h4>範例回應</h4>
+  <h4>樣品回复</h4>
   
   <pre class="line-numbers">
   <code class="language-json" translate="No">[{
@@ -1057,7 +946,7 @@ Brightcove
         <td style="width:80em;"><code class="language-http" translate="No">GET</code></td>
       </tr>
       <tr>
-        <th>URL</th>
+        <th>網址</th>
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/ssai/beaconsets</code></td>
       </tr>
       <tr>
@@ -1067,7 +956,7 @@ Brightcove
     </tbody>
   </table>
   
-  <h4>範例回應</h4>
+  <h4>樣品回复</h4>
   
   <pre class="line-numbers">
   <code class="language-json" translate="No">[{
@@ -1091,9 +980,9 @@ Brightcove
       }]
   }]</code></pre>
   
-  <h3>獲取ID設置的信標</h3>
+  <h3>獲取按ID設置的信標</h3>
   
-  <p>要通過其ID檢索單個信標集，請提交一個<code translate="No">GET</code>請求：</p>
+  <p>要通過其ID檢索單個信標集，請提交一個<code translate="No">GET</code>要求：</p>
   
   <table class="bcls-table">
     <tbody class="bcls-table__body">
@@ -1102,7 +991,7 @@ Brightcove
         <td style="width:80em;"><code class="language-http" translate="No">GET</code></td>
       </tr>
       <tr>
-        <th>URL</th>
+        <th>網址</th>
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/ssai/beaconsets/beaconset/<span class="bcls-input">beacon_set_id</span></code></td>
       </tr>
       <tr>
@@ -1112,7 +1001,7 @@ Brightcove
     </tbody>
   </table>
   
-  <h4>範例回應</h4>
+  <h4>樣品回复</h4>
   
   <pre class="line-numbers">
   <code class="language-json" translate="No">{
@@ -1130,7 +1019,7 @@ Brightcove
   
   <h3>刪除信標集</h3>
   
-  <p>最後，要刪除信標集，請發送一個<code translate="No">DELETE</code>請求：</p>
+  <p>最後，要刪除信標集，請發送一個<code translate="No">DELETE</code>要求：</p>
   
   <table class="bcls-table">
     <tbody class="bcls-table__body">
@@ -1139,7 +1028,7 @@ Brightcove
         <td style="width:80em;"><code class="language-http" translate="No">DELETE</code></td>
       </tr>
       <tr>
-        <th>URL</th>
+        <th>網址</th>
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/ssai/beaconsets/beaconset/<span class="bcls-input">beacon_set_id</span></code></td>
       </tr>
       <tr>
@@ -1149,7 +1038,7 @@ Brightcove
     </tbody>
   </table>
   
-  <h4>範例回應</h4>
+  <h4>樣品回复</h4>
   
   <p>響應將如下所示：</p>
   
@@ -1165,15 +1054,14 @@ Brightcove
   
   <p>下面的屏幕截圖顯示了Elemental編碼器的示例提示點設置。</p>
   
-  <figure class="bcls-figure"><img class="bcls-image" alt="元素提示點設置" src="/assets/images/live-api/18835/elemental-screenshot.png"/>
+  <figure class="bcls-figure"><img class="bcls-image" alt="Elemental Cue Point Setup" src="/assets/images/live-api/18835/elemental-screenshot.png" />
   <figcaption class="bcls-caption--image">元素提示點設置</figcaption>
   </figure>
   </section>
   
   </article>
   
-  
-<!-- complete bootstrap layout -->
+  <!-- complete bootstrap layout -->
     </div>
     <div class="col-sm-2 right-side-bar">
       
@@ -1187,18 +1075,25 @@ Brightcove
 </div>
 
 <hr>
-<footer class="bcls-footer" role="contentinfo">  <div class="row">
+<div class="last-updated">
+  頁面上次更新時間14 Feb 2022
+</div>
+
+
+ <footer class="bcls-footer" role="contentinfo">
+  <div class="row">
     <div class="region region-footer-top-center col-md-12">
       <nav role="navigation" aria-labelledby="block-brightcovesupport-menu" id="block-brightcovesupport" class="footer-menu">
+        <img src="https://support.brightcove.com/site-assets/images/site/SVG/COVE004_Brightcove_Logo_093020_RGB_KO.svg" class="bc-footer-logo" alt="Brightcove">
 
         <h2>布萊特灣支援</h2>
 
         <ul class="menu">
           <li>
-            <a href="https://status.brightcove.com">系統狀態</a>
+            <a href="https://status.brightcove.com">系統狀況</a>
           </li>
           <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">聯絡支援</a>
+            <a href="https://supportportal.brightcove.com/s/login/?">與支持人員聯繫</a>
           </li>
           <li>
             <a href="https://support.brightcove.com/">文獻資料</a>
@@ -1212,27 +1107,27 @@ Brightcove
 
         <ul class="menu">
           <li>
-            <a href="https://studio.support.brightcove.com/training/online-training-courses.html">線上課程</a>
+            <a href="https://studio.support.brightcove.com/training/online-training-courses.html">在線課程</a>
           </li>
           <li>
             <a href="https://studio.support.brightcove.com/training/register-training.html">註冊課程</a>
           </li>
           <li>
-            <a href="https://university.brightcove.com/">布萊特灣大學</a>
+            <a href="https://university.brightcove.com/">布萊頓科夫大學</a>
           </li>
         </ul>
 
       </nav>
       <nav role="navigation" aria-labelledby="block-brightcove-menu" class="footer-menu">
 
-        <h2>Brightcove</h2>
+        <h2>布萊特灣</h2>
 
         <ul class="menu">
           <li>
-            <a href="https://www.brightcove.com">亮麗</a>
+            Brightcove.com<a href="https://www.brightcove.com"></a>
           </li>
           <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">聯絡我們</a>
+            <a href="https://supportportal.brightcove.com/s/login/?">聯繫我們</a>
           </li>
         </ul>
       </nav>
@@ -1246,10 +1141,10 @@ Brightcove
             <td>
               <div id="bc_copyright" class="field field--name-field-copyright-year field--type-string field--label-hidden field--item" style="float: left;"> 布萊特灣公司版權所有</div>
             </td>
-            <td><a href="https://www.brightcove.com/en/legal/privacy">私隱</a> | 條<a href="https://www.brightcove.com/en/terms-and-conditions">款及細則</a></td>
+            <td><a href="https://www.brightcove.com/en/legal/privacy">隱私</a> | <a href="https://www.brightcove.com/en/terms-and-conditions">條款及細則</a></td>
             <td>
               <div class="gf-links-cols footer-menu">
-                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin"><i class="fab fa-linkedin-in" style="font-size: 1.5rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter"><i class="fab fa-twitter" style="font-size: 1.5rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i class="fab fa-facebook-f" style="font-size: 1.5rem;"></i></a>
+                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin" style="margin-right: 1rem;"><i data-feather="linkedin" style="color:#8E9093;height: 1.25rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter" style="margin-right: 1rem;"><i data-feather="twitter" style="color:#8E9093;height: 1.25rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i data-feather="facebook" style="color:#8E9093;height: 1.25rem;"></i></a>
                 </div>
               </div>
             </td>
@@ -1262,10 +1157,10 @@ Brightcove
 
 <script>
       
-  var searchBox = sajari.init({
+      var searchBox = sajari.init({
     mode: "search-box",
     project: "1588255093746585379", // Set this to your project.
-    collection: "brightcove-documenation", // Set this to your collection.
+    collection: "brightcove-documentation", // Set this to your collection.
     instantPipeline: "autocomplete", // Pipeline used as you type
     inputPlaceholder: "Search", // Input element placeholder
     maxSuggestions: 5, // Maximum number of suggestions to show
@@ -1274,11 +1169,9 @@ Brightcove
   
     searchBox("sub", "pipeline.search-sent", function (_, query) {
       window.location = "/search.html?q=" + encodeURIComponent(query.q);
-    });
-  
+    });  
 
-</script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
+</script>   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://support.brightcove.com/site-assets/js/site/https-fix.js"></script>
@@ -1296,34 +1189,14 @@ Brightcove
   
   <script src="/assets/js/sajari-search-foot.js"></script>
   
+	<script>
+  羽毛.replace()
+</script>
   <!-- <script src="/assets/js/sajari-index.js"></script> -->
   <style>
-    a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 {
-      background-color: lightblue;
-    }
-    div.sj-tabs__tab {
-      margin-top: 3rem;
-      margin-left: .3rem;
-      border-top-left-radius: .4rem;
-      border-top-right-radius: .4rem;
-      background-color:#e8e8e8;
-    }
-
-    div.sj-tabs__tab.sj-tabs__tab--selected {
-      border-bottom-color: crimson;
-      background-color: #f8f8f8;
-    }
-
-    p.sj-results__result__description.css-p9jvyt {
-      font-size: 1rem;
-    }
-
-    .sj-result__text.css-31l7gp h3 {
-      color: navy;
-      font-size: 1.4rem;
-    }
+    a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 { background-color: lightblue; } div.sj-tabs__tab { margin-top: 3rem; margin-left: .3rem; border-top-left-radius: .4rem; border-top-right-radius: .4rem; background-color:#e8e8e8; } div.sj-tabs__tab.sj-tabs__tab--選中{ border-bottom-color: crimson; background-color: #f8f8f8; } p.sj-results__result__description.css-p9jvyt { font-size: 1rem; } .sj-result__text.css-31l7gp h3 { color: navy; font-size: 1.4rem; }
     </style>
 
 </body>
 
-</html>
+</html> 

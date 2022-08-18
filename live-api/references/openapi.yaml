@@ -2483,7 +2483,7 @@ components:
         application_id:
           description: The ad application id
           type: string
-        description:
+        description: 
           description: The ad application description
           type: string
       required:
@@ -2495,7 +2495,7 @@ components:
       type: object
     Application.applicationAdConfiguration:
       properties:
-        ad_configuration_description:
+        ad_configuration_description: 
           description: The ad configuration description
           type: string
         ad_configuration_strategy:
@@ -2556,7 +2556,7 @@ components:
           type: array
       required:
         - beacon_urls
-      title: beacon_set
+      title:  beacon_set
       type: object
     BeaconSet.beaconUrls:
       properties:
@@ -2569,7 +2569,7 @@ components:
       required:
         - beacon_url
         - beacon_type
-      title: beacon_set.beacon_urls
+      title:  beacon_set.beacon_urls
       type: object
     BeaconSets:
       items:
@@ -2577,7 +2577,7 @@ components:
       required:
         - beacon_set_id
         - account_id
-      title: beacon_sets
+      title:  beacon_sets
       type: array
     CancelLiveJob:
       properties:
@@ -2586,7 +2586,7 @@ components:
             The job id for the stream that was cancelled. No unprocessed VOD jobs associated with the live job will be processed.
           type: string
           readOnly: true
-      title: Cancel_Live_Job_Response
+      title:  Cancel_Live_Job_Response
       type: object
     StopLiveJob:
       properties:
@@ -2595,7 +2595,7 @@ components:
             The job id for the stream that was stopped. Any unprocessed VOD jobs associated with the live job will continue to be processed.
           type: string
           readOnly: true
-      title: Cancel_Live_Job_Response
+      title:  Cancel_Live_Job_Response
       type: object
     CreateAdConfigurationbody:
       properties:
@@ -2607,17 +2607,17 @@ components:
         application_ad_configuration:
           $ref: >-
             #/components/schemas/CreateAdConfigurationbody.applicationAdConfiguration
-        application_description:
+        application_description: 
           description: Human readable description of the ad application.
           type: string
       required:
         - application_ad_configuration
         - application_description
-      title: Create_Ad_ConfigurationBody
+      title:  Create_Ad_ConfigurationBody
       type: object
     CreateAdConfigurationbody.applicationAdConfiguration:
       properties:
-        ad_configuration_description:
+        ad_configuration_description: 
           description: Human readable description of the configuration.
           type: string
         ad_configuration_expected_response_type:
@@ -2656,7 +2656,7 @@ components:
         - ad_configuration_url_format
         - ad_configuration_strategy
         - ad_configuration_transforms
-      title: Create_Ad_ConfigurationBody.application_ad_configuration
+      title:  Create_Ad_ConfigurationBody.application_ad_configuration
       type: object
     CreateAdConfigurationbody.applicationAdConfiguration.adConfigurationTransforms:
       properties:
@@ -2669,7 +2669,7 @@ components:
       required:
         - xpath
         - xslt
-      title: >-
+      title:  >-
         Create_Ad_ConfigurationBody.application_ad_configuration.ad_configuration_transforms
       type: object
     CreateBeaconSetResponse:
@@ -2687,7 +2687,7 @@ components:
           type: boolean
       required:
         - beacon_urls
-      title: beacon_set
+      title:  beacon_set
       type: object
     CreateBeaconSetbody:
       properties:
@@ -2701,7 +2701,7 @@ components:
           type: array
       required:
         - beacon_urls
-      title: Create_beacon_setBody
+      title:  Create_beacon_setBody
       type: object
     CreateBeaconSetbody.beaconUrls:
       properties:
@@ -2717,7 +2717,7 @@ components:
       required:
         - beacon_url
         - beacon_type
-      title: Create_beacon_setBody.beacon_urls
+      title:  Create_beacon_setBody.beacon_urls
       type: object
     CreateCredential:
       properties:
@@ -2730,7 +2730,7 @@ components:
       required:
         - credential_id
         - user_id
-      title: Create_Credential_Response
+      title:  Create_Credential_Response
       type: object
     CreateCredentialbody:
       properties:
@@ -2769,7 +2769,7 @@ components:
         - credential_type
         - credential_private
         - credential_public
-      title: Create_CredentialBody
+      title:  Create_CredentialBody
       type: object
     CreateCredentialbody.oauthSettings:
       properties:
@@ -2780,7 +2780,7 @@ components:
           type: string
       required:
         - url
-      title: Create_CredentialBody.oauth_settings
+      title:  Create_CredentialBody.oauth_settings
       description: >-
         OAuth settings for OAuth credentials needed to send notifications to a
         notification URL Required for oauth type credentials
@@ -2997,7 +2997,7 @@ components:
         - live_stream
         - region
         - outputs
-      title: Create_Live_JobBody
+      title:  Create_Live_JobBody
       type: object
       example: {
             "live_dvr_sliding_window_duration": 1,
@@ -3065,7 +3065,7 @@ components:
         - label
         - prepend
         - protocol
-      title: Create_Live_Job_Request_Body.add_cdns
+      title:  Create_Live_Job_Request_Body.add_cdns
       type: object
     CreateLiveJobRequestBody.addCdns.tokenAuth:
       description: |-
@@ -3091,7 +3091,7 @@ components:
         - auth_type
         - key
         - token_name
-      title: Create_Live_Job_Request_Body.add_cdns.token_auth
+      title:  Create_Live_Job_Request_Body.add_cdns.token_auth
       type: object
     CreateLiveJobRequestBody.addCdns.tokenAuth.media:
       description: Object containing tokenization properties
@@ -3115,7 +3115,7 @@ components:
           description: The time to live in seconds - either `end_time` or `ttl` is required
           format: int32
           type: integer
-      title: Create_Live_Job_Request_Body.add_cdns.token_auth.media
+      title:  Create_Live_Job_Request_Body.add_cdns.token_auth.media
       type: object
     CreateLiveJobRequestBody.encryption:
       properties:
@@ -3160,7 +3160,7 @@ components:
       required:
         - method
         - type
-      title: Create_Live_Job_Request_Body.encryption
+      title:  Create_Live_Job_Request_Body.encryption
       description: Encryption to apply to the stream.
       type: object
     CreateLiveJobRequestBody.outputs:
@@ -3336,7 +3336,7 @@ components:
         - live_stream
         - video_bitrate
         - segment_seconds
-      title: Create_Live_Job_Request_Body.outputs
+      title:  Create_Live_Job_Request_Body.outputs
       type: object
     CreateLiveJobRequestBody.videocloud:
       properties:
@@ -3364,7 +3364,7 @@ components:
           $ref: '#/components/schemas/CreateLiveJobRequestBody.videocloud.video'
       required:
         - video
-      title: Create_Live_Job_Request_Body.videocloud
+      title:  Create_Live_Job_Request_Body.videocloud
       type: object
       description: >-
         Video Cloud customers have the option to create a video to use for the live stream. The `videocloud` object in the `job` settings is used for this purpose. If you want to define VOD clips to send to Video Cloud, use the `videocloud` object in `outputs`.
@@ -3380,7 +3380,7 @@ components:
           description: >-
             An object whose properties are `field_name`:`value` pairs - be sure to the *internal* name of the field
           type: object
-        description:
+        description: 
           description: Video short description
           type: string
         drm_disabled:
@@ -3395,7 +3395,7 @@ components:
             - FREE
         geo:
           $ref: '#/components/schemas/CreateLiveJobRequestBody.videocloud.video.geo'
-        long_description:
+        long_description: 
           description: A longer description of the video
           type: string
         name:
@@ -3420,7 +3420,7 @@ components:
           type: object
       required:
         - name
-      title: Create_Live_Job_Request_Body.videocloud.video
+      title:  Create_Live_Job_Request_Body.videocloud.video
       description: >-
         'An object containing inputs for Video Cloud video object creation - see the [CMS API Reference](https://apis.support.brightcove.com/cms/references/reference.html#operation/CreateVideo)'
       type: object
@@ -3448,7 +3448,7 @@ components:
       required:
         - time
         - type
-      title: Create_Live_Job_Request_Body.videocloud.video.cue_point
+      title:  Create_Live_Job_Request_Body.videocloud.video.cue_point
       type: object
     CreateLiveJobRequestBody.videocloud.video.geo:
       properties:
@@ -3470,7 +3470,7 @@ components:
         - countries
         - exclude_countries
         - restricted
-      title: Create_Live_Job_Request_Body.videocloud.video.geo
+      title:  Create_Live_Job_Request_Body.videocloud.video.geo
       type: object
       description: map of geo-filtering properties
     CreateLiveJobRequestBody.videocloud.video.schedule:
@@ -3486,11 +3486,11 @@ components:
       required:
         - ends_at
         - starts_at
-      title: Create_Live_Job_Request_Body.videocloud.video.schedule
+      title:  Create_Live_Job_Request_Body.videocloud.video.schedule
       type: object
       description: map of scheduling properties
     CreatePlaybackTokenRequestBody:
-      title: Create Playback Token Request Body
+      title:  Create Playback Token Request Body
       description: >-
         Create Playback Token Request Body
       type: object
@@ -3520,7 +3520,7 @@ components:
       required:
         - live_job_id
         - outputs
-      title: Create_VOD_ClipBody
+      title:  Create_VOD_ClipBody
       type: object
       example: {
           "live_job_id": "3ae7fa89943f4a96aa273fbbf175d527",
@@ -3548,7 +3548,7 @@ components:
           type: array
       required:
         - outputs
-      title: Create_VOD_ClipBody
+      title:  Create_VOD_ClipBody
       type: object
     CreateLiveJob.outputs.videocloud:
       properties:
@@ -3564,7 +3564,7 @@ components:
       required:
         - video
         - ingest
-      title: Create_VOD_ClipBody.outputs.videocloud
+      title:  Create_VOD_ClipBody.outputs.videocloud
       description: An object containing inputs for Video Cloud ingestion
       type: object
     CreateVodClipbody.outputs.videocloud.video.schedule:
@@ -3582,7 +3582,7 @@ components:
       required:
         - ends_at
         - starts_at
-      title: Create_VOD_ClipBody.outputs.videocloud.video.schedule
+      title:  Create_VOD_ClipBody.outputs.videocloud.video.schedule
       type: object
       description: map of scheduling properties
     CreateVodJobResponse:
@@ -3606,10 +3606,10 @@ components:
           description: The id of the live job
           readOnly: true
           example: 3ae7fa89943f4a96aa273fbbf175d527
-      title: Create VOD Job Response
+      title:  Create VOD Job Response
       type: object
     CreateRTMPOutputRequestBody:
-      title: Create RTMP Output Request Body
+      title:  Create RTMP Output Request Body
       description: Request body for requests to create an RTMP output
       type: object
       properties:
@@ -3624,7 +3624,7 @@ components:
       required:
         - url
     CreateRTMPOutputResponse:
-      title: Create RTMP output success response
+      title:  Create RTMP output success response
       description: Create RTMP output success response
       type: object
       properties:
@@ -3727,7 +3727,7 @@ components:
         - label
         - credential_id
         - credential_public
-      title: credentials
+      title:  credentials
       type: object
     CuePoint:
       properties:
@@ -3748,7 +3748,7 @@ components:
         - duration
         - accuracy
         - inserted_at
-      title: cue_point
+      title:  cue_point
       type: object
     DeactivateSepStreamResponse:
       properties:
@@ -3757,7 +3757,7 @@ components:
           type: string
       required:
         - id
-      title: Deactivate_SEP_Stream_Response
+      title:  Deactivate_SEP_Stream_Response
       type: object
     DeleteAdConfigurationResponse:
       properties:
@@ -3770,7 +3770,7 @@ components:
       required:
         - application_id
         - deleted
-      title: Delete_Ad_Configuration_Response
+      title:  Delete_Ad_Configuration_Response
       type: object
     DeleteBeaconSetResponse:
       properties:
@@ -3783,7 +3783,7 @@ components:
       required:
         - beacon_set_id
         - deleted
-      title: Delete_beacon_set_Response
+      title:  Delete_beacon_set_Response
       type: object
     DeleteSlateMediaSourceAssetResponse:
       properties:
@@ -3812,7 +3812,7 @@ components:
         - media_source_asset_type
         - media_source_asset_url
         - media_source_asset_status
-      title: Delete_Slate_Media_Source_Asset_Response
+      title:  Delete_Slate_Media_Source_Asset_Response
       type: object
     GetSlateMediaSourceAssetsResponse:
       properties:
@@ -3822,7 +3822,7 @@ components:
         media_source_asset_default:
           description: Whether this is the default media source asset
           type: boolean
-        media_source_asset_description:
+        media_source_asset_description: 
           description: User identifiable description for the slate
           type: string
         media_source_asset_id:
@@ -3845,7 +3845,7 @@ components:
         - media_source_asset_type
         - media_source_asset_url
         - media_source_asset_status
-      title: Get_Slate_Media_Source_Assets_Response
+      title:  Get_Slate_Media_Source_Assets_Response
       type: object
     Id3Tag:
       properties:
@@ -3858,7 +3858,7 @@ components:
       required:
         - tag_name
         - tag_value
-      title: id3_tag
+      title:  id3_tag
       type: object
     IngestSlateMediaSourceAssetResponse:
       properties:
@@ -3869,7 +3869,7 @@ components:
           description: Whether this is the default media source asset
           type: boolean
           readOnly: true
-        media_source_asset_description:
+        media_source_asset_description: 
           description: User identifiable description for the slate
           type: string
         media_source_asset_id:
@@ -3886,14 +3886,14 @@ components:
         media_source_asset_url:
           description: URL for the media asset to be ingested
           type: string
-      title: Ingest_Slate_Media_Source_Asset_Response
+      title:  Ingest_Slate_Media_Source_Asset_Response
       type: object
     IngestSlateMediaSourceAssetbody:
       properties:
         account_id:
           description: 'The Live account id (if left blank, the request will still work)'
           type: string
-        source_description:
+        source_description: 
           description: User identifiable description for the slate
           type: string
         source_url:
@@ -3902,7 +3902,7 @@ components:
       required:
         - source_url
         - account_id
-      title: Ingest_Slate_Media_Source_AssetBody
+      title:  Ingest_Slate_Media_Source_AssetBody
       type: object
     InsertId3TimedMetadataResponse:
       properties:
@@ -3914,7 +3914,7 @@ components:
       required:
         - id
         - id3_tag
-      title: Insert_ID3_timed_metadata_Response
+      title:  Insert_ID3_timed_metadata_Response
       type: object
     InsertId3TimedMetadatabody:
       properties:
@@ -3922,7 +3922,7 @@ components:
           $ref: '#/components/schemas/InsertId3TimedMetadatabody.id3Tag'
       required:
         - id3_tag
-      title: Insert_ID3_timed_metadataBody
+      title:  Insert_ID3_timed_metadataBody
       type: object
       example: {
           "id3_tag": {
@@ -3954,7 +3954,7 @@ components:
       required:
         - name
         - value
-      title: Insert_ID3_timed_metadataBody.id3_tag
+      title:  Insert_ID3_timed_metadataBody.id3_tag
       type: object
     Job:
       properties:
@@ -4170,7 +4170,7 @@ components:
         - slate
         - stream
         - output_media_files
-      title: job
+      title:  job
       type: object
       example: {
           "job": {
@@ -4469,7 +4469,7 @@ components:
         width:
           description: Frame width of the input media file
           type: number
-      title: job.input_media_file
+      title:  job.input_media_file
       type: object
       description: Object containing properties for the input media file
     Job.outputMediaFiles:
@@ -4599,7 +4599,7 @@ components:
         - type
         - filename
         - dvr_filename
-      title: job.output_media_files
+      title:  job.output_media_files
       type: object
     Job.stream:
       properties:
@@ -4651,7 +4651,7 @@ components:
         width:
           description: Frame width of the stream
           type: number
-      title: job.stream
+      title:  job.stream
       type: object
       description: Object containing properties for the live stream
     Job.stream.destination:
@@ -4665,7 +4665,7 @@ components:
         longitude:
           description: Longitude of the location source
           type: string
-      title: job.stream.destination
+      title:  job.stream.destination
       type: object
       description: Object representing the destination of the stream
     Job.stream.location:
@@ -4679,7 +4679,7 @@ components:
         longitude:
           description: Longitude of the location source
           type: string
-      title: job.stream.location
+      title:  job.stream.location
       type: object
       description: Object representing the location of the stream
     ListCredentials:
@@ -4691,7 +4691,7 @@ components:
           type: array
       required:
         - Array
-      title: List_Credentials200
+      title:  List_Credentials200
       type: object
     ListLiveJobsResponse:
       properties:
@@ -4715,7 +4715,7 @@ components:
       required:
         - start_token
         - jobs
-      title: List_Live_Jobs200
+      title:  List_Live_Jobs200
       type: object
       example: {
           "next_token": "eyJhY2NvdW50X2lkIjoiYTk1YWM1ODE1NTFiNDQ3OGIyNzkxMGU1Njc1ZGIxZjgiLCJqb2JfaWQiOiI5NTA2NGI0Mjc0ZTI0M2Y0ODE0ZGQ2OTcxYTNjMmRkNyIsImpvYl9jcmVhdGVkX2F0IjoxNTI2MjQzNDgyNzEzfQ==",
@@ -4870,7 +4870,7 @@ components:
           ]
         }
     ListRTMPOutputs:
-      title: List RMTP Outputs
+      title:  List RMTP Outputs
       description: >-
         Response to GET request for RTMP outputs - array of RTMP outputs objects
       type: array
@@ -4897,7 +4897,7 @@ components:
           }
         ]
     RTMPout:
-      title: RTMP Output
+      title:  RTMP Output
       type: object
       description: RTMP output object
       properties:
@@ -4981,7 +4981,7 @@ components:
       required:
         - start_token
         - vod_jobs
-      title: List_Live_Jobs200
+      title:  List_Live_Jobs200
       type: object
       example: {
           "jvod_state": "processing",
@@ -5013,7 +5013,7 @@ components:
           }
         }
     GetVodJob:
-      title: Get_VOD_Job200
+      title:  Get_VOD_Job200
       type: object
       properties:
         job_id:
@@ -5271,7 +5271,7 @@ components:
         - sep_state
         - notifications
         - add_cdns
-      title: Create_a_Live_Job
+      title:  Create_a_Live_Job
       type: object
       example: {
           "id": "493885dfd7c64e23ad253fcc42c120d8",
@@ -5327,7 +5327,7 @@ components:
       required:
         - id
         - cue_point
-      title: Manual_Ad_Cue_Point_Insertion_Response
+      title:  Manual_Ad_Cue_Point_Insertion_Response
       type: object
       example: {
           "cue_point": {
@@ -5364,7 +5364,7 @@ components:
             }
       required:
         - duration
-      title: Manual_Ad_Cue_Point_InsertionBody
+      title:  Manual_Ad_Cue_Point_InsertionBody
       type: object
     RedundantGroupCuePointInsertionResponse:
       properties:
@@ -5424,7 +5424,7 @@ components:
             }
           ]
         }
-      title: Redundant Group Cuepoint Insertion Response
+      title:  Redundant Group Cuepoint Insertion Response
       type: object
     Notification:
       properties:
@@ -5448,7 +5448,7 @@ components:
       required:
         - url
         - event
-      title: notification
+      title:  notification
       type: object
     Outputs:
       properties:
@@ -5475,10 +5475,10 @@ components:
         - playback_url
         - playback_url_dvr
         - playback_url_vod
-      title: outputs
+      title:  outputs
       type: object
     StopRTMPOutputResponse:
-      title: Stop RTMP output response
+      title:  Stop RTMP output response
       description: Success response for stopping and RTMP output
       type: object
       properties:
@@ -5499,17 +5499,17 @@ components:
         application_ad_configuration:
           $ref: >-
             #/components/schemas/UpdateAdConfigurationbody.applicationAdConfiguration
-        application_description:
+        application_description: 
           description: Human readable description of the ad application.
           type: string
       required:
         - application_ad_configuration
         - application_description
-      title: Update_Ad_ConfigurationBody
+      title:  Update_Ad_ConfigurationBody
       type: object
     UpdateAdConfigurationbody.applicationAdConfiguration:
       properties:
-        ad_configuration_description:
+        ad_configuration_description: 
           description: Human readable description of the configuration.
           type: string
         ad_configuration_expected_response_type:
@@ -5548,7 +5548,7 @@ components:
         - ad_configuration_url_format
         - ad_configuration_strategy
         - ad_configuration_transforms
-      title: Update_Ad_ConfigurationBody.application_ad_configuration
+      title:  Update_Ad_ConfigurationBody.application_ad_configuration
       type: object
     UpdateAdConfigurationbody.applicationAdConfiguration.adConfigurationTransforms:
       properties:
@@ -5561,7 +5561,7 @@ components:
       required:
         - xpath
         - xslt
-      title: >-
+      title:  >-
         Update_Ad_ConfigurationBody.application_ad_configuration.ad_configuration_transforms
       type: object
     UpdateBeaconSetbody:
@@ -5576,7 +5576,7 @@ components:
           type: array
       required:
         - beacon_urls
-      title: Update_beacon_setBody
+      title:  Update_beacon_setBody
       type: object
     UpdateBeaconSetbody.beaconUrls:
       properties:
@@ -5593,7 +5593,7 @@ components:
       required:
         - beacon_url
         - beacon_type
-      title: Update_beacon_setBody.beacon_urls
+      title:  Update_beacon_setBody.beacon_urls
       type: object
     UpdateCredential:
       properties:
@@ -5606,7 +5606,7 @@ components:
       required:
         - credential_id
         - user_id
-      title: Update_Credential_Response
+      title:  Update_Credential_Response
       type: object
     UpdateCredentialbody:
       properties:
@@ -5645,10 +5645,10 @@ components:
         - credential_type
         - credential_private
         - credential_public
-      title: Update_CredentialBody
+      title:  Update_CredentialBody
       type: object
     UpdateCredentialbody.oauthSettings:
-      title: Update_CredentialBody.oauth_settings
+      title:  Update_CredentialBody.oauth_settings
       type: object
       description: >-
         OAuth settings for OAuth credentials needed to send notifications to a
@@ -5672,7 +5672,7 @@ components:
       required:
         - jvod_id
         - label
-      title: vod_jobs
+      title:  vod_jobs
       type: object
     VodJobs2:
       properties:
@@ -5756,7 +5756,7 @@ components:
       required:
         - jvod_id
         - label
-      title: vod_jobs2
+      title:  vod_jobs2
       type: object
     CreateJobStartStopRequestBody:
       properties:
@@ -5769,7 +5769,7 @@ components:
           $ref: '#/components/schemas/CreateJobStartStopRequestBody.TaskInfo'
         deactivation:
           $ref: '#/components/schemas/CreateJobStartStopRequestBody.TaskInfo'
-        description:
+        description: 
           description: >-
             JobStartStop workflow description.
           type: string
@@ -5782,7 +5782,7 @@ components:
         - job_id
         - activation
         - deactivation
-      title: Create_JobStartStop_Body
+      title:  Create_JobStartStop_Body
       type: object
       example: {
         "job_id": "481ff4cf0bf74956bc2ec6e126588080",
@@ -5809,7 +5809,7 @@ components:
           type: number
       required:
         - time_utc
-      title: Create_JobStartStop_Body.task_info
+      title:  Create_JobStartStop_Body.task_info
       type: object
     JobStartStop:
       properties:
@@ -5833,7 +5833,7 @@ components:
           type: string
           enum:
             - jobstartstop
-        description:
+        description: 
           description: >-
             JobStartStop workflow description.
           type: string
@@ -5849,7 +5849,7 @@ components:
         - workflow_id
         - account_id
         - type
-      title:  JobStartStop
+      title:   JobStartStop
       type: object
     JobStartStop.TaskInfo:
       properties:
@@ -5872,7 +5872,7 @@ components:
       required:
         - time_utc
         - state
-      title: JobStartStop.task_info
+      title:  JobStartStop.task_info
       type: object
     ListJobStartStopResponse:
       properties:
@@ -5888,7 +5888,7 @@ components:
           type: string
       required:
         - workflows
-      title: List_JobStartStop_Response
+      title:  List_JobStartStop_Response
       type: object
     UpdateJobStartStopRequestBody:
       properties:
@@ -5896,7 +5896,7 @@ components:
           $ref: '#/components/schemas/CreateJobStartStopRequestBody.TaskInfo'
         deactivation:
           $ref: '#/components/schemas/CreateJobStartStopRequestBody.TaskInfo'
-      title: Update_JobStartStop_Body
+      title:  Update_JobStartStop_Body
       type: object
       example: {
         "activation": {
@@ -5916,7 +5916,7 @@ components:
           type: string
         clip:
           $ref: '#/components/schemas/CreateClipRequestBody.ClipInfo'
-        description:
+        description: 
           description: >-
             Clip workflow description.
           type: string
@@ -5928,7 +5928,7 @@ components:
       required:
         - job_id
         - clip
-      title: Create_Clip_Body
+      title:  Create_Clip_Body
       type: object
       example: {
         "job_id": "481ff4cf0bf74956bc2ec6e126588080",
@@ -5967,7 +5967,7 @@ components:
           type: string
           enum:
             - clip
-        description:
+        description: 
           description: >-
             Clip workflow description.
           type: string
@@ -5982,7 +5982,7 @@ components:
         - workflow_id
         - account_id
         - type
-      title:  Clip
+      title:   Clip
       type: object
     Clip.ClipInfo:
       properties:
@@ -6008,7 +6008,7 @@ components:
         - time_utc
         - state
         - output
-      title: Clip.clip_info
+      title:  Clip.clip_info
       type: object
     ListClipResponse:
       properties:
@@ -6024,13 +6024,13 @@ components:
           type: string
       required:
         - workflows
-      title: List_Clip_Response
+      title:  List_Clip_Response
       type: object
     UpdateClipRequestBody:
       properties:
         clip:
           $ref: '#/components/schemas/CreateClipRequestBody.ClipInfo'
-      title: Update_Clip_Body
+      title:  Update_Clip_Body
       type: object
       example: {
         "clip": {
@@ -6063,7 +6063,7 @@ components:
       required:
         - time_utc
         - output
-      title: Create_Clip_Body.clip_info
+      title:  Create_Clip_Body.clip_info
       type: object
     CreateVodClipbody.outputs:
       properties:
@@ -6141,7 +6141,7 @@ components:
           $ref: '#/components/schemas/CreateVodClipbody.outputs.videocloud'
       required:
         - label
-      title: Create_VOD_ClipBody.outputs
+      title:  Create_VOD_ClipBody.outputs
       type: object
     CreateVodClipbody.outputs.videocloud:
       properties:
@@ -6156,7 +6156,7 @@ components:
           $ref: '#/components/schemas/CreateVodClipbody.outputs.videocloud.video'
       required:
         - video
-      title: Create_VOD_ClipBody.outputs.videocloud
+      title:  Create_VOD_ClipBody.outputs.videocloud
       description: An object containing inputs for Video Cloud ingestion
       type: object
     CreateVodClipbody.outputs.videocloud.ingest:
@@ -6176,7 +6176,7 @@ components:
           description: >-
             The ingest profile to use - we recommend that you do **not** include this field and use the account default profile instead
           type: string
-      title: Create_VOD_ClipBody.outputs.videocloud.ingest
+      title:  Create_VOD_ClipBody.outputs.videocloud.ingest
       description: >-
         An object containing inputs for Video Cloud video ingestion - see the [Dynamic Ingest Reference](https://apis.support.brightcove.com/dynamic-ingest/references/reference.html#operation/AccountsVideosIngestRequestsByAccountIdAndVideoIdPost) - do not include the master field, as that information will be provided by the Live API. If no ingest profile is specified, the account default profile will be used.
       type: object
@@ -6192,7 +6192,7 @@ components:
           description: >-
             An object whose properties are `field_name`:`value` pairs - be sure to the *internal* name of the field
           type: object
-        description:
+        description: 
           description: Video short description
           type: string
         drm_disabled:
@@ -6207,7 +6207,7 @@ components:
             - FREE
         geo:
           $ref: '#/components/schemas/CreateVodClipbody.outputs.videocloud.video.geo'
-        long_description:
+        long_description: 
           description: A longer description of the video
           type: string
         name:
@@ -6232,7 +6232,7 @@ components:
           type: object
       required:
         - name
-      title: Create_VOD_ClipBody.outputs.videocloud.video
+      title:  Create_VOD_ClipBody.outputs.videocloud.video
       description: >-
         'An object containing inputs for Video Cloud video object creation - see the [CMS API Reference](https://apis.support.brightcove.com/cms/references/reference.html#operation/CreateVideo)'
       type: object
@@ -6260,7 +6260,7 @@ components:
       required:
         - time
         - type
-      title: Create_VOD_ClipBody.outputs.videocloud.video.cue_point
+      title:  Create_VOD_ClipBody.outputs.videocloud.video.cue_point
       type: object
     CreateVodClipbody.outputs.videocloud.video.geo:
       properties:
@@ -6279,7 +6279,7 @@ components:
         - countries
         - exclude_countries
         - restricted
-      title: Create_VOD_ClipBody.outputs.videocloud.video.geo
+      title:  Create_VOD_ClipBody.outputs.videocloud.video.geo
       type: object
       description: map of geo-filtering properties
   parameters:

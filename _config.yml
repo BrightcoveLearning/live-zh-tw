@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Brightcove Live Documentation
+title:  Brightcove Live Documentation
 email: training@brightcove.com
 description: |- # this means to ignore newlines until "baseurl:"
   The Live module is used to broadcast live events to both desktop and mobile devices. After entering your event information into the Live module, you will be provided with a set of encoder settings that you plug into your on-site encoder. All transcoding is done in the cloud so you don't need a hardware based transcoder.

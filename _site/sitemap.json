@@ -5,11 +5,6 @@
   },
 
   {
-      "newURL": "https://live.support.brightcove.com/support/brightcove-answer.html",
-      "oldURL": "/brightcove-answer"
-  },
-
-  {
       "newURL": "https://live.support.brightcove.com/live-api/guides/brightcove-live-best-practices.html",
       "oldURL": "/brightcove-live-best-practices"
   },
@@ -65,6 +60,11 @@
   },
 
   {
+      "newURL": "https://live.support.brightcove.com/general/forensic-watermarking-live.html",
+      "oldURL": "/forensic-watermarking-live"
+  },
+
+  {
       "newURL": "https://live.support.brightcove.com/live-api/guides/getting-list-live-or-vod-jobs.html",
       "oldURL": "/getting-list-live-or-vod-jobs"
   },
@@ -105,37 +105,7 @@
   },
 
   {
-      "newURL": "https://live.support.brightcove.com/",
-      "oldURL": "/index"
-  },
-
-  {
-      "newURL": "https://live.support.brightcove.com/support/",
-      "oldURL": "/index"
-  },
-
-  {
-      "newURL": "https://live.support.brightcove.com/get-started/",
-      "oldURL": "/index"
-  },
-
-  {
-      "newURL": "https://live.support.brightcove.com/live-api/",
-      "oldURL": "/index"
-  },
-
-  {
-      "newURL": "https://live.support.brightcove.com/live-module/",
-      "oldURL": "/index"
-  },
-
-  {
-      "newURL": "https://live.support.brightcove.com/live-api/getting-started/",
-      "oldURL": "/index"
-  },
-
-  {
-      "newURL": "https://live.support.brightcove.com/live-api/ssai/",
+      "newURL": "https://live.support.brightcove.com/admin/",
       "oldURL": "/index"
   },
 
@@ -145,7 +115,12 @@
   },
 
   {
-      "newURL": "https://live.support.brightcove.com/live-api/guides/",
+      "newURL": "https://live.support.brightcove.com/support/",
+      "oldURL": "/index"
+  },
+
+  {
+      "newURL": "https://live.support.brightcove.com/live-module/",
       "oldURL": "/index"
   },
 
@@ -160,13 +135,33 @@
   },
 
   {
-      "newURL": "https://live.support.brightcove.com/admin/",
+      "newURL": "https://live.support.brightcove.com/live-api/getting-started/",
       "oldURL": "/index"
   },
 
   {
-      "newURL": "https://live.support.brightcove.com/release-notes/known-issues.html",
-      "oldURL": "/known-issues"
+      "newURL": "https://live.support.brightcove.com/live-api/guides/",
+      "oldURL": "/index"
+  },
+
+  {
+      "newURL": "https://live.support.brightcove.com/live-api/ssai/",
+      "oldURL": "/index"
+  },
+
+  {
+      "newURL": "https://live.support.brightcove.com/live-api/",
+      "oldURL": "/index"
+  },
+
+  {
+      "newURL": "https://live.support.brightcove.com/get-started/",
+      "oldURL": "/index"
+  },
+
+  {
+      "newURL": "https://live.support.brightcove.com/",
+      "oldURL": "/index"
   },
 
   {
@@ -200,12 +195,12 @@
   },
 
   {
-      "newURL": "https://live.support.brightcove.com/live-api/references/live-api-release-notes.html",
+      "newURL": "https://live.support.brightcove.com/release-notes/live-api-release-notes.html",
       "oldURL": "/live-api-release-notes"
   },
 
   {
-      "newURL": "https://live.support.brightcove.com/release-notes/live-api-release-notes.html",
+      "newURL": "https://live.support.brightcove.com/live-api/references/live-api-release-notes.html",
       "oldURL": "/live-api-release-notes"
   },
 
@@ -270,8 +265,33 @@
   },
 
   {
+      "newURL": "https://live.support.brightcove.com/live-api/guides/live-playback-restrictions.html",
+      "oldURL": "/live-playback-restrictions"
+  },
+
+  {
       "newURL": "https://live.support.brightcove.com/live-module/live-redundancy.html",
       "oldURL": "/live-redundancy"
+  },
+
+  {
+      "newURL": "https://live.support.brightcove.com/live-api/guides/live-scheduler-clips.html",
+      "oldURL": "/live-scheduler-clips"
+  },
+
+  {
+      "newURL": "https://live.support.brightcove.com/live-api/guides/live-scheduler-notifications.html",
+      "oldURL": "/live-scheduler-notifications"
+  },
+
+  {
+      "newURL": "https://live.support.brightcove.com/live-api/guides/live-scheduler-stop-start.html",
+      "oldURL": "/live-scheduler-stop-start"
+  },
+
+  {
+      "newURL": "https://live.support.brightcove.com/live-api/guides/live-scheduler.html",
+      "oldURL": "/live-scheduler"
   },
 
   {
@@ -292,6 +312,11 @@
   {
       "newURL": "https://live.support.brightcove.com/admin/managing-live-settings.html",
       "oldURL": "/managing-live-settings"
+  },
+
+  {
+      "newURL": "https://live.support.brightcove.com/general/multi-language-audio.html",
+      "oldURL": "/multi-language-audio"
   },
 
   {
@@ -350,6 +375,11 @@
   },
 
   {
+      "newURL": "https://live.support.brightcove.com/live-api/references/reference-staging.html",
+      "oldURL": "/reference-staging"
+  },
+
+  {
       "newURL": "https://live.support.brightcove.com/live-api/references/reference.html",
       "oldURL": "/reference"
   },
@@ -360,13 +390,23 @@
   },
 
   {
+      "newURL": "https://live.support.brightcove.com/support/reset-support-portal-password.html",
+      "oldURL": "/reset-support-portal-password"
+  },
+
+  {
       "newURL": "https://live.support.brightcove.com/live-module/reviewing-live-analytics.html",
       "oldURL": "/reviewing-live-analytics"
   },
 
   {
-      "newURL": "https://live.support.brightcove.com/search-test.html",
-      "oldURL": "/search-test"
+      "newURL": "https://live.support.brightcove.com/live-module/scheduling-clips.html",
+      "oldURL": "/scheduling-clips"
+  },
+
+  {
+      "newURL": "https://live.support.brightcove.com/live-module/scheduling-live-event.html",
+      "oldURL": "/scheduling-live-event"
   },
 
   {
@@ -380,11 +420,6 @@
   },
 
   {
-      "newURL": "https://live.support.brightcove.com/live-api/code-samples/simulated-live.html",
-      "oldURL": "/simulated-live"
-  },
-
-  {
       "newURL": "https://live.support.brightcove.com/live-api/references/standard-live-ingest-profiles.html",
       "oldURL": "/standard-live-ingest-profiles"
   },
@@ -392,6 +427,11 @@
   {
       "newURL": "https://live.support.brightcove.com/admin/standard-live-ingest-profiles.html",
       "oldURL": "/standard-live-ingest-profiles"
+  },
+
+  {
+      "newURL": "https://live.support.brightcove.com/get-started/step-step-live-srt.html",
+      "oldURL": "/step-step-live-srt"
   },
 
   {
@@ -427,6 +467,11 @@
   {
       "newURL": "https://live.support.brightcove.com/support/viewing-brightcove-system-status-page.html",
       "oldURL": "/viewing-brightcove-system-status-page"
+  },
+
+  {
+      "newURL": "https://live.support.brightcove.com/live-module/zoom-live-integration.html",
+      "oldURL": "/zoom-live-integration"
   },
 ]
 
