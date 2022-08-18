@@ -5,7 +5,7 @@
 
     
       <url>
-        <loc>https://live.support.brightcove.com/index.html</loc>
+        <loc>https://zh-tw.live.support.brightcove.com/index.html</loc>
         <lastmod>2022-08-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
@@ -13,7 +13,7 @@
       
     
       <url>
-        <loc>https://live.support.brightcove.com/get-started/index.html</loc>
+        <loc>https://zh-tw.live.support.brightcove.com/get-started/index.html</loc>
         <lastmod>2022-08-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
@@ -21,7 +21,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/get-started/brightcove-live-training-videos.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/get-started/brightcove-live-training-videos.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -31,7 +31,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/get-started/delivering-live-streams.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/get-started/delivering-live-streams.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -41,7 +41,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/get-started/live-module-guidelines-and-best-practices.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/get-started/live-module-guidelines-and-best-practices.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -51,7 +51,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/get-started/step-step-using-live-module-open-broadcaster-software-obs.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/get-started/step-step-using-live-module-open-broadcaster-software-obs.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -61,7 +61,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/get-started/step-step-using-live-module-telestream-wirecast.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/get-started/step-step-using-live-module-telestream-wirecast.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -71,75 +71,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/get-started/step-step-live-srt.html</loc>
-          
-            <lastmod>2022-08-18</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-        </url>
-        
-      
-    
-      <url>
-        <loc>https://live.support.brightcove.com/general/index.html</loc>
-        <lastmod>2022-08-18</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.5</priority>
-      </url>
-      
-        <url>
-          
-            <loc>https://live.support.brightcove.com/general/live-drm.html</loc>
-          
-            <lastmod>2022-08-18</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-        </url>
-        
-      
-        <url>
-          
-            <loc>https://live.support.brightcove.com/general/live-platforms-comparison-matrix.html</loc>
-          
-            <lastmod>2022-08-18</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-        </url>
-        
-      
-        <url>
-          
-            <loc>https://live.support.brightcove.com/general/live-video-glossary.html</loc>
-          
-            <lastmod>2022-08-18</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-        </url>
-        
-      
-        <url>
-          
-            <loc>https://live.support.brightcove.com/general/reducing-latency-live-streams.html</loc>
-          
-            <lastmod>2022-08-18</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-        </url>
-        
-      
-        <url>
-          
-            <loc>https://live.support.brightcove.com/general/supported-encoders-live-events.html</loc>
-          
-            <lastmod>2022-08-18</lastmod>
-            <changefreq>daily</changefreq>
-            <priority>0.5</priority>
-        </url>
-        
-      
-        <url>
-          
-            <loc>https://live.support.brightcove.com/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/get-started/step-step-live-srt.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -149,7 +81,7 @@
       
     
       <url>
-        <loc>https://live.support.brightcove.com/live-module/index.html</loc>
+        <loc>https://zh-tw.live.support.brightcove.com/general/index.html</loc>
         <lastmod>2022-08-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
@@ -157,7 +89,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/live-module/client-side-preroll-with-live-ssai.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/general/live-drm.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -167,7 +99,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/live-module/creating-and-managing-live-events-using-live-module.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/general/live-platforms-comparison-matrix.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -177,7 +109,75 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/live-module/creating-video-clip-using-live-module.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/general/live-video-glossary.html</loc>
+          
+            <lastmod>2022-08-18</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+        </url>
+        
+      
+        <url>
+          
+            <loc>https://zh-tw.live.support.brightcove.com/general/reducing-latency-live-streams.html</loc>
+          
+            <lastmod>2022-08-18</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+        </url>
+        
+      
+        <url>
+          
+            <loc>https://zh-tw.live.support.brightcove.com/general/supported-encoders-live-events.html</loc>
+          
+            <lastmod>2022-08-18</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+        </url>
+        
+      
+        <url>
+          
+            <loc>https://zh-tw.live.support.brightcove.com/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html</loc>
+          
+            <lastmod>2022-08-18</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+        </url>
+        
+      
+    
+      <url>
+        <loc>https://zh-tw.live.support.brightcove.com/live-module/index.html</loc>
+        <lastmod>2022-08-18</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.5</priority>
+      </url>
+      
+        <url>
+          
+            <loc>https://zh-tw.live.support.brightcove.com/live-module/client-side-preroll-with-live-ssai.html</loc>
+          
+            <lastmod>2022-08-18</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+        </url>
+        
+      
+        <url>
+          
+            <loc>https://zh-tw.live.support.brightcove.com/live-module/creating-and-managing-live-events-using-live-module.html</loc>
+          
+            <lastmod>2022-08-18</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+        </url>
+        
+      
+        <url>
+          
+            <loc>https://zh-tw.live.support.brightcove.com/live-module/creating-video-clip-using-live-module.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -227,7 +227,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/live-module/implementing-server-side-ads-live-module.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/live-module/implementing-server-side-ads-live-module.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -237,7 +237,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/live-module/live-redundancy.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/live-module/live-redundancy.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -247,7 +247,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/live-module/publishing-live-event-facebook.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/live-module/publishing-live-event-facebook.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -257,7 +257,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/live-module/publishing-live-event-youtube.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/live-module/publishing-live-event-youtube.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -267,7 +267,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/live-module/reviewing-live-analytics.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/live-module/reviewing-live-analytics.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -277,7 +277,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -287,7 +287,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/live-module/zoom-live-integration.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/live-module/zoom-live-integration.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -297,7 +297,7 @@
       
     
       <url>
-        <loc>https://live.support.brightcove.comhttps://apis.support.brightcove.com/live-api/index.html</loc>
+        <loc>https://zh-tw.live.support.brightcove.comhttps://apis.support.brightcove.com/live-api/index.html</loc>
         <lastmod>2022-08-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
@@ -543,7 +543,7 @@
         
           <url>
             
-              <loc>https://live.support.brightcove.com/general/reducing-latency-live-streams.html</loc>
+              <loc>https://zh-tw.live.support.brightcove.com/general/reducing-latency-live-streams.html</loc>
             
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -598,7 +598,7 @@
       
     
       <url>
-        <loc>https://live.support.brightcove.com/admin/index.html</loc>
+        <loc>https://zh-tw.live.support.brightcove.com/admin/index.html</loc>
         <lastmod>2022-08-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
@@ -606,7 +606,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/admin/creating-custom-live-ingest-profiles.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/admin/creating-custom-live-ingest-profiles.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -616,7 +616,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/admin/fields-custom-live-ingest-profiles.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/admin/fields-custom-live-ingest-profiles.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -626,7 +626,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/admin/managing-live-settings.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/admin/managing-live-settings.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -636,7 +636,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/admin/managing-api-authentication-credentials.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/admin/managing-api-authentication-credentials.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -646,7 +646,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/admin/standard-live-ingest-profiles.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/admin/standard-live-ingest-profiles.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -656,7 +656,7 @@
       
     
       <url>
-        <loc>https://live.support.brightcove.com/release-notes/index.html</loc>
+        <loc>https://zh-tw.live.support.brightcove.com/release-notes/index.html</loc>
         <lastmod>2022-08-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
@@ -664,7 +664,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/release-notes/live-api-release-notes.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/release-notes/live-api-release-notes.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -674,7 +674,7 @@
       
     
       <url>
-        <loc>https://live.support.brightcove.com/support/index.html</loc>
+        <loc>https://zh-tw.live.support.brightcove.com/support/index.html</loc>
         <lastmod>2022-08-18</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.5</priority>
@@ -682,7 +682,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/support/viewing-brightcove-system-status-page.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/support/viewing-brightcove-system-status-page.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -692,7 +692,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/support/contact-sales.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/support/contact-sales.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -702,7 +702,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/support/opening-case-with-brightcove-support.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/support/opening-case-with-brightcove-support.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
@@ -712,7 +712,7 @@
       
         <url>
           
-            <loc>https://live.support.brightcove.com/support/reset-support-portal-password.html</loc>
+            <loc>https://zh-tw.live.support.brightcove.com/support/reset-support-portal-password.html</loc>
           
             <lastmod>2022-08-18</lastmod>
             <changefreq>daily</changefreq>
