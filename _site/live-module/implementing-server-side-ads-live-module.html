@@ -1,657 +1,1190 @@
-<!doctype html>
-<html lang="en-us">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  
-  <title>在直播模塊 (SSAI) 中實施服務器端廣告</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">  
-<link rel="preconnect" href="https://fonts.gstatic.com"> 
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/prism.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/styles.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/landing-page.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/tabs.css">
-  <link rel="stylesheet" href="/assets/css/local.css">
-  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
-  
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2728311-17"></script>
-<script translate="no">
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-2728311-17');
-</script>
-  <script src="/assets/js/sajari-head.js"></script>
-	<script src="https://unpkg.com/feather-icons"></script>
-</head>
-
-<body class="body">
- <header>
-  <div class="div-header">
-    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/SVG/COVE004_Brightcove_Live_Logo_RGB_K.svg" alt="Brightcove" style="max-width: 170px;"></a>
-<!-- GTranslate: https://gtranslate.io/ -->
-<select onchange="doGTranslate(this);"><option value="">選擇語言</option><option value="en|en" translate="No">英語</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">法國</option><option value="en|de" translate="No">德意志</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">국</option><option value="en|es" translate="No">西班牙文</option></select>
-
-<script>
-/*<![CDATA[ */ 函數 doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;} /*]]> */
-</script>
-
-
-
-    <span class="secondary-nav"><a href="https://supportportal.brightcove.com/s/login/?"><i data-feather="help-circle"></i> 聯繫支持</a><span style="vertical-align: middle;margin-left:1em;margin-right:1em;">|</span><a href="https://status.brightcove.com/"><i data-feather="cloud"></i> 系統狀況</a></span>
-    <br>
-    
-  </div>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb arr-right">
-      
-      <li class="breadcrumb-item first-item"><a href="/">家</a></li>
+﻿<!DOCTYPE html>
+<html lang="zh-TW"> 
+    <head>
+        <title>在直播模塊 (SSAI) 中實施服務器端廣告</title>
         
-      <li class="breadcrumb-item"><a href="/live-module/">Live Module</a></li>
-      
-      <li class="breadcrumb-item active" aria-current="page">在直播模塊 (SSAI) 中實施服務器端廣告</li>
-    </ol>
-  </nav>
-</header> <div class="container">
-    <div class="row">
-      <div class="col-sm-3 left-side-bar">
-				<select id="site_select" class="bcls-select" style="margin-left: 1rem;">
-					<option value="">其他布萊特灣文件</option>
-					 
-							<option value="https://support.brightcove.com">文檔主頁</option>
-						  
-							<option value="">-- 視頻雲 --</option>
-						  
-							<option value="https://studio.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;影雲工作室</option>
-						  
-							<option value="https://player.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp; Brightcove 播放器開發</option>
-						  
-							<option value="https://apis.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;視頻雲平台API</option>
-						  
-							<option value="https://sdks.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;視頻雲設備 SDK</option>
-						  
-							<option value="https://integrations.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;集成和 CMS 連接器</option>
-						  
-							<option value="https://general.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;視頻雲一般信息</option>
-						  
-							<option value="">-- 視頻要點 --</option>
-						  
-							<option value="https://beacon.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;明灣燈塔</option>
-						  
-							<option value="https://live.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp; Brightcove 現場直播</option>
-						  
-							<option value="https://zencoder.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;編碼器</option>
-						  
-							<option value="">-- 視頻雲插件 --</option>
-						  
-							<option value="https://campaign.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp; Brightcove 運動</option>
-						  
-							<option value="https://engage.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp; Brightcove 參與</option>
-						  
-							<option value="https://gallery.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp;布賴特科夫畫廊</option>
-						  
-							<option value="https://studio.support.brightcove.com/social/index.html">&nbsp;&nbsp;&nbsp;&nbsp; Brightcove 社交</option>
-						  
-							<option value="https://ssai.support.brightcove.com">&nbsp;&nbsp;&nbsp;&nbsp; Brightcove SSAI</option>
-						 
-				</select>
-        <nav class="sidenav" id="side_nav">
-           
-            <h5><a href="/index.html">家</a></h5>
-              
-              <h5 class="submenu-header"><a href="/get-started/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;入門</a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                 
-                    <li><a href="/get-started/brightcove-live-training-videos.html">Brightcove 現場培訓視頻</a></li>
-                    
-                    <li><a href="/get-started/delivering-live-streams.html">提供實時流</a></li>
-                    
-                    <li><a href="/get-started/live-module-guidelines-and-best-practices.html">Brightcove 現場直播：最佳實踐</a></li>
-                    
-                    <li><a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">一步步：將實時模塊與 OBS 結合使用</a></li>
-                    
-                    <li><a href="/get-started/step-step-using-live-module-telestream-wirecast.html">一步步：使用直播模組與線控</a></li>
-                    
-                    <li><a href="/get-started/step-step-live-srt.html">一步步：串流 SRT 即時事件</a></li>
-                   
-              </ul>
-              
-              <h5 class="submenu-header"><a href="/general/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;一般信息</a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                 
-                    <li><a href="/general/live-drm.html">實時數字版權管理</a></li>
-                    
-                    <li><a href="/general/live-platforms-comparison-matrix.html">直播平台比較矩陣</a></li>
-                    
-                    <li><a href="/general/live-video-glossary.html">實時視頻詞彙表</a></li>
-                    
-                    <li><a href="/general/reducing-latency-live-streams.html">減少直播的延遲</a></li>
-                    
-                    <li><a href="/general/supported-encoders-live-events.html">現場活動支持的編碼器</a></li>
-                    
-                    <li><a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html">使用 Akamai Stream Packaging 和 Wirecast</a></li>
-                   
-              </ul>
-              
-              <h5 class="submenu-header"><a href="/live-module/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;使用實時模塊</a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                 
-                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">帶有實時 SSAI 的客戶端預貼廣告</a></li>
-                    
-                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">創建和管理現場活動</a></li>
-                    
-                    <li><a href="/live-module/creating-video-clip-using-live-module.html">創建視頻剪輯</a></li>
-                    
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">在 Brightcove Live 上主持 Avaya 會議</a></li>
-                    
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">將 Cisco Webex 託管到 Brightcove Live</a></li>
-                    
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">主機 Zoom 到 Brightcove Live</a></li>
-                    
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">在 Brightcove Live 上舉辦 INXPO 活動</a></li>
-                    
-                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">實施服務器端廣告 (SSAI)</a></li>
-                    
-                    <li><a href="/live-module/live-redundancy.html">實時冗餘</a></li>
-                    
-                    <li><a href="/live-module/publishing-live-event-facebook.html">將直播活動發佈到 Facebook</a></li>
-                    
-                    <li><a href="/live-module/publishing-live-event-youtube.html">將直播活動發佈到 YouTube</a></li>
-                    
-                    <li><a href="/live-module/reviewing-live-analytics.html">查看實時分析</a></li>
-                    
-                    <li><a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html">使用實時 RTMP 輸出</a></li>
-                    
-                    <li><a href="/live-module/zoom-live-integration.html">集成 Zoom 會議</a></li>
-                   
-              </ul>
-              
-              <h5 class="submenu-header"><a href="https://apis.support.brightcove.com/live-api/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;使用實時 API</a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                 
-                    <li class="submenu-header">
-                      <a href="https://apis.support.brightcove.com/live-api/getting-started/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;實時 API：入門</a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                         
-                            <li><a href="https://apis.support.brightcove.com/live-api/getting-started/overview-brightcove-live-api.html">概述：實時API</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">使用 API 創建實時流</a></li>
-                           
-                      </ul>
-                    </li>
-                    
-                    <li class="submenu-header">
-                      <a href="https://apis.support.brightcove.com/live-api/code-samples/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;實時 API：代碼樣例</a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                         
-                            <li><a href="https://apis.support.brightcove.com/live-api/code-samples/live-api-sample-create-live-job.html">創建現場工作</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">為 MPEG2-TS 輸入創建實時作業</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html">將 RTMP 輸出用於實時事件</a></li>
-                           
-                      </ul>
-                    </li>
-                    
-                    <li class="submenu-header">
-                      <a href="https://apis.support.brightcove.com/live-api/references/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;實時 API：參考</a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                         
-                            <li><a href="https://apis.support.brightcove.com/live-api/references/live-api-error-messages.html">錯誤訊息</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/references/live-api-release-notes.html">發行說明</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/references/reference.html">實時API參考</a></li>
-                           
-                      </ul>
-                    </li>
-                    
-                    <li class="submenu-header">
-                      <a href="https://apis.support.brightcove.com/live-api/ssai/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;實時 API：智囊團</a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                         
-                            <li><a href="https://apis.support.brightcove.com/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">使用 SSAI 的提示點和廣告信標</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">服務器端廣告插入（SSAI）</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/ssai/overview-player-enhancements-live-ssai.html">概述：實時SSAI的播放器增強</a></li>
-                           
-                      </ul>
-                    </li>
-                    
-                    <li class="submenu-header">
-                      <a href="https://apis.support.brightcove.com/live-api/guides/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;實時 API：指南</a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                         
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/brightcove-live-best-practices.html">Brightcove Live 最佳實踐</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/brightcove-live-program-ad-metadata-api.html">Brightcove 直播節目廣告元數據 API</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-frame-accurate-clip.html">創建幀精確剪輯</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-vod-clips.html">創建 VOD 剪輯</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/getting-list-live-or-vod-jobs.html">獲取直播或 VOD 作業列表</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-insert-id3-timed-metadata.html">插入 ID3 定時元數據</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-drm-live-api.html">通過 Live API 進行實時 DRM</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/managing-credentials-live-api.html">管理 Live API 的憑證</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-notifications.html">通知</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-playback-restrictions.html">實時流的播放限制</a></li>
-                            
-                            <li><a href="/general/reducing-latency-live-streams.html">減少直播的延遲</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-rtmp-outputs.html">RTMP 輸出</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-static-entry-points.html">靜態入口點</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/signed-urls-and-token-auth-live-stream.html">帶有實時流的簽名URL和令牌身份驗證</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/using-live-redundancy.html">使用實時冗餘</a></li>
-                            
-                            <li><a href="https://apis.support.brightcove.com/live-api/guides/live-api-vod-live-event.html">來自現場活動的 VOD</a></li>
-                           
-                      </ul>
-                    </li>
-                   
-              </ul>
-              
-              <h5 class="submenu-header"><a href="/admin/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;管理帳戶</a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                 
-                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">創建自定義實時攝取配置文件</a></li>
-                    
-                    <li><a href="/admin/fields-custom-live-ingest-profiles.html">自定義實時攝取配置文件的字段</a></li>
-                    
-                    <li><a href="/admin/managing-live-settings.html">管理實時設置</a></li>
-                    
-                    <li><a href="/admin/managing-api-authentication-credentials.html">管理API身份驗證憑據</a></li>
-                    
-                    <li><a href="/admin/standard-live-ingest-profiles.html">標準實時攝取配置文件</a></li>
-                   
-              </ul>
-              
-              <h5 class="submenu-header"><a href="/release-notes/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;發行說明</a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                 
-                    <li><a href="/release-notes/live-api-release-notes.html">實時發布說明</a></li>
-                   
-              </ul>
-              
-              <h5 class="submenu-header"><a href="/support/index.html"><span style="color:#8E9093">+</span>&nbsp;&nbsp;支持</a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                 
-                    <li><a href="/support/viewing-brightcove-system-status-page.html">查看Brightcove系統狀態頁面</a></li>
-                    
-                    <li><a href="/support/contact-sales.html">與銷售人員聯繫</a></li>
-                    
-                    <li><a href="/support/opening-case-with-brightcove-support.html">打開支持案例</a></li>
-                    
-                    <li><a href="/support/reset-support-portal-password.html">重置您的支持門戶密碼</a></li>
-                   
-              </ul>
-             
-      </nav>
-    </div>
-    <div class="col-lg-7" style="background-color: white;color: #333333;margin-top: -1em;margin-bottom: -1em;padding-bottom:1em;">
-  <!-- bootstrap layout -->
- <p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="Navigation Menu"></p>
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        
+        <!-- Google Font -->
+        <link href="/assets/s-site-assets-stylesheets/fonts/poppins.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/s-site-assets-stylesheets/fonts/articulat-site.css">
+        <link href="/assets/s-site-assets-stylesheets/fonts/source-code-pro.css" rel="stylesheet">
+        
+        <!-- FontAwesome JS-->
+        
+        <script src="https://kit.fontawesome.com/d67c74a882.js" crossorigin="anonymous"></script>  
+        
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+        <link rel="stylesheet" href="/assets/s-site-assets-template-stylesheets/plugins/simplelightbox/simple-lightbox.min.css">
 
-<!-- search bar -->
-<div id="nav-search-box" style="margin-top: 1rem;"></div>
-<!-- in-page navigation for narrow screens -->
-<details class="centered-inpage-nav" id="centered_inpage_nav">
-  <summary><h6 class="toc">頁面內容</h6></summary>
-  <nav id="centered_toc"></nav>
-  <ul id="centered_in_page_toc" class="list-none"></ul>
-</details>
-<!-- open in new tab/window -->
-<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="open in new tab" style="margin-top:4em;width: 1.5em;"></a>  <article class="bcls-article">
-  <h1>在實時模塊中實施服務器端廣告</h1>
-  <summary>在本主題中，您將學習如何在實時模塊中實現服務器端廣告。</summary>
-  <section class="bcls-section">
-
-<h2 id="Introduction">簡介</h2>
-
-<p>實時模塊支持服務器端廣告插入（SSAI），因此可以在實時流中請求並顯示服務器端廣告。SSAI在現場活動期間提供以下主要功能：</p>
-
-<ul>
-	<li>由於廣告是在服務器端縫合到實時視頻流中的，因此它們不受廣告攔截器的影響</li>
-	<li>廣告會插入從編碼器發送的提示點，或者您可以使用&nbsp;現場模塊控制室</li>
-	<li>您可以配置&nbsp;<a href="#fill_slate">填充石板</a>&nbsp;填補所有未使用的廣告時間</li>
-</ul>
-
-<aside class="bcls-aside bcls-aside--information">
-  <ul>
-    <li>您的視訊雲端帳戶必須先設定為動態傳遞並啟用 SSAI，才能使用 SSAI，才能使用 SSAI。如需詳細資訊，請聯絡您的客戶經理</li>
-  </ul>
-
-</aside>
-
-<p>本主題重點介紹實時事件期間所需的設置以及請求服務器端廣告的過程。</p>
-</section>
-
-<section class="bcls-section">
-<h2 id="Configuring_the_server_side_ad_settings">配置服務器端廣告設置</h2>
-
-<p>必須先配置服務器端廣告設置，然後才能投放服務器端廣告。服務器端廣告設置定義了廣告播放的各個方面，包括廣告調用，計時，信標和其他廣告配置選項。這些設置被配置為“管理"模塊中“服務器端廣告設置"的一部分。在此示例中，定義了一個簡單的廣告代碼。</p>
-
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-live-ad-config.png" width="600" height="900" /></figure>
-
-<p>有關更多信息，請參見<a href="https://studio.support.brightcove.com/admin/configuring-server-side-ad-settings.html">配置服務器端廣告設置</a>。</p>
-</section>
-
-<section class="bcls-section">
-<h2 id="fill_slate">配置填充板</h2>
-
-<p>填充板岩是當直播廣告中斷中的空白無法用動態投放的廣告填充時將顯示的視頻。如果所請求的廣告短於廣告休息時間，則將顯示填充列表，因此觀眾不會看到空白的播放器。請求伺服器端廣告之前，您應該至少設定一個填色板。廣告板被配置為“管理"模塊中“實時設置"的一部分。在此示例中，定義了顯示Brightcove徽標的填充板。</p>
-
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-fill-slate.png" /></figure>
-
-<p>有關創建廣告列表的信息，請參見<a href="/admin/managing-live-settings.html">管理實時設置</a>。</p>
-</section>
-
-<section class="bcls-section">
-<h2 id="Creating_a_live_event_that_supports_server_side_ads">創建支持服務器端廣告的現場活動</h2>
-
-<p>為了使現場活動能夠顯示服務器端廣告，<strong>啟用服務器端廣告插入（SSAI）</strong>創建事件時必須選擇設置。有關使用“實時"模塊創建實時事件的完整信息，請參見<a href="/live-module/creating-and-managing-live-events-using-live-module.html">使用實時模塊創建和管理實時事件</a>。</p>
-
-<aside class="bcls-aside bcls-aside--information">在創建事件之前，您應該已經配置了服務器端廣告設置並添加了至少一個填充選項板。</aside>
-
-<p>要創建支持服務器端廣告的新直播事件，請按照以下步驟操作。</p>
-
-<ol class="bcls-tasklist-restart">
-	<li>開啟即時模組。</li>
-	<li>在“管理事件"頁面中，單擊<strong>建立活動</strong>。</li>
-	<li>根據需要輸入事件詳細信息。</li>
-	<li>點擊<strong>高級選項</strong>擴展高級選項。</li>
-	<li>查看<strong>啟用服務器端廣告插入（SSAI）</strong>。這將啟用服務器端廣告插入。</li>
-	<li>選擇一個<strong>填充石板</strong>。當直播廣告片段中有空白無法填滿動態播放的廣告時，即會顯示填色板。</li>
-	<li>當。。。的時候<strong>廣告音頻</strong>設置被選中後，廣告上的音頻電平將根據設置的調整進行歸一化。這可以用來協助確保廣告不會比內容大幅度大。布萊特灣建議您選取此選項。
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-event-ssai-settings.png" width="600" height="900" /></figure>
-	</li>
-	<li>點擊<strong>建立活動</strong>。</li>
-	<li>這&nbsp;控制室頁面&nbsp;將打開有關直播活動的詳細信息，包括&nbsp;<strong>流式傳輸端點（RTMP URL）</strong>&nbsp;和&nbsp;<strong>流名稱</strong>。這些值將由編碼器使用。</li>
-	<li>配置編碼器並開始直播。</li>
-	<li>默認，&nbsp;控制室預覽播放器將顯示無廣告流。除非選取即時廣告設定，  否則   控制室不會顯示廣告。使用播放器下方的下拉式清單來選取廣告設定。
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-select-ad-config.png" /></figure>
-	</li>
-	<li><strong>（可選的）</strong>單擊加號按鈕 (<img alt="" src="/assets/images/general/18753/node18753-plus-icon.png" width="15" height="15" />) 以選擇其他廣告配置。這樣做會在「  控制室  」頁面上新增另一個預覽玩家。
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-two-preview-players.png" /></figure>
-	</li>
-</ol>
-
-<p>按一下預覽播放器下方的音量按鈕，即可控制哪個播放器音訊串流啟動。</p>
-
-<aside class="bcls-aside bcls-aside--information">如果事件使用 RTMP 輸出，則廣告不會流式傳輸到 RTMP 輸出。將改為流式傳輸無廣告流。</aside><aside class="bcls-aside bcls-aside--information">如果事件正在被<a href="/live-module/publishing-live-event-facebook.html">直播到 Facebook</a>社交模塊中的功能，廣告將不會流式傳輸到 Facebook。將改為流式傳輸無廣告流。</aside>
-</section>
-
-<section class="bcls-section">
-<h2 id="Requesting_an_ad">要求廣告</h2>
-
-<p>要請求廣告，請點擊<strong>轉到廣告</strong>。按一下後，即可選取廣告片段的長度。</p>
-
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-goto-ad.png" width="500" height="800" /></figure>
-
-<p>點擊<strong>插</strong>將廣告時段插入實時流。如果廣告沒有佔據整個廣告休息時間，則將顯示填充板岩（創建事件時選擇）。廣告將在   控制室   預覽播放器和使用直播模組發佈的播放器中看到。此範例顯示   控制室中顯示 2 則廣告  。</p>
-
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-two-ad-preview.png" /></figure>
-</section>
-
-<section class="bcls-section">
-<h2 id="Publishing_the_live_event">發佈現場活動</h2>
-
-<p>帶有服務器端廣告的實時流無法使用媒體模塊發布，而必須使用實時模塊來發布。</p>
-
-<p>要為帶有服務器端廣告的直播活動生成嵌入代碼，請按照以下步驟操作：</p>
-
-<ol class="bcls-tasklist-restart">
-	<li>按一下事件以開啟 [控制室] 頁面。</li>
-	<li>點擊<strong>發布和嵌入</strong>在左側導航欄中。</li>
-	<li>選擇一個<strong>可用的播放器</strong>。<aside class="bcls-aside bcls-aside--information">如果事件配置為啟用服務器端廣告 (SSAI)、DVR 或多 CDN，則必須使用 Brightcove Player 版本 6.18.3 及更高版本。只有 6.18.3 及以上版本的玩家才會出現在下拉列表中。</aside>
-	</li>
-	<li>選擇<strong>廣告設定</strong>與播放器一起使用。廣告配置將確定哪些廣告出現在播放器中。</li>
-	<li>點擊<strong>播放器網址</strong>在瀏覽器中預覽事件或複制要使用的嵌入代碼。
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18753/node18753-publish.png" /></figure>
-	</li>
-</ol>
-</section>
-
-<section class="bcls-section">
-<h2 id="Publishing_a_remote_live_event">發布遠程現場活動</h2>
-
-<p>如果要發布遠程實時事件，請按照下列步驟操作：</p>
-
-<ol class="bcls-tasklist-restart">
-  <li>
-    <p>按照以下步驟創建直播活動後<a href="#Creating_a_live_event_that_supports_server_side_ads">以上所列</a>，返回<strong>居住</strong>模塊的<strong>控制室</strong>。
-	</li>
-	<li>
-    <p>如果您知道廣告配置ID的值，則可以將其插入播放列表URL。</p>
-    <p>在裡面<strong>居住</strong>模塊的<strong>控制室</strong>，複製<strong>播放網址</strong>。</p>
-    <p></p>
-    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Playback URL" src="/assets/images/live-module/remote/playback-url.png" />
-    <figcaption class="bcls-caption--image">播放網址</figcaption>
-    </figure>
-    <p>接下來，將您要使用的廣告配置ID（045f90cfd55187ff6e60c8）插入URL，如下所示：</p>
-
-	<pre>
-<code class="language-html" translate="No">https://bcovlive-a.akamaihd.net/21e83ff8c229478e8c81416838eb6e1f/us-west-2/NA/<span class="bcls-highlight">045f90cfd55187ff6e60c8/</span>playlist.m3u8</code></pre>
-<p>然後，從重新命名播放列表<code translate="No">playlist.m3u8</code>至<code translate="No">playlist_ssaiM.m3u8</code>。遠程資產應類似於以下內容：</p>
-
-	<pre>
-<code class="language-html" translate="No">https://bcovlive-a.akamaihd.net/21e83ff8c229478e8c81416838eb6e1f/us-west-2/NA/045f90cfd55187ff6e60c8/<span class="bcls-highlight">playlist_ssaiM.m3u8</span></code></pre>
-<p>跳到第6步，並使用此播放列表URL。</p>
-	</li>
-  <li>
-    <p>如果您不知道廣告配置ID的值，則可以按以下方式獲取完整的播放列表網址。選擇您要使用的廣告配置。 </p>
-    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Select ad config" src="/assets/images/live-module/remote/select-ad-config.png" />
-    <figcaption class="bcls-caption--image">選擇廣告配置</figcaption>
-    </figure>
-	</li>
-  <li>
-    <p>對於您的瀏覽器，打開網絡控制台選項卡。在這種情況下，我們使用的是Chrome瀏覽器。</p>
-	</li>
-  <li>
-    <p>在網絡控制台中，搜索“playlist_ssaiM"。複製以“playlist_ssaiM.m3u8"結尾的URL。您可能需要刷新頁面，然後重新打開“網絡"選項卡。</p>
-    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Network console" src="/assets/images/live-module/remote/network-console.png" />
-    <figcaption class="bcls-caption--image">網絡控制台</figcaption>
-    </figure>
-    <aside class="bcls-aside bcls-aside--information">由於廣告配置 ID 包含在 URL 中，您的 SSAI URL 將根據您選擇的廣告配置而有所不同。</aside>
-    <p>在此示例中，URL為：</p>
-    <pre>
-<code class="language-html" translate="No">https://bcovlive-a.akamaihd.net/21e83ff8c229478e8c81416838eb6e1f/us-west-2/NA/582ea6fafea84bf595f610b8ebbeeda8/playlist_ssaiM.m3u8</code></pre>
-	</li>
-  <li>
-    <p>
-      在Studio中，導航到<strong>媒體</strong>模塊並創建一個指向上一步中的播放列表URL的新的遠程資產。在左側菜單中，選擇<strong>+添加遠程視頻</strong>。
-    </p>
-    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Add Remote Video" src="/assets/images/live-module/remote/add-remote-video.png" width="300" height="500"/>
-    <figcaption class="bcls-caption--image">添加遠程視頻</figcaption>
-    </figure>
-  </li>
-  <li>
-    <p>
-      在裡面<strong>添加遠程視頻</strong>進入一個<strong>影片名稱</strong>和播放列表網址。選擇<strong>保存</strong>按鈕。
-    </p>
-    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="Add Remote Video dialog" src="/assets/images/live-module/remote/remote-dialog.png" />
-    <figcaption class="bcls-caption--image">添加遠程視頻對話框</figcaption>
-    </figure>
-  </li>
-  <li>
-    <p>
-      現在，您有一個指向遠程實時流的視頻ID。您可以將其與帳戶中的任何播放器一起使用，以通過服務器端廣告流式傳輸實時內容。
-    </p>
-  </li>
-</ol>
-</section>
-
-<section class="bcls-section">
-<h2 id="Troubleshooting_live_stream_issues">即時串流問題疑難排解</h2>
-
-<p>如果您需要進一步的幫助以使現場活動開始進行，可以<a href="https://supportportal.brightcove.com/create">聯繫我們</a>。為了確保您得到最快的回應，以下是解決問題所需的支援清單。</p>
-
-<ul>
-	<li>流的具體症狀。例如，它是根本不播放還是口吃或凍結？</li>
-	<li>這個流是否在過去正常工作</li>
-	<li>您在編碼器中使用的入口點 URL</li>
-	<li>您使用的編碼軟件和硬件</li>
-	<li>您發佈直播活動的玩家 URL</li>
-	<li>影片雲端工作室中即時資產的視訊 ID</li>
-	<li>從編碼器到發佈點主機的追蹤路由結果</li>
-</ul>
-</section>
-</article>
- <!-- complete bootstrap layout -->
-    </div>
-    <div class="col-sm-2 right-side-bar">
-      
-      <nav class="right-side-nav" id="right_side_nav">
-        <h6 class="toc">頁面內容</h6>
-        <ul id="in_page_nav" class="list-none"></ul>
-      </nav>
-      
-    </div>
-  </div>
-</div>
-
-<hr>
-<div class="last-updated">
-  頁面上次更新時間18 Aug 2022
-</div>
+        <!-- Theme CSS -->  
+        <link id="theme-style" rel="stylesheet" href="/assets/s-site-assets-template-stylesheets/css/theme.css">
+        <link rel="stylesheet" href="/assets/s-site-assets-stylesheets/prism.css">
+        <link rel="stylesheet" href="/assets/s-site-assets-template-stylesheets/custom-css/styles.css">
 
 
- <footer class="bcls-footer" role="contentinfo">
-  <div class="row">
-    <div class="region region-footer-top-center col-md-12">
-      <nav role="navigation" aria-labelledby="block-brightcovesupport-menu" id="block-brightcovesupport" class="footer-menu">
-        <img src="https://support.brightcove.com/site-assets/images/site/SVG/COVE004_Brightcove_Logo_093020_RGB_KO.svg" class="bc-footer-logo" alt="Brightcove">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBJC11HF8Z"></script>
+        <script translate="no">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-        <h2>布萊特灣支援</h2>
+        gtag('config', 'G-XBJC11HF8Z');
+        </script>
+        <script src="/assets/s-site-assets-scripts/sixth-sense.js"></script>
+        <script src="/assets/s-site-assets-scripts/sajari-head.js"></script>
+        <script src="/assets/s-site-assets-scripts/feather.min.js"></script>
 
-        <ul class="menu">
-          <li>
-            <a href="https://status.brightcove.com">系統狀況</a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">與支持人員聯繫</a>
-          </li>
-          <li>
-            <a href="https://support.brightcove.com/">文獻資料</a>
-          </li>
-        </ul>
+    </head> 
 
-      </nav>
-      <nav role="navigation" aria-labelledby="block-training-menu" id="block-training" class="footer-menu">
+    <body class="docs-page">
+        
 
-        <h2>訓練</h2>
+<header class="header fixed-top">
+  <div class="branding docs-branding">
+    <div class="container-fluid position-relative py-2">
+      <div class="docs-logo-wrapper">
+        <button id="docs-sidebar-toggler" class="docs-sidebar-toggler"
+          type="button">
+          <span></span> <span></span> <span></span>
+        </button>
+        <div class="site-logo"><a class="navbar-brand" href="https://support.brightcove.com/" style="margin-left: 15px;"> <img class="logo-icon me-2" src="/assets/s-site-assets-template-stylesheets/images/bc_logo_black_1@1x.png" alt="商標" style="margin-bottom: 9px;"/>
+            <!-- <span class="logo-text">BRIGHTCOVE</span> -->
+          </a></div>
+      </div><!--//docs-logo-wrapper-->
 
-        <ul class="menu">
-          <li>
-            <a href="https://studio.support.brightcove.com/training/online-training-courses.html">在線課程</a>
-          </li>
-          <li>
-            <a href="https://studio.support.brightcove.com/training/register-training.html">註冊課程</a>
-          </li>
-          <li>
-            <a href="https://university.brightcove.com/">布萊頓科夫大學</a>
-          </li>
-        </ul>
+      <div class="docs-top-utilities d-flex justify-content-end
+        align-items-center">
+        
+        <!-- Search bar -->
+        <div id="nav-search-box" class="top-search-box d-none d-lg-flex" style="margin-right: 10px ;"></div>
 
-      </nav>
-      <nav role="navigation" aria-labelledby="block-brightcove-menu" class="footer-menu">
+<select id="site_select" class="form-select select-focus" style="width:
+          20%; margin-right: 10px;" translate="no">
+          <option value="">Other Brightcove Docs</option>
+          
+          
+          <option value="https://support.brightcove.com" translate="no">Documentation Home</option>
+          
+          
+          
+          <option value="https://support.brightcove.com/" translate="no">-- VIDEO CLOUD --</option>
+          
+          
+          
+          <option value="https://studio.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud Studio</option>
+          
+          
+          
+          <option value="https://mstudio.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Marketing Studio</option>
+          
+          
+          
+          <option value="https://player.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Player Development</option>
+          
+          
+          
+          <option value="https://apis.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud Platform APIs</option>
+          
+          
+          
+          <option value="https://sdks.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud Device SDKs</option>
+          
+          
+          
+          <option value="https://integrations.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Integrations and CMS Connectors</option>
+          
+          
+          
+          <option value="https://general.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud General Information</option>
+          
+          
+          
+          <option value="https://support.brightcove.com/" translate="no">-- VIDEO ESSENTIALS --</option>
+          
+          
+          
+          <option value="https://audience-insights.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Audience Insights</option>
+          
+          
+          
+          <option value="https://beacon-help.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Beacon Studio</option>
+          
+          
+          
+          <option value="https://beacon.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Beacon Classic</option>
+          
+          
+          
+          <option value="https://corptv.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;CorpTV</option>
+          
+          
+          
+          <option value="https://live.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Live</option>
+          
+          
+          
+          <option value="https://zencoder.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Zencoder</option>
+          
+          
+          
+          <option value="https://support.brightcove.com/" translate="no">-- VIDEO CLOUD ADD-ONS --</option>
+          
+          
+          
+          <option value="https://gallery.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Gallery</option>
+          
+          
+          
+          <option value="https://studio.support.brightcove.com/social/index.html" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Social</option>
+          
+          
+          
+          <option value="https://interactivity.support.brightcove.com/index.html" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Interactivity</option>
+          
+          
+          
+          <option value="https://ssai.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove SSAI</option>
+          
+          
+          
+          <option value="https://campaign.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Campaign</option>
+          
+          
+        </select>
 
-        <h2>布萊特灣</h2>
+        <select id="language_select" class="form-select select-focus" style="width: 10%;"
+          onchange="doGTranslate(this);" translate="no">
+          <!-- <option value="">Select Language</option> -->
+          <option value="en|en" translate="No">English</option>
+          <option value="en|zh-TW" translate="No">繁體中文</option>
+          <option value="en|fr" translate="No">Français</option>
+          <option value="en|de" translate="No">Deutsche</option>
+          <option value="en|ja" translate="No">日本語</option>
+          <option value="en|ko" translate="No">한국어</option>
+          <option value="en|es" translate="No">Español</option>
+        </select>
 
-        <ul class="menu">
-          <li>
-            Brightcove.com<a href="https://www.brightcove.com"></a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">聯繫我們</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="row">
-    <div class="region region-footer-bottom-center col-md-12">
-      <div class="bcls-copyright footer-menu">
-        <table>
-          <tr>
-            <td>
-              <div id="bc_copyright" class="field field--name-field-copyright-year field--type-string field--label-hidden field--item" style="float: left;"> 布萊特灣公司版權所有</div>
-            </td>
-            <td><a href="https://www.brightcove.com/en/legal/privacy">隱私</a> | <a href="https://www.brightcove.com/en/terms-and-conditions">條款及細則</a></td>
-            <td>
-              <div class="gf-links-cols footer-menu">
-                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin" style="margin-right: 1rem;"><i data-feather="linkedin" style="color:#8E9093;height: 1.25rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter" style="margin-right: 1rem;"><i data-feather="twitter" style="color:#8E9093;height: 1.25rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i data-feather="facebook" style="color:#8E9093;height: 1.25rem;"></i></a>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
+        <script translate="no">
+          /* <![CDATA[ */
+          function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
+          /* ]]> */
+        </script>
       </div>
     </div>
   </div>
-</footer>
+</header><!--//header-->
 
-<script>
+<div class="docs-wrapper">
+  <div id="docs-sidebar" class="docs-sidebar" style="padding-right: 15px;">
+    <div id="nav-search-box" class="top-search-box d-lg-none p-3"></div>
+    <div class="row">
       
-      var searchBox = sajari.init({
+        <div id="side_nav" style="margin-left: 1em; display: inline-block; border-right: 1px solid #e5e5e6; padding-right: 1em;">
+          
+          <nav class="docs-nav sidenav" aria-label="Main">
+            <ul class="site-nav" style="list-style-type: none;">
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/index.html">首頁</a></li>
+            
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/get-started/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-plus"></i></span>&nbsp;開始使用</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/brightcove-live-training-videos.html">布萊特灣現場訓練影片</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/delivering-live-streams.html">提供即時串流</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/live-module-guidelines-and-best-practices.html">光明灣直播：最佳實務</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">逐步：與 OBS 搭配使用即時模組</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/step-step-using-live-module-telestream-wirecast.html">逐步：使用直播模組與線控</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/step-step-live-srt.html">逐步：串流 SRT 直播活動</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/general/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-plus"></i></span>&nbsp;一般資訊</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/captions-with-live-streams.html">帶直播的字幕</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/live-drm.html">即時 DRM </a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/live-video-glossary.html">即時視訊詞彙</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/reducing-latency-live-streams.html">減少即時串流的延遲</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/supported-encoders-live-events.html">直播活動支援編碼器</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/using-mtr-to-look-at-network-traffic.html">使用港鐵 (我的追蹤) </a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/live-module/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-plus"></i></span>&nbsp;使用即時模組</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/live-module/getting-started-index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;開始使用</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/creating-and-managing-live-events-using-live-module.html">建立與管理即時事件</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/creating-video-clip-using-live-module.html">建立視訊片段</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/reviewing-live-analytics.html">檢閱即時分析</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/scheduling-live-event.html">安排現場活動</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/live-module/advertising-index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;广告</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item section-doc"><a class="nav-link" href="/live-module/implementing-server-side-ads-live-module.html" aria-current="page">實作伺服器端廣告 (SSAI) </a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/client-side-preroll-with-live-ssai.html">使用即時 SSAI 的客戶端預售廣告</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/live-module/guides-index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;指南</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/audio-only-live-events.html">純音頻現場活動</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/multi-language-audio.html">帶直播模塊的多語言音頻</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/playback-restrictions-live-module.html">直播活動的播放限制</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/live-redundancy.html">使用即時備援</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html">使用即時 RTMP 輸出</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/live-module/hosting-platforms-index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;託管平台</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/overview-hosting-platforms.html">概述：託管平台</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/zoom-live-integration.html">整合 Zoom 會議</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://studio.support.brightcove.com/social/general/publishing-live-event-facebook.html">發佈直播活動至臉書</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://studio.support.brightcove.com/social/general/publishing-live-event-youtube.html">將現場活動發佈至 YouTube </a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/web-conferencing/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-plus"></i></span>&nbsp;網絡會議</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/web-conferencing/host-zoom-conference-brightcove-live.html">布萊特灣現場變焦會議</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/web-conferencing/host-cisco-webex-conference-brightcove-live.html">思科 Webex 會議-布萊特灣直播</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/web-conferencing/host-avaya-conference-brightcove-live.html">阿瓦雅會議在布萊特灣直播</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/web-conferencing/host-inxpo-live.html">在布萊特灣直播的 INXPO 活動</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-plus"></i></span>&nbsp;使用即時 API</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/getting-started/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;實時 API：開始使用</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/getting-started/overview-brightcove-live-api.html">概述：實時API</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">使用 API 建立即時串流</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/code-samples/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;實時 API：程式碼範例</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/code-samples/live-api-sample-create-live-job.html">建立即時工作</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">為 MPEG2-TS 輸入建立即時工作</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html">使用即時事件的 RTMP 輸出</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/references/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;實時 API：參考</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/references/live-api-error-messages.html">錯誤訊息</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/references/live-api-release-notes.html">版本資訊</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/references/reference.html">即時 API 參考</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/ssai/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;實時 API：</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">提示點和廣告信標與 SSAI </a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">伺服器端廣告插入 (SSAI) </a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/ssai/overview-player-enhancements-live-ssai.html">概述：即時 SSAI 的玩家增強功能</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;實時 API：導遊</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/brightcove-live-best-practices.html">布萊特灣現場最佳實踐</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/brightcove-live-program-ad-metadata-api.html">布萊特灣直播計畫廣告中繼資料 API </a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-frame-accurate-clip.html">建立精確影格的剪輯</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-vod-clips.html">建立點播剪輯</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/getting-list-live-or-vod-jobs.html">取得即時或 VOD 工作清單</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-insert-id3-timed-metadata.html">插入 ID3 計時的詮釋資料</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-drm-live-api.html">透過即時 API 即時 DRM </a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/managing-credentials-live-api.html">管理即時 API 的認證</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-multi-language-audio.html">帶實時 API 的多語言音頻</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-notifications.html">通知</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-playback-restrictions.html">直播流的播放限制</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/general/reducing-latency-live-streams.html">減少即時串流的延遲</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-rtmp-outputs.html">RTMP 輸出</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-static-entry-points.html">靜態進入點</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/signed-urls-and-token-auth-live-stream.html">具有即時串流的已簽署 URL 和權杖驗證</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/using-live-redundancy.html">使用即時備援</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-vod-live-event.html">直播活動的 VOD </a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/admin/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-plus"></i></span>&nbsp;管理帳戶</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/admin/general/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;一般資訊</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/general/configuring-server-side-ad-settings.html">設定伺服器端廣告設定</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/general/managing-live-settings.html">管理即時設定</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/general/managing-api-authentication-credentials.html">管理 API 身份驗證憑證</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/admin/ingest-profiles/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;管理內嵌設定檔</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/ingest-profiles/creating-custom-live-ingest-profiles.html">建立自訂即時內嵌設定檔</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/ingest-profiles/fields-custom-live-ingest-profiles.html">自訂即時擷取設定檔的欄位</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/ingest-profiles/standard-live-ingest-profiles.html">標準即時擷取設定檔</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/release-notes/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-plus"></i></span>&nbsp;版本說明</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/release-notes/live-api-release-notes.html">即時發行紀錄</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/support/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-plus"></i></span>&nbsp;支持</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/support/viewing-brightcove-system-status-page.html">檢視布萊特灣系統狀態頁面</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/support/contact-sales.html">聯絡銷售人員</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/support/opening-case-with-brightcove-support.html">開啟支援案例</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/support/reset-support-portal-password.html">重置您的支持門戶密碼</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+          </ul>
+          </nav>
+        </div>
+      </div>
+    </div><!--//docs-sidebar-->
+  </div>
+</div>
+
+<div style="margin-top: 20px;">
+  <div class="docs-content" style="padding-bottom: 0px;">
+    <div class="container">
+      <div class="docs-overview">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            
+            <li class="breadcrumb-item"><a class="theme-link" href="/">首頁</a></li>
+            
+            
+            <li class="breadcrumb-item"><a class="theme-link" href="/live-module/">直播模塊</a></li>
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">在直播模塊 (SSAI) 中實施服務器端廣告</li>
+            
+            
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="docs-content">
+  <div class="container">
+    <div class="docs-overview py-5">
+      
+      <div class="centered-inpage-nav" id="centered_inpage_nav">
+        <nav id="centered_toc">
+          <select id="centered_in_page_toc" class="form-select select-focus"></select>
+        </nav>
+      </div>
+      <br/>
+      
+      
+<article class="bcls-article">
+  <h1>在即時模組中實作伺服器端廣告</h1>
+  <summary>在本主題中，您將學習如何在實時模塊中實現服務器端廣告。</summary>
+  <section class="bcls-section">
+    <h2 id="Introduction">簡介</h2>
+    <p>實時模塊支持服務器端廣告插入（SSAI），因此可以在實時流中請求並顯示服務器端廣告。SSAI在現場活動期間提供以下主要功能：</p>
+    <ul>
+      <li>由於廣告被拼接到服務器端的實時視頻流中，因此不受廣告攔截器的影響</li>
+      <li>廣告會插入從編碼器發送的提示點，或者您可以使用&nbsp;現場模塊控制室</li>
+      <li>您可以配置&nbsp;<a href="#fill_slate">填充石板</a>&nbsp;填補所有未使用的廣告時間</li>
+    </ul>
+    <aside class="bcls-aside bcls-aside--information">
+      <ul>
+        <li>在您可以使用 SSAI 之前，您的 Brightcove 帳戶需要針對動態交付進行配置並啟用 SSAI。有關詳細信息，請聯繫您的客戶成功經理。</li>
+        <li>目前未啟用 Live SSAI + DRM 功能。</li>
+        <li>默認情況下，用於加密 (AES) 直播流的 SSAI 使用 <strong>片段精確</strong> （非幀精確）廣告插入。如果您需要幀精確的廣告插入，您必須聯繫支持人員為其配置您的帳戶。</li>
+      </ul>
+    </aside>
+    <p>本主題重點介紹實時事件期間所需的設置和請求服務器端廣告的過程。</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="Configuring_the_server_side_ad_settings">配置服務器端廣告設置</h2>
+    <p>必須先配置服務器端廣告設置，然後才能投放服務器端廣告。服務器端廣告設置定義了廣告播放的各個方面，包括廣告調用，計時，信標和其他廣告配置選項。這些設置被配置為“管理”模塊中“服務器端廣告設置”的一部分。在此示例中，定義了一個簡單的廣告代碼。</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/implement-ssai/live-ad-config.png"/></figure>
+    <p>有關更多信息，請參見<a href="/admin/general/configuring-server-side-ad-settings.html">配置服務器端廣告設置</a>。</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="fill_slate">配置填充板</h2>
+    <p>填充板岩是當直播廣告中斷中的空白無法用動態投放的廣告填充時將顯示的視頻。如果所請求的廣告短於廣告休息時間，則會顯示填充廣告，因此觀看者不會看到空白的播放器。請求伺服器端廣告之前，您應該至少設定一個填色板。廣告板被配置為“管理”模塊中“實時設置”的一部分。在此示例中，定義了顯示Brightcove徽標的填充板。</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/implement-ssai/fill-slate.png"/></figure>
+    <p>有關創建廣告列表的信息，請參見<a href="/admin/general/managing-live-settings.html">管理實時設置</a>。</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="Creating_a_live_event_that_supports_server_side_ads">創建支持服務器端廣告的現場活動</h2>
+    <p>為了使現場活動能夠顯示服務器端廣告，<strong>啟用服務器端廣告插入（SSAI）</strong>創建事件時必須選擇設置。有關使用實時模塊創建實時事件的完整信息，請參見<a href="creating-and-managing-live-events-using-live-module.html">使用實時模塊創建和管理實時事件</a>。</p>
+    <aside class="bcls-aside bcls-aside--information">在創建事件之前，您應該已經配置了服務器端廣告設置並添加了至少一個填充廣告。</aside>
+    <p>要創建支持服務器端廣告的新直播事件，請按照以下步驟操作。</p>
+    <ol class="bcls-tasklist-restart">
+      <li>開啟即時模組。</li>
+      <li>從「管理事件」頁面按一下「<span class="button-blue">建立事件</span>」。</li>
+      <li>根據需要輸入事件詳細信息。</li>
+      <li>單擊 <strong>高級選項</strong> 以展開高級選項。</li>
+      <li>檢查一下<strong>啟用服務器端廣告插入（SSAI）</strong>。這將啟用服務器端廣告插入。</li>
+      <li>選取「<strong>填滿板</strong>」。當直播廣告片段中有空白無法填滿動態播放的廣告時，即會顯示填色板。</li>
+      <li>勾選「<strong>廣告音訊</strong>」設定後，廣告上的音量會根據所設定的調整進行標準化。這可以用來協助確保廣告不會比內容大幅度大。布萊特灣建議您選取此選項。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/implement-ssai/event-ssai-settings.png"/></figure>
+      </li>
+      <li>按一下「<span class="button-blue">建立事件</span>」。</li>
+      <li>的&nbsp;控制室頁面&nbsp;將打開有關直播活動的詳細信息，包括&nbsp;<strong>流式傳輸端點（RTMP URL）</strong>&nbsp;和&nbsp;<strong>流名稱</strong>。這些值將由編碼器使用。</li>
+      <li>配置編碼器並開始直播。</li>
+      <li>默認，&nbsp;控制室預覽播放器將顯示無廣告流。除非選取即時廣告設定，  否則   控制室不會顯示廣告。使用播放器下方的下拉式清單來選取廣告設定。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/implement-ssai/select-ad-config2.png"/></figure>
+      </li>
+      <li><strong>（可選的）</strong>點擊加號按鈕（<img alt="" src="/assets/images/s-live-img/live-module/implement-ssai/plus-icon.png" width="15" height="15"/>）以選擇其他廣告配置。這樣做會在「  控制室  」頁面上新增另一個預覽玩家。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/implement-ssai/two-preview-players.png"/></figure>
+        <p>按一下預覽播放器下方的音量按鈕，即可控制哪個播放器音訊串流啟動。</p>
+        <p>使用額外預覽播放器的用例包括：</p>
+        <ul>
+          <li>預覽兩個廣告配置</li>
+          <li>在帶廣告的 Feed (SSAI) 旁邊查看未更改的 Feed（非 SSAI）</li>
+        </ul>
+      </li>
+    </ol>
+    
+    <aside class="bcls-aside bcls-aside--information">如果事件使用RTMP輸出，則廣告不會流式傳輸到RTMP輸出。無廣告串流會改為串流。</aside>
+    <aside class="bcls-aside bcls-aside--information">如果事件正在被直播到Facebook社交模塊中的功能，廣告將不會流式傳輸到Facebook。無廣告串流會改為串流。</aside>
+  </section>
+  <section class="bcls-section">
+    <h2 id="Requesting_an_ad">要求廣告</h2>
+    <p>要請求廣告，請單擊 <span class="button-blue">“轉到廣告”</span> 。按一下後，即可選取廣告片段的長度。</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/implement-ssai/goto-ad.png"/></figure>
+    <p>按一下 [ <span class="button-blue">插</span>入]，即可在直播中插入廣告分享。如果廣告沒有佔據整個廣告休息時間，則將顯示填充板岩（創建事件時選擇）。廣告將在   控制室   預覽播放器和使用直播模組發佈的播放器中看到。此範例顯示   控制室中顯示 2 則廣告  。</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/implement-ssai/two-ad-preview.png"/></figure>
+  </section>
+  <section class="bcls-section">
+    <h2 id="Publishing_the_live_event">發佈現場活動</h2>
+    <p>帶有服務器端廣告的實時流無法使用媒體模塊發布，而必須使用實時模塊來發布。</p>
+    <p>要為帶有服務器端廣告的直播活動生成嵌入代碼，請按照以下步驟操作：</p>
+    <ol class="bcls-tasklist-restart">
+      <li>按一下事件以開啟 [控制室] 頁面。</li>
+      <li>請點擊<strong>發布和嵌入</strong>在左側導航欄中。</li>
+      <li>選擇一個<strong>可用的播放器</strong>。
+        <aside class="bcls-aside bcls-aside--information">如果事件設定為啟用伺服器端廣告 (SSAI)、DVR 或多 CDN，則必須使用布萊特灣播放程式 6.18.3 及以上版本。只有 6.18.3 版及以上的玩家才會出現在下拉列表中。</aside>
+      </li>
+      <li>選擇<strong>廣告配置</strong>與播放器一起使用。廣告配置將確定哪些廣告出現在播放器中。</li>
+      <li>按一下<strong>播放程式 URL </strong>可在瀏覽器中預覽事件，或複製要使用的適當內嵌程式碼。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/implement-ssai/publish.png"/></figure>
+      </li>
+    </ol>
+  </section>
+  <section class="bcls-section">
+    <h2 id="Publishing_a_remote_live_event">發布遠程現場活動</h2>
+    <p>如果要發布遠程實時事件，請按照下列步驟操作：</p>
+    <ol class="bcls-tasklist-restart">
+      <li>按照以下步驟創建直播活動後<a href="#Creating_a_live_event_that_supports_server_side_ads">以上所列</a>，返回<strong>生活</strong>模塊的<strong>控制室</strong>。 
+      </li>
+      <li>如果您知道廣告配置ID的值，則可以將其插入播放列表URL。
+        <p>在裡面<strong>生活</strong>模塊的<strong>控制室</strong>，複製<strong>播放網址</strong>。</p>
+        <p></p>
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="播放 URL" src="/assets/images/s-live-img/live-module/implement-ssai/playback-url.png"/>
+          <figcaption class="bcls-caption--image">播放 URL</figcaption>
+        </figure>
+        <p>接下來，將您要使用的廣告配置ID（045f90cfd55187ff6e60c8）插入URL，如下所示：</p>
+        <pre>
+<code class="language-html" translate="No">https://bcovlive-a.akamaihd.net/21e83ff8c229478e8c81416838eb6e1f/us-west-2/NA/<span class="bcls-highlight">045f90cfd55187ff6e60c8/</span>playlist.m3u8</code></pre>
+        <p>然後，將播放列表重命名為<code translate="No">playlist.m3u8</code>至<code translate="No">playlist_ssaiM.m3u8</code>。遠程資產應類似於以下內容：</p>
+        <pre>
+<code class="language-html" translate="No">https://bcovlive-a.akamaihd.net/21e83ff8c229478e8c81416838eb6e1f/us-west-2/NA/045f90cfd55187ff6e60c8/<span class="bcls-highlight">playlist_ssaiM.m3u8</span></code></pre>
+        <p>跳到步驟6，並使用此播放列表URL。</p>
+      </li>
+      <li>如果您不知道廣告配置ID的值，則可以按以下方式獲取完整的播放列表網址。選擇您要使用的廣告配置。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="選取廣告設定" src="/assets/images/s-live-img/live-module/implement-ssai/select-ad-config.png"/>
+          <figcaption class="bcls-caption--image">選取廣告設定</figcaption>
+        </figure>
+      </li>
+      <li>對於您的瀏覽器，打開網絡控制台選項卡。在這種情況下，我們使用的是Chrome瀏覽器。
+      </li>
+      <li>在網絡控制台中，搜索“ playlist_ssaiM”。複製以“ playlist_ssaiM.m3u8”結尾的URL。您可能需要刷新頁面，然後重新打開“網絡”選項卡。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="網路主控台" src="/assets/images/s-live-img/live-module/implement-ssai/network-console.png"/>
+          <figcaption class="bcls-caption--image">網路主控台</figcaption>
+        </figure>
+        <aside class="bcls-aside bcls-aside--information">由於廣告配置ID包含在URL中，因此您的SSAI URL會有所不同，具體取決於您選擇的廣告配置。</aside>
+        <p>在此示例中，URL為：</p>
+        <pre>
+<code class="language-html" translate="No">https://bcovlive-a.akamaihd.net/21e83ff8c229478e8c81416838eb6e1f/us-west-2/NA/582ea6fafea84bf595f610b8ebbeeda8/playlist_ssaiM.m3u8</code></pre>
+      </li>
+      <li>在Studio中，導航到<strong>媒體</strong>模塊並創建一個指向上一步中播放列表URL的新遠程資產。在左側菜單中，選擇<strong>+添加遠程視頻</strong>。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="新增遠端視訊" src="/assets/images/s-live-img/live-module/implement-ssai/add-remote-video.png"/>
+          <figcaption class="bcls-caption--image">新增遠端視訊</figcaption>
+        </figure>
+      </li>
+      <li>在裡面<strong>添加遠程視頻</strong>進入一個<strong>影片名稱</strong>和播放列表網址。選取「<strong>儲存</strong>」按鈕。
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="新增遠端視訊對話方塊" src="/assets/images/s-live-img/live-module/implement-ssai/remote-dialog.png"/>
+          <figcaption class="bcls-caption--image">新增遠端視訊對話方塊</figcaption>
+        </figure>
+      </li>
+      <li>現在，您有一個指向遠程實時流的視頻ID。您可以將其與帳戶中的任何播放器一起使用，以通過服務器端廣告流式傳輸實時內容。
+      </li>
+    </ol>
+  </section>
+  <section class="bcls-section">
+    <h2 id="Troubleshooting_live_stream_issues">即時串流問題疑難排解</h2>
+    <p>如果您需要進一步協助讓您的直播活動正常運作，<a href="https://supportportal.brightcove.com/">請與我們聯絡</a>。為了確保您得到最快的回應，以下是解決問題所需的支援清單。</p>
+    <ul>
+      <li>流的具體症狀。例如，它是根本不播放還是口吃或凍結？</li>
+      <li>這個流是否在過去正常工作</li>
+      <li>您在編碼器中使用的入口點 URL</li>
+      <li>您使用的編碼軟件和硬件</li>
+      <li>您發佈直播活動的玩家 URL</li>
+      <li>您的實時資產的視頻 ID</li>
+      <li>從編碼器到發佈點主機的追蹤路由結果</li>
+    </ul>
+  </section>
+</article>
+
+<!-- <div class="col-sm-2 right-side-bar" style="display: inline-block;max-width: 20%;"> -->
+  
+  <nav class="right-side-nav" id="right_side_nav">
+    <h6 class="toc">頁面內容</h6>
+    <ul id="in_page_nav" class="list-none"></ul>
+  </nav>
+  
+<!-- </div> -->
+</div>
+</div>
+</div>
+<div class="page-content" style="background-color: rgb(1, 5, 14);">
+  <div class="container" style="width: 50%;">
+    <footer class="py-5">
+      <div class="row">
+        <div class="col-6 col-md">
+          <h5 class="h5-text">布萊特灣支援</h5>
+          <ul class="list-unstyled text-small" style="color: white ;">
+            <li><a class="a-text" href="https://status.brightcove.com">系統狀態</a></li>
+            <li><a class="a-text" href="https://supportportal.brightcove.com">聯絡支援</a></li>
+            <li><a class="a-text" href="https://support.brightcove.com/search.html">搜索所有文檔</a></li>
+          </ul>
+        </div>
+      
+        <div class="col-6 col-md">
+          <h5 class="h5-text">訓練</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="a-text" href="https://studio.support.brightcove.com/get-started/training/online-training-courses.html">在線課程</a></li>
+            <li><a class="a-text" href="https://studio.support.brightcove.com/get-started/training/register-training.html">註冊課程</a></li>
+            <li><a class="a-text" href="https://academy.brightcove.com/">光明灣學院</a></li>
+          </ul>
+        </div>
+      
+        <div class="col-6 col-md">
+          <h5 class="h5-text">Brightcove</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="a-text" href="https://www.brightcove.com">亮麗</a></li>
+            <li><a class="a-text" href="https://community.brightcove.com/s/">亮點社區論壇</a></li>
+            <li><a class="a-text" href="https://support.brightcove.com/product-updates.html">產品發布說明</a></li>
+            <li><a class="a-text" href="https://support.brightcove.com/doc-updates.html">文檔更新</a></li>
+          </ul>
+        </div>
+      </div>
+    
+      <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      <p>© Brightcove Inc. 保留所有權利。</p>
+      <a class="a-text" href="https://www.brightcove.com/en/legal/privacy">隱私</a> <a class="a-text" href="https://www.brightcove.com/en/terms-and-conditions">條款 &amp; 狀況</a>
+
+      <ul class="list-unstyled d-flex">
+        <li class="ms-3"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" target="_blank" class="gf-social-linkedin" style="margin-right: 1rem;"><i data-feather="linkedin" style="color:#8E9093;height: 1.25rem;"></i></a></li>
+
+        <li class="ms-3"><a href="https://twitter.com/brightcove" title="Twitter" target="_blank" class="gf-social-twitter" style="margin-right: 1rem;"><i data-feather="twitter" style="color:#8E9093;height: 1.25rem;"></i></a></li>
+
+        <li class="ms-3"><a href="https://www.facebook.com/Brightcove" title="Facebook" target="_blank" class="gf-social-facebook"><i data-feather="facebook" style="color:#8E9093;height: 1.25rem;"></i></a></li>
+      </ul>
+      </div>
+    </footer>
+  </div>
+</div>
+
+
+<script translate="no">
+  var searchBox = sajari.init({
     mode: "search-box",
     project: "1588255093746585379", // Set this to your project.
     collection: "brightcove-documentation", // Set this to your collection.
     instantPipeline: "autocomplete", // Pipeline used as you type
-    inputPlaceholder: "Search", // Input element placeholder
+    inputPlaceholder: "Search", // Input element placeholder,
+    styling: {
+      components: {
+        
+        input: {
+          container: {
+          backgroundColor: 'white',
+          }
+        
+        }
+      }
+    },
     maxSuggestions: 5, // Maximum number of suggestions to show
-    attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
+      attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
   });
-  
-    searchBox("sub", "pipeline.search-sent", function (_, query) {
-      window.location = "/search.html?q=" + encodeURIComponent(query.q);
-    });  
 
-</script>   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
+  
+
+
+    searchBox("sub", "pipeline.search-sent", function (_, query) {
+    window.location = "/search.html?q=" + encodeURIComponent(query.q);
+    });
+  
+  </script>
+  
+  <!-- Javascript -->          
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/popper.min.js"></script>
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/bootstrap/js/bootstrap.min.js"></script>  
+
+
+  <!-- Page Specific JS -->
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/smoothscroll.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script> -->
+  <!-- <script src="/assets/s-site-assets-template-stylesheets/js/highlight-custom.js"></script>  -->
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/simplelightbox/simple-lightbox.min.js"></script>      
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/gumshoe/gumshoe.polyfills.min.js"></script> 
+  <script src="/assets/s-site-assets-template-stylesheets/js/docs.js"></script> 
+
+  <!-- original footer components -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/https-fix.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/setDate.js"></script>
+
+  <script src="/assets/s-site-assets-scripts/https-fix.js"></script>
+  <script src="/assets/s-site-assets-scripts/setDate.js"></script>
+  <script src="/assets/s-site-assets-scripts/selector.js"></script>
   
-  <script src="https://support.brightcove.com/site-assets/js/site/prism.js"></script>
+  <script src="/assets/s-site-assets-scripts/prism.js"></script>
+  <script src="/assets/s-site-assets-scripts/prism-normalize.js"></script>
   
-  <script src="https://support.brightcove.com/site-assets/js/site/site.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/tabs.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/toc.js"></script>
+  <script src="/assets/s-site-assets-scripts/site.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/learning-paths/learning-paths.js"></script>
+  <!-- <script src="/assets/s-site-assets-scripts/site.js"></script> -->
+  <script src="/assets/s-site-assets-scripts/tabs.js"></script>
+  
+  <script src="/assets/s-site-assets-scripts/toc-new-template.js"></script>
+  
   <script src="/assets/js/sites_nav.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/bcls-utils.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/local-link-fix.js"></script>
+  <script src="/assets/s-site-assets-scripts/bcls-utils.js"></script>
+  <script src="/assets/s-site-assets-scripts/local-link-fix.js"></script>
+  <script src="/assets/s-site-assets-scripts/sajari-reindex.js"></script>
   <script src="/assets/js/feedback.js"></script>
   
-  <script src="/assets/js/sajari-search-foot.js"></script>
+  <script src="/assets/s-site-assets-scripts/sajari-search-foot.js"></script>
   
-	<script>
-  羽毛.replace()
-</script>
+  <script translate="no">
+    feather.replace()
+  </script>
   <!-- <script src="/assets/js/sajari-index.js"></script> -->
-  <style>
-    a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 { background-color: lightblue; } div.sj-tabs__tab { margin-top: 3rem; margin-left: .3rem; border-top-left-radius: .4rem; border-top-right-radius: .4rem; background-color:#e8e8e8; } div.sj-tabs__tab.sj-tabs__tab--選中{ border-bottom-color: crimson; background-color: #f8f8f8; } p.sj-results__result__description.css-p9jvyt { font-size: 1rem; } .sj-result__text.css-31l7gp h3 { color: navy; font-size: 1.4rem; }
+  <script src="/assets/s-site-assets-scripts/in-app.js"></script>
+  <style translate="no">
+    a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 {
+      background-color: lightblue;
+    }
+    div.sj-tabs__tab {
+      margin-top: 3rem;
+      margin-left: .3rem;
+      border-top-left-radius: .4rem;
+      border-top-right-radius: .4rem;
+      background-color:#e8e8e8;
+    }
+
+    div.sj-tabs__tab.sj-tabs__tab--selected {
+      border-bottom-color: crimson;
+      background-color: #f8f8f8;
+    }
+
+    p.sj-results__result__description.css-p9jvyt {
+      font-size: 1rem;
+    }
+
+    .sj-result__text.css-31l7gp h3 {
+      color: navy;
+      font-size: 1.4rem;
+    }
     </style>
 
-</body>
-
+  </body>
 </html> 
